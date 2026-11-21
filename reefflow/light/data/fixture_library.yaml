@@ -1,0 +1,133 @@
+# ReefFlow generic light-fixture archetypes (Phase 4).
+#
+# These are GENERIC starting points, not models of any specific product. Every
+# field can be overridden per fixture in the project file (`lighting.fixtures`).
+# Uncalibrated results are labelled "relative/estimated": the photon output of a
+# real fixture, its optic and its channel balance are only known after
+# calibration against a PAR meter or a published PAR map (`lighting.calibration`).
+#
+# Fields
+#   footprint     length x width of the fixture's emitting face (local x = length)
+#   emitters      nx x ny emitters spread evenly over the footprint; each emitter is a
+#                 uniformly emitting rectangle of `size` (0 = point source). An LED puck is
+#                 one LED cluster; a bar is one long strip; a T5 fixture is one row per tube.
+#   distribution  angular distribution of radiant intensity about the emitting axis
+#                 (straight down for an untilted fixture):
+#                   isotropic                 uniform over the full sphere
+#                   lambertian                I ~ cos(theta)      (bare LED, diffuse panel)
+#                   cosine_power, m           I ~ cos^m(theta)
+#                   beam_angle, beam_angle    cos^m with the full width at half maximum = beam angle
+#                                             (m = ln 0.5 / ln cos(beam/2); 120 deg = Lambertian)
+#                   collimated                all photons along the axis (verification)
+#                   table, angles, values     relative intensity vs angle (deg), e.g. a goniometer file
+#                 optional `cutoff` (deg): no emission beyond this angle (reflector / housing);
+#                 the distribution is renormalised so the fixture still emits its full PPF.
+#   ppf           total photon output (400-700 nm) at 100 % on every channel, OR
+#   power x efficacy  (W x umol/J; efficacy at fixture level, including optic losses)
+#   channels      name: {share: fraction of the 100 % PPF, spectrum: key in `spectra`}.
+#                 Shares need not sum to 1 exactly; they are normalised. Per-fixture channel
+#                 intensities (%) in the project file scale each channel.
+#
+# Values are typical of the product class (2024-2026 hobby fixtures) and are starting
+# assumptions (docs/drafts/phase4_assumptions.md A-404), not data-sheet values.
+
+spectra:
+  # relative PHOTON spectra over 400-700 nm as sums of Gaussians: [peak nm, FWHM nm, height]
+  violet:      [[405, 16, 1.0]]
+  royal_blue:  [[450, 20, 1.0]]
+  blue:        [[470, 24, 1.0]]
+  indigo:      [[430, 18, 1.0]]                         # "violet 430 nm" LEDs (D-844)
+  cyan:        [[495, 28, 1.0]]
+  green:       [[525, 34, 1.0]]
+  red:         [[660, 20, 1.0]]
+  cool_white:  [[450, 20, 0.55], [560, 110, 1.0]]      # blue pump + broad phosphor
+  warm_white:  [[450, 20, 0.25], [600, 110, 1.0]]      # D-844: warmer phosphor
+  amber:       [[590, 16, 1.0]]                         # D-844
+  t5_actinic:  [[420, 28, 1.0], [440, 12, 0.5]]
+  t5_10k:      [[436, 10, 0.5], [490, 30, 0.3], [545, 10, 1.0], [612, 14, 0.8]]
+  mh_14k:      [[440, 45, 0.8], [535, 60, 1.0], [590, 40, 0.7]]
+  flat:        [[550, 10000, 1.0]]                      # equal photons per nm (tests)
+
+archetypes:
+  led_puck:
+    description: >-
+      LED module ("puck") of ~90 W with a ~90 deg secondary optic over a compact LED
+      cluster. Typical hung 6-10 in above a 24 in-wide tank section.
+    footprint: {length: 200 mm, width: 200 mm}
+    emitters: {nx: 1, ny: 1, size: [60 mm, 60 mm]}
+    distribution: {type: beam_angle, beam_angle: 90 deg}
+    power: 90 W
+    efficacy: 2.0 umol/J                 # -> 180 umol/s
+    channels:
+      violet:     {share: 0.10, spectrum: violet}
+      royal_blue: {share: 0.35, spectrum: royal_blue}
+      blue:       {share: 0.20, spectrum: blue}
+      white:      {share: 0.30, spectrum: cool_white}
+      red:        {share: 0.05, spectrum: red}
+
+  led_bar:
+    description: >-
+      LED bar / strip, 36 in long, bare LEDs (Lambertian) on a narrow board. Often used
+      as supplemental lighting or in rows.
+    footprint: {length: 900 mm, width: 50 mm}
+    emitters: {nx: 1, ny: 1, size: [860 mm, 20 mm]}
+    distribution: {type: lambertian}
+    power: 40 W
+    efficacy: 2.2 umol/J                 # -> 88 umol/s
+    channels:
+      royal_blue: {share: 0.55, spectrum: royal_blue}
+      white:      {share: 0.30, spectrum: cool_white}
+      violet:     {share: 0.15, spectrum: violet}
+
+  t5_fixture:
+    description: >-
+      4 x 54 W T5 HO fixture, 48 in tubes with individual reflectors (two actinic, two 10k).
+      Each tube is a line emitter; reflectors make the output roughly Lambertian downward
+      with a cut-off near horizontal.
+    footprint: {length: 1200 mm, width: 300 mm}
+    emitters: {nx: 1, ny: 4, size: [1150 mm, 16 mm]}
+    distribution: {type: lambertian, cutoff: 85 deg}
+    power: 216 W
+    efficacy: 1.0 umol/J                 # fixture level incl. reflector and ballast losses
+    channels:
+      actinic: {share: 0.45, spectrum: t5_actinic}
+      daylight: {share: 0.55, spectrum: t5_10k}
+
+  metal_halide:
+    description: >-
+      250 W metal-halide pendant (14k lamp) with a faceted reflector. Modelled as the
+      reflector aperture emitting a wide cos^m beam with a cut-off.
+    footprint: {length: 350 mm, width: 350 mm}
+    emitters: {nx: 1, ny: 1, size: [250 mm, 250 mm]}
+    distribution: {type: beam_angle, beam_angle: 110 deg, cutoff: 80 deg}
+    power: 250 W
+    efficacy: 1.0 umol/J
+    channels:
+      lamp: {share: 1.0, spectrum: mh_14k}
+
+  isotropic_point:
+    description: Ideal isotropic point source (verification).
+    footprint: {length: 0 mm, width: 0 mm}
+    emitters: {nx: 1, ny: 1, size: [0 mm, 0 mm]}
+    distribution: {type: isotropic}
+    ppf: 100 umol/s
+    channels:
+      flat: {share: 1.0, spectrum: flat}
+
+  lambertian_panel:
+    description: Ideal Lambertian rectangle (verification).
+    footprint: {length: 300 mm, width: 50 mm}
+    emitters: {nx: 1, ny: 1, size: [300 mm, 50 mm]}
+    distribution: {type: lambertian}
+    ppf: 100 umol/s
+    channels:
+      flat: {share: 1.0, spectrum: flat}
+
+  collimated_beam:
+    description: Collimated beam from a rectangle (verification).
+    footprint: {length: 10 mm, width: 10 mm}
+    emitters: {nx: 1, ny: 1, size: [10 mm, 10 mm]}
+    distribution: {type: collimated}
+    ppf: 100 umol/s
+    channels:
+      flat: {share: 1.0, spectrum: flat}

@@ -1,0 +1,34 @@
+{
+  "case": "2 Lambertian rectangle",
+  "rays": 50000000,
+  "planes": [
+    {
+      "h_m": 0.05,
+      "chi2_dof": 0.9886547829407156,
+      "max_abs_z": 4.3904614125569115,
+      "pixels": 18956,
+      "flux_ratio_mc_over_analytic": 1.0000144356890879,
+      "on_axis_E_analytic": 2935.724857305442
+    },
+    {
+      "h_m": 0.15,
+      "chi2_dof": 1.0038710222501437,
+      "max_abs_z": 4.116307884359874,
+      "pixels": 25600,
+      "flux_ratio_mc_over_analytic": 0.9999783252785795,
+      "on_axis_E_analytic": 895.2712614419571
+    },
+    {
+      "h_m": 0.4,
+      "chi2_dof": 1.016469396796608,
+      "max_abs_z": 4.295975081614075,
+      "pixels": 25600,
+      "flux_ratio_mc_over_analytic": 0.999936978253188,
+      "on_axis_E_analytic": 181.9208442739006
+    }
+  ],
+  "max_abs_z": 4.3904614125569115,
+  "pass": true,
+  "backend": "cuda",
+  "timestamp": "2026-10-31 10:09:15"
+}

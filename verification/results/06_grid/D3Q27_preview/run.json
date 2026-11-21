@@ -1,0 +1,380 @@
+{
+ "project": "Demo 75-gallon reef",
+ "project_file": "examples\\demo_75gal\\demo_75gal.yaml",
+ "backend": "cuda",
+ "precision": "f32",
+ "lattice": "D3Q27",
+ "collision": "rr",
+ "smagorinsky": 0.1,
+ "dx_m": 0.01,
+ "spinup_s": 60.00508145149043,
+ "average_s": 120.01016290298087,
+ "steps": 254580,
+ "sample_every": 10,
+ "samples": 16972,
+ "pump_update_every": 5,
+ "wall_time_s": 426.0078628999763,
+ "mlups": 149.67952038709552,
+ "estimate": {
+  "cells": 250470,
+  "steps": 254559,
+  "dt_s": 0.0007071067811865476,
+  "gpu_memory_GB": 0.06963066,
+  "host_memory_GB": 0.050094,
+  "backend": "cuda",
+  "mlups_assumed": 1224.0,
+  "runtime_s_est": 52.09100713235294,
+  "free_vram_GB": 3.5703125
+ },
+ "model": {
+  "dx_m": 0.01,
+  "shape": [
+   121,
+   45,
+   46
+  ],
+  "cells": 250470,
+  "fluid_nodes": 203378,
+  "grid_fluid_extent_m": [
+   1.19,
+   0.43,
+   0.44
+  ],
+  "origin_m": [
+   -0.0031000000000000983,
+   -0.004099999999999988,
+   0.0458
+  ],
+  "lid_z_m": 0.4908,
+  "water_volume_model_m3": 0.20337800000000003,
+  "water_volume_model_gal": 53.726783664495514,
+  "rock_nodes": 12095,
+  "rock_volume_m3": 0.012095000000000002,
+  "rock_meshes": [
+   {
+    "triangles": 95522,
+    "watertight": true,
+    "volume_m3": 0.01364050447973369,
+    "bounds_m": [
+     [
+      0.1619958190917969,
+      0.11789073944091798,
+      0.02459617805480957
+     ],
+     [
+      0.9338568725585937,
+      0.35902142333984377,
+      0.35069818115234375
+     ]
+    ],
+    "file": "rock.stl"
+   }
+  ],
+  "overflow": {
+   "footprint_m": [
+    1.0413999999999999,
+    1.1937999999999998,
+    0.27940000000000004,
+    0.4318
+   ],
+   "crest_m": 0.4826,
+   "crest_model_m": 0.4808,
+   "sink_nodes": 225,
+   "sink_layers": 1
+  },
+  "lattice": {
+   "dt_s": 0.0007071067811865476,
+   "C_U_ms": 14.14213562373095,
+   "u_peak_est_ms": 1.414213562373095,
+   "nu_lat": 6.646803743153547e-06,
+   "tau_molecular": 0.5000199404112294,
+   "sound_speed_ms": 8.164965809277259
+  },
+  "pumps": [
+   {
+    "name": "return",
+    "kind": "return",
+    "archetype": "return_nozzle",
+    "outlet": "circle D = 19.0 mm",
+    "outlet_area_m2": 0.0002835287369864788,
+    "position_m": [
+     1.02108,
+     0.26924,
+     0.43942
+    ],
+    "aim": [
+     -0.8384436163006371,
+     -0.5030661697803823,
+     -0.20961090407515928
+    ],
+    "rated_flow_m3s": 0.0008412026186666667,
+    "rated_flow_GPH": 800.0,
+    "delivered_flow_m3s": 0.0005948200760110816,
+    "delivered_flow_GPH": 565.685424949238,
+    "delivered_flow_Lh": 2141.3522736398936,
+    "flow_basis": "pump curve Q0 sqrt(1 - H/H0): Q0 = 800 GPH, H = 5.00 ft, H0 = 10.00 ft",
+    "nozzle_velocity_ms": 2.0979181240434475,
+    "momentum_flux_N": 1.2765851458227457,
+    "mode": "constant",
+    "mean_momentum_flux_N": 1.2765851458227457,
+    "turbulence_intensity": 0.05,
+    "outlet_model": "circle D = 40.0 mm",
+    "outlet_model_area_m2": 0.0012566370614359172,
+    "source_nodes": 23,
+    "equivalent_velocity_ms": 0.9965111089206374,
+    "turbulence_tcorr_s": 0.04014004424228212,
+    "notes": [
+     "outlet circle D = 19.0 mm is narrower than 40.0 mm (= 4.0 cells); modelled as circle D = 40.0 mm at the same momentum flux"
+    ]
+   },
+   {
+    "name": "PH-left",
+    "kind": "powerhead",
+    "archetype": "narrow_jet_propeller",
+    "outlet": "circle D = 32.0 mm",
+    "outlet_area_m2": 0.000804247719318987,
+    "position_m": [
+     0.07111999999999999,
+     0.29972,
+     0.381
+    ],
+    "aim": [
+     0.9656090991705352,
+     -0.2414022747926338,
+     -0.09656090991705353
+    ],
+    "rated_flow_m3s": 0.0015772549100000002,
+    "rated_flow_GPH": 1500.0,
+    "delivered_flow_m3s": 0.001104078437,
+    "delivered_flow_GPH": 1050.0,
+    "delivered_flow_Lh": 3974.6823732000007,
+    "flow_basis": "rated x derating 0.7",
+    "nozzle_velocity_ms": 1.372808912575967,
+    "momentum_flux_N": 1.550549559021964,
+    "mode": "constant",
+    "mean_momentum_flux_N": 1.550549559021964,
+    "turbulence_intensity": 0.05,
+    "outlet_model": "circle D = 43.9 mm",
+    "outlet_model_area_m2": 0.0015156887184965438,
+    "source_nodes": 28,
+    "equivalent_velocity_ms": 0.9999999999999999,
+    "turbulence_tcorr_s": 0.043929885202430956,
+    "notes": [
+     "outlet circle D = 32.0 mm is narrower than 40.0 mm (= 4.0 cells); modelled as circle D = 40.0 mm at the same momentum flux",
+     "equivalent velocity 1.10 m/s exceeds the cap 1.00 m/s; outlet enlarged to circle D = 43.9 mm at the same momentum flux"
+    ]
+   },
+   {
+    "name": "PH-right",
+    "kind": "powerhead",
+    "archetype": "wide_jet_propeller",
+    "outlet": "circle D = 60.0 mm",
+    "outlet_area_m2": 0.0028274333882308137,
+    "position_m": [
+     1.1252199999999999,
+     0.11938,
+     0.36067999999999995
+    ],
+    "aim": [
+     -0.9656090991705352,
+     0.2414022747926338,
+     -0.09656090991705353
+    ],
+    "rated_flow_m3s": 0.002733908510666667,
+    "rated_flow_GPH": 2600.0,
+    "delivered_flow_m3s": 0.0019137359574666669,
+    "delivered_flow_GPH": 1820.0,
+    "delivered_flow_Lh": 6889.449446880001,
+    "flow_basis": "rated x derating 0.7",
+    "nozzle_velocity_ms": 0.6768456386744917,
+    "momentum_flux_N": 1.325095824622741,
+    "mode": "constant",
+    "mean_momentum_flux_N": 1.325095824622741,
+    "turbulence_intensity": 0.05,
+    "outlet_model": "circle D = 60.0 mm",
+    "outlet_model_area_m2": 0.0028274333882308137,
+    "source_nodes": 61,
+    "equivalent_velocity_ms": 0.6768456386744917,
+    "turbulence_tcorr_s": 0.08864650456712948,
+    "notes": []
+   }
+  ]
+ },
+ "notes": [
+  "grid length 1190.0 mm vs tank 1193.8 mm (-0.32 %, whole cells)",
+  "grid width 430.0 mm vs tank 431.8 mm (-0.42 %, whole cells)",
+  "grid water column 440.0 mm vs tank 444.5 mm (-1.01 %, whole cells)",
+  "return: outlet circle D = 19.0 mm is narrower than 40.0 mm (= 4.0 cells); modelled as circle D = 40.0 mm at the same momentum flux",
+  "PH-left: outlet circle D = 32.0 mm is narrower than 40.0 mm (= 4.0 cells); modelled as circle D = 40.0 mm at the same momentum flux",
+  "PH-left: equivalent velocity 1.10 m/s exceeds the cap 1.00 m/s; outlet enlarged to circle D = 43.9 mm at the same momentum flux"
+ ],
+ "metrics": {
+  "water_volume_m3": 0.20337800000000003,
+  "mean_speed": 0.10708590499352846,
+  "median_speed": 0.08696603833033774,
+  "p10_speed": 0.029852364469231927,
+  "p90_speed": 0.1947834924176662,
+  "mean_velocity_magnitude": 0.07264654810191737,
+  "dead_speed_threshold": 0.025,
+  "dead_fraction": 0.07599642045845667,
+  "dead_fraction_meanvel": 0.17942451985957183,
+  "high_fraction": 0.027515267138038528,
+  "rock_top_speed": 0.013657488746094869,
+  "sand_speed": 0.023707599199378277,
+  "plane_25": 0.07264819101185518,
+  "plane_50": 0.09983478989020989,
+  "plane_75": 0.17431609065499148,
+  "mean_tke": 0.005534568141362314,
+  "mean_sigma": 0.05076411261502143,
+  "global_turbulence_intensity": 0.5672361864623751
+ },
+ "metrics_stat_uncertainty": {
+  "water_volume_m3": 0.0,
+  "mean_speed": 0.001282417159368883,
+  "median_speed": 0.001651823481962087,
+  "p10_speed": 0.000647281869308693,
+  "p90_speed": 0.0008437144543623792,
+  "mean_velocity_magnitude": 0.0011730109109810575,
+  "dead_speed_threshold": 0.0,
+  "dead_fraction": 0.0026090549455562613,
+  "dead_fraction_meanvel": 0.006374232384653509,
+  "high_fraction": 0.0004804057142310351,
+  "rock_top_speed": 0.0003742299725175982,
+  "sand_speed": 0.0007831772619756357,
+  "plane_25": 0.0018258677872205556,
+  "plane_50": 0.0035585082175170406,
+  "plane_75": 0.0015739175262518008,
+  "mean_tke": 7.808738361798293e-05,
+  "mean_sigma": 0.0005186139109199044,
+  "global_turbulence_intensity": 0.005235306281821285
+ },
+ "batches": [
+  {
+   "water_volume_m3": 0.20337800000000003,
+   "mean_speed": 0.10858274056430334,
+   "median_speed": 0.08945748281098759,
+   "p10_speed": 0.030609784071434918,
+   "p90_speed": 0.1952895468638052,
+   "mean_velocity_magnitude": 0.0751736548483398,
+   "dead_speed_threshold": 0.025,
+   "dead_fraction": 0.07295282675608965,
+   "dead_fraction_meanvel": 0.1563885966033691,
+   "high_fraction": 0.02826756089645881,
+   "rock_top_speed": 0.01364322911037854,
+   "sand_speed": 0.025353720417359074,
+   "plane_25": 0.0745637189667139,
+   "plane_50": 0.10396214120317697,
+   "plane_75": 0.17524794766287546,
+   "mean_tke": 0.005540623441320117,
+   "mean_sigma": 0.05036864384007776,
+   "global_turbulence_intensity": 0.559722659799575
+  },
+  {
+   "water_volume_m3": 0.20337800000000003,
+   "mean_speed": 0.10884281550607575,
+   "median_speed": 0.08862555939934165,
+   "p10_speed": 0.029473518166117478,
+   "p90_speed": 0.19828476636240225,
+   "mean_velocity_magnitude": 0.07720455289383564,
+   "dead_speed_threshold": 0.025,
+   "dead_fraction": 0.07856798670455999,
+   "dead_fraction_meanvel": 0.16134980184680742,
+   "high_fraction": 0.02892151560149082,
+   "rock_top_speed": 0.01461353332181811,
+   "sand_speed": 0.022828868164705973,
+   "plane_25": 0.07424109313953052,
+   "plane_50": 0.10523213309431652,
+   "plane_75": 0.17814675730032276,
+   "mean_tke": 0.005309185336503438,
+   "mean_sigma": 0.049225891069695195,
+   "global_turbulence_intensity": 0.5465986392264202
+  },
+  {
+   "water_volume_m3": 0.20337800000000003,
+   "mean_speed": 0.10759379683181579,
+   "median_speed": 0.08770418238104385,
+   "p10_speed": 0.029980738641126603,
+   "p90_speed": 0.19459849903007537,
+   "mean_velocity_magnitude": 0.07585770694085003,
+   "dead_speed_threshold": 0.025,
+   "dead_fraction": 0.07625701894993558,
+   "dead_fraction_meanvel": 0.15983046347195862,
+   "high_fraction": 0.028405235571202392,
+   "rock_top_speed": 0.013588387803735884,
+   "sand_speed": 0.02466257366026601,
+   "plane_25": 0.07461179742681114,
+   "plane_50": 0.10056923821929865,
+   "plane_75": 0.17312718287580364,
+   "mean_tke": 0.005232951541963765,
+   "mean_sigma": 0.0490313259191032,
+   "global_turbulence_intensity": 0.5489597382202964
+  },
+  {
+   "water_volume_m3": 0.20337800000000003,
+   "mean_speed": 0.10332426707191904,
+   "median_speed": 0.0821455337891046,
+   "p10_speed": 0.027604830965282864,
+   "p90_speed": 0.19498485204835633,
+   "mean_velocity_magnitude": 0.07170051598459413,
+   "dead_speed_threshold": 0.025,
+   "dead_fraction": 0.08528946100364838,
+   "dead_fraction_meanvel": 0.18434638948165485,
+   "high_fraction": 0.026694136042246457,
+   "rock_top_speed": 0.012784804748446938,
+   "sand_speed": 0.021985234555182052,
+   "plane_25": 0.06717615451436522,
+   "plane_50": 0.08957564704404739,
+   "plane_75": 0.17074247478096394,
+   "mean_tke": 0.005190329191315616,
+   "mean_sigma": 0.047835701670981265,
+   "global_turbulence_intensity": 0.5693108868830108
+  }
+ ],
+ "mass_rel_drift": 8.202040695515223e-07,
+ "ke_spinup_end": 0.011120059731719633,
+ "ke_avg_first_half": 0.011520480017304624,
+ "ke_avg_second_half": 0.011098338540031208,
+ "u_max_overall_ms": 1.8105004856085343,
+ "u_max_overall_lattice": 0.1280217170715332,
+ "fraction_time_above_u_lat_0.15": 0.0,
+ "probe_names": [
+  "left 30%",
+  "left 70%",
+  "centre 30%",
+  "centre 70%",
+  "right 30%",
+  "right 70%"
+ ],
+ "probe_nodes": [
+  [
+   24,
+   22,
+   15
+  ],
+  [
+   24,
+   22,
+   31
+  ],
+  [
+   60,
+   22,
+   13
+  ],
+  [
+   60,
+   22,
+   31
+  ],
+  [
+   96,
+   22,
+   13
+  ],
+  [
+   96,
+   22,
+   31
+  ]
+ ]
+}

@@ -1,0 +1,380 @@
+{
+  "case": "6 calibration round trip",
+  "truth": {
+    "beam_angle_deg": 70,
+    "ppf_umol_s": 150,
+    "scale": 0.8333333333333334
+  },
+  "nominal": {
+    "beam_angle_deg": 90,
+    "ppf_umol_s": 180
+  },
+  "a_air_chart": {
+    "ok": true,
+    "scale": 0.8324143162273704,
+    "n_readings": 8,
+    "rms_rel": 0.017209565231526416,
+    "scale_se_rel": 0.0070257755853969945,
+    "immersion_factor": 1.08,
+    "fit": [
+      "scale",
+      "beam_angle"
+    ],
+    "fixtures": [
+      "LED-left"
+    ],
+    "beam_angle_deg": 68.59326014903031,
+    "trials": {
+      "beam_angle_deg": [
+        31.5,
+        44.550000000000004,
+        57.599999999999994,
+        57.6,
+        60.86249999999999,
+        64.125,
+        67.38749999999999,
+        70.64999999999999,
+        70.64999999999999,
+        73.9125,
+        77.175,
+        80.4375,
+        83.7,
+        83.7,
+        96.75,
+        109.79999999999998,
+        122.85,
+        135.9,
+        148.95,
+        162.0
+      ],
+      "cost": [
+        3.5298185995482063,
+        1.4795979484346153,
+        0.23166876199920006,
+        0.23166876199920006,
+        0.0937902063049681,
+        0.029562957770012645,
+        0.005290837646159756,
+        0.008931128033470712,
+        0.008931128033470712,
+        0.03428391692752587,
+        0.07906106844569233,
+        0.13403633477547958,
+        0.19364990482378602,
+        0.19364990482378602,
+        0.37022044126732373,
+        0.6541059736606478,
+        0.8649883162121402,
+        0.9982849481345601,
+        1.1420469659633574,
+        1.1687550562313838
+      ]
+    },
+    "readings": [
+      {
+        "scene": "air",
+        "par": 1079.2603228840826,
+        "in_water": false,
+        "immersion_corrected": true,
+        "below": 0.30479999999999996,
+        "ox": 0.0,
+        "oy": 0.0,
+        "measured_corrected": 1079.2603228840826,
+        "model_uncalibrated": 1309.6756799999996,
+        "model_calibrated": 1090.192785646816,
+        "residual_rel": 0.01012958832167463
+      },
+      {
+        "scene": "air",
+        "par": 898.3636672982358,
+        "in_water": false,
+        "immersion_corrected": true,
+        "below": 0.30479999999999996,
+        "ox": 0.0,
+        "oy": 0.07619999999999999,
+        "measured_corrected": 898.3636672982358,
+        "model_uncalibrated": 1078.1423999999997,
+        "model_calibrated": 897.4611686917358,
+        "residual_rel": -0.001004602745360561
+      },
+      {
+        "scene": "air",
+        "par": 537.1957137491294,
+        "in_water": false,
+        "immersion_corrected": true,
+        "below": 0.30479999999999996,
+        "ox": 0.0,
+        "oy": 0.15239999999999998,
+        "measured_corrected": 537.1957137491294,
+        "model_uncalibrated": 633.0110399999999,
+        "model_calibrated": 526.9274520259765,
+        "residual_rel": -0.019114563762040924
+      },
+      {
+        "scene": "air",
+        "par": 251.80222066599927,
+        "in_water": false,
+        "immersion_corrected": true,
+        "below": 0.30479999999999996,
+        "ox": 0.0,
+        "oy": 0.2286,
+        "measured_corrected": 251.80222066599927,
+        "model_uncalibrated": 306.38735999999994,
+        "model_calibrated": 255.04122477510913,
+        "residual_rel": 0.01286328651329173
+      },
+      {
+        "scene": "air",
+        "par": 113.1449623894196,
+        "in_water": false,
+        "immersion_corrected": true,
+        "below": 0.30479999999999996,
+        "ox": 0.0,
+        "oy": 0.30479999999999996,
+        "measured_corrected": 113.1449623894196,
+        "model_uncalibrated": 135.83375999999998,
+        "model_calibrated": 113.06996645099272,
+        "residual_rel": -0.000662830556863516
+      },
+      {
+        "scene": "air",
+        "par": 477.9094935073555,
+        "in_water": false,
+        "immersion_corrected": true,
+        "below": 0.4572,
+        "ox": 0.0,
+        "oy": 0.0,
+        "measured_corrected": 477.9094935073555,
+        "model_uncalibrated": 592.6737599999999,
+        "model_calibrated": 493.3501226763045,
+        "residual_rel": 0.03230868894365539
+      },
+      {
+        "scene": "air",
+        "par": 343.8165474650056,
+        "in_water": false,
+        "immersion_corrected": true,
+        "below": 0.4572,
+        "ox": 0.0,
+        "oy": 0.15239999999999998,
+        "measured_corrected": 343.8165474650056,
+        "model_uncalibrated": 406.3507199999999,
+        "model_calibrated": 338.2521567372996,
+        "residual_rel": -0.01618418534166799
+      },
+      {
+        "scene": "air",
+        "par": 148.94237899412377,
+        "in_water": false,
+        "immersion_corrected": true,
+        "below": 0.4572,
+        "ox": 0.0,
+        "oy": 0.30479999999999996,
+        "measured_corrected": 148.94237899412377,
+        "model_uncalibrated": 175.22351999999995,
+        "model_calibrated": 145.85856658775293,
+        "residual_rel": -0.020704734456353117
+      }
+    ]
+  },
+  "b_tank_meter": {
+    "ok": true,
+    "scale": 0.8392347375990001,
+    "n_readings": 6,
+    "rms_rel": 0.02120049602640702,
+    "scale_se_rel": 0.009481150054352055,
+    "immersion_factor": 1.08,
+    "fit": [
+      "scale"
+    ],
+    "fixtures": [
+      "LED-left",
+      "LED-right"
+    ],
+    "beam_angle_deg": null,
+    "trials": null,
+    "readings": [
+      {
+        "scene": "tank",
+        "par": 1181.2596056524953,
+        "in_water": true,
+        "immersion_corrected": false,
+        "x": 0.29845,
+        "y": 0.21589999999999998,
+        "depth": 0.1016,
+        "measured_corrected": 1275.760374104695,
+        "model_uncalibrated": 1492.3845707270618,
+        "model_calibrated": 1252.460973610922,
+        "residual_rel": -0.018263147975672196
+      },
+      {
+        "scene": "tank",
+        "par": 416.87406934508385,
+        "in_water": true,
+        "immersion_corrected": false,
+        "x": 0.29845,
+        "y": 0.21589999999999998,
+        "depth": 0.254,
+        "measured_corrected": 450.2239948926906,
+        "model_uncalibrated": 542.3019423901748,
+        "model_calibrated": 455.1186283212464,
+        "residual_rel": 0.01087155168111908
+      },
+      {
+        "scene": "tank",
+        "par": 209.12356389119057,
+        "in_water": true,
+        "immersion_corrected": false,
+        "x": 0.5969,
+        "y": 0.21589999999999998,
+        "depth": 0.1016,
+        "measured_corrected": 225.85344900248583,
+        "model_uncalibrated": 265.8028753607368,
+        "model_calibrated": 223.07100635642766,
+        "residual_rel": -0.012319681892604382
+      },
+      {
+        "scene": "tank",
+        "par": 289.4034945345275,
+        "in_water": true,
+        "immersion_corrected": false,
+        "x": 0.5969,
+        "y": 0.21589999999999998,
+        "depth": 0.254,
+        "measured_corrected": 312.5557740972897,
+        "model_uncalibrated": 378.5497863682364,
+        "model_calibrated": 317.69213063090444,
+        "residual_rel": 0.016433407920392246
+      },
+      {
+        "scene": "tank",
+        "par": 610.1933993348546,
+        "in_water": true,
+        "immersion_corrected": false,
+        "x": 0.89535,
+        "y": 0.1016,
+        "depth": 0.15239999999999998,
+        "measured_corrected": 659.008871281643,
+        "model_uncalibrated": 809.1856435519979,
+        "model_calibrated": 679.096701235239,
+        "residual_rel": 0.03048188094119151
+      },
+      {
+        "scene": "tank",
+        "par": 355.362558215392,
+        "in_water": true,
+        "immersion_corrected": false,
+        "x": 0.762,
+        "y": 0.3302,
+        "depth": 0.30479999999999996,
+        "measured_corrected": 383.7915628726234,
+        "model_uncalibrated": 443.63737618114465,
+        "model_calibrated": 372.31589698849183,
+        "residual_rel": -0.029900776865019876
+      }
+    ]
+  },
+  "b_ignoring_immersion": {
+    "ok": true,
+    "scale": 0.7770692014805554,
+    "n_readings": 6,
+    "rms_rel": 0.021200496026407077,
+    "scale_se_rel": 0.009481150054352083,
+    "immersion_factor": 1.08,
+    "fit": [
+      "scale"
+    ],
+    "fixtures": [
+      "LED-left",
+      "LED-right"
+    ],
+    "beam_angle_deg": null,
+    "trials": null,
+    "readings": [
+      {
+        "scene": "tank",
+        "par": 1181.2596056524953,
+        "in_water": true,
+        "immersion_corrected": true,
+        "x": 0.29845,
+        "y": 0.21589999999999998,
+        "depth": 0.1016,
+        "measured_corrected": 1181.2596056524953,
+        "model_uncalibrated": 1492.3845707270618,
+        "model_calibrated": 1159.6860866767793,
+        "residual_rel": -0.0182631479756725
+      },
+      {
+        "scene": "tank",
+        "par": 416.87406934508385,
+        "in_water": true,
+        "immersion_corrected": true,
+        "x": 0.29845,
+        "y": 0.21589999999999998,
+        "depth": 0.254,
+        "measured_corrected": 416.87406934508385,
+        "model_uncalibrated": 542.3019423901748,
+        "model_calibrated": 421.40613733448725,
+        "residual_rel": 0.010871551681118847
+      },
+      {
+        "scene": "tank",
+        "par": 209.12356389119057,
+        "in_water": true,
+        "immersion_corrected": true,
+        "x": 0.5969,
+        "y": 0.21589999999999998,
+        "depth": 0.1016,
+        "measured_corrected": 209.12356389119057,
+        "model_uncalibrated": 265.8028753607368,
+        "model_calibrated": 206.5472281078033,
+        "residual_rel": -0.01231968189260471
+      },
+      {
+        "scene": "tank",
+        "par": 289.4034945345275,
+        "in_water": true,
+        "immersion_corrected": true,
+        "x": 0.5969,
+        "y": 0.21589999999999998,
+        "depth": 0.254,
+        "measured_corrected": 289.4034945345275,
+        "model_uncalibrated": 378.5497863682364,
+        "model_calibrated": 294.1593802138003,
+        "residual_rel": 0.016433407920391933
+      },
+      {
+        "scene": "tank",
+        "par": 610.1933993348546,
+        "in_water": true,
+        "immersion_corrected": true,
+        "x": 0.89535,
+        "y": 0.1016,
+        "depth": 0.15239999999999998,
+        "measured_corrected": 610.1933993348546,
+        "model_uncalibrated": 809.1856435519979,
+        "model_calibrated": 628.7932418844804,
+        "residual_rel": 0.03048188094119125
+      },
+      {
+        "scene": "tank",
+        "par": 355.362558215392,
+        "in_water": true,
+        "immersion_corrected": true,
+        "x": 0.762,
+        "y": 0.3302,
+        "depth": 0.30479999999999996,
+        "measured_corrected": 355.362558215392,
+        "model_uncalibrated": 443.63737618114465,
+        "model_calibrated": 344.7369416560108,
+        "residual_rel": -0.029900776865020313
+      }
+    ]
+  },
+  "b_ignoring_immersion_scale_error": -0.06751695822333359,
+  "pass_a": true,
+  "pass_b": true,
+  "pass": true,
+  "backend": "cuda",
+  "timestamp": "2026-10-31 10:09:44"
+}

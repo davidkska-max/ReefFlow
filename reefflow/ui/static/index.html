@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReefFlow</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a7ea4'/%3E%3Cpath d='M5 13c4-4 7 2 11-1.5S22 7 27 10' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Cpath d='M5 20c4-4 7 2 11-1.5s6-4.5 11-1.5' stroke='white' stroke-opacity='.7' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/css/app.css">
+<script type="importmap">
+{ "imports": {
+    "three": "/static/vendor/three/three.module.js",
+    "three/addons/": "/static/vendor/three/addons/"
+} }
+</script>
+</head>
+<body>
+<header id="topbar">
+  <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#19b6d2"/><stop offset="1" stop-color="#0a5f80"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#lg)"/><path d="M5 13c4-4 7 2 11-1.5S22 7 27 10" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M5 19.5c4-4 7 2 11-1.5s6-4.5 11-1.5" stroke="#fff" stroke-opacity=".7" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M9 27c0-3 1.2-4.6 2.6-5.6M11.6 27c0-2 .6-3.2 1.6-4M22 27c0-2.6 1.4-4 3-4.6" stroke="#ffd7a8" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg><span>Reef<span class="flow">Flow</span></span></div>
+  <div class="proj">
+    <span id="projName" class="projname">No project open</span>
+    <span id="dirtyMark" class="dirty" hidden title="Unsaved changes">● unsaved</span>
+  </div>
+  <div class="actions">
+    <button id="btnProjects" title="Open, create or import a project">Projects</button>
+    <button id="btnSave" class="primary" title="Save the project (Ctrl+S)" disabled>Save</button>
+    <button id="btnUndo" title="Undo (Ctrl+Z)" disabled>Undo</button>
+    <button id="btnRedo" title="Redo (Ctrl+Y)" disabled>Redo</button>
+    <a id="btnYaml" class="button" title="Download the project file (YAML)" href="#" hidden>YAML</a>
+    <span class="sep"></span>
+    <div class="seg" id="unitsToggle" title="Display units (the project file and the solver stay consistent either way)">
+      <button data-u="US">US</button><button data-u="SI">SI</button>
+    </div>
+    <span id="validBadge" class="badge" hidden title="Project check: click for details"></span>
+  </div>
+</header>
+<nav id="tabs">
+  <button data-tab="tank"><span class="n">1</span><span class="t">Tank</span><span class="x"></span></button>
+  <button data-tab="photos" title="Existing tank: reconstruct the rockscape from photos"><span class="n">2</span><span class="t">Photos</span><span class="x"></span></button>
+  <button data-tab="rocks"><span class="n">3</span><span class="t">Rockscape</span><span class="x"></span></button>
+  <button data-tab="equip"><span class="n">4</span><span class="t">Pumps &amp; lights</span><span class="x"></span></button>
+  <button data-tab="run"><span class="n">5</span><span class="t">Run</span><span class="x"></span></button>
+  <button data-tab="results"><span class="n">6</span><span class="t">Results</span><span class="x"></span></button>
+  <button data-tab="compare"><span class="n">7</span><span class="t">Compare</span><span class="x"></span></button>
+</nav>
+<main>
+  <aside id="panel"></aside>
+  <section id="view">
+    <div id="viewTools">
+      <div class="seg" id="camViews">
+        <button data-view="3d" title="Perspective view">3D</button>
+        <button data-view="top" title="Plan view from above">Top</button>
+        <button data-view="front" title="Front elevation">Front</button>
+        <button data-view="side" title="Side elevation from the right">Side</button>
+      </div>
+      <div class="seg" id="gizmoModes" hidden>
+        <button data-mode="translate" title="Move (W)">Move</button>
+        <button data-mode="rotate" title="Rotate (E)">Rotate</button>
+        <button data-mode="scale" title="Scale (R)">Scale</button>
+      </div>
+    </div>
+    <div id="photoView" hidden></div>
+    <div id="legend" hidden></div>
+    <div id="readout" hidden></div>
+    <div id="viewMsg" hidden></div>
+  </section>
+</main>
+<footer id="statusbar"><span id="status">Ready.</span><span id="busy" hidden><span class="spinner"></span><span id="busyText"></span></span></footer>
+<div id="modal" hidden><div class="modal-box"><div id="modalBody"></div></div></div>
+<script type="module" src="/static/js/main.js"></script>
+</body>
+</html>

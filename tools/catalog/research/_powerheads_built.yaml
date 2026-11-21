@@ -1,0 +1,881 @@
+ecotech_mp10wqd:
+  kind: powerhead
+  brand: EcoTech Marine
+  model: VorTech MP10wQD
+  pump_type: propeller
+  description: EcoTech Marine VorTech MP10wQD (propeller powerhead)
+  rated_flow: 1500 GPH
+  rated_flow_basis: 'EcoTech: ''1,500+ gph''; delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 39 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (below the wet-side size 64 mm)'
+  power: 18 W
+  dimensions: Wet side 2.5 in dia x 1.5 in long (63.5 x 38.1 mm); dry side 2.5 in dia x 2 in long (63.5 x 50.8 mm);
+    clearance behind tank 2.25 in (57 mm)
+  tank_range: 2.5-50+ gal (9.5-190 L)
+  modes: 'Controllable (QuietDrive driver, wireless ''w''): constant, Lagoon, Reef Crest, Short Pulse, Gyre, Tidal
+    Swell, Nutrient Transport, Feed, Night, Wave Auto-Tune; EcoSmart Live / ReefLink'
+  status: discontinued
+  checked: '2026-11-12'
+  sources:
+  - https://www.marine-aquatics.eu/inshop/files/ecotech-marine/VorTech_QD_QUIETDRIVE_Datasheet_info-en.pdf
+  - https://support.ecotechmarine.com/hc/en-us/article_attachments/4402323654935
+  - https://ecotechmarine.com/vortech
+  notes: Flow, power and tank range come from EcoTech's QuietDrive launch datasheet (8-18 W). Dimensions come from
+    the EcoTech EcoSmart manual (rev 1.1) on support.ecotechmarine.com. Per the datasheet, the MP10QD keeps the
+    ES motor and wet side and only the driver changed. Max glass 0.375 in (9.5 mm). Status is discontinued because
+    ecotechmarine.com/vortech now lists only the MP10mQD.
+ecotech_mp40wqd:
+  kind: powerhead
+  brand: EcoTech Marine
+  model: VorTech MP40wQD
+  pump_type: propeller
+  description: EcoTech Marine VorTech MP40wQD (propeller powerhead)
+  rated_flow: 4500 GPH
+  rated_flow_basis: 'EcoTech: ''4,500+ gph''; delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 67 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (below the wet-side size 76 mm)'
+  power: 38 W
+  dimensions: 'Wet side 3 in (76 mm) diameter. The QD datasheet drawing shows 3 in, 3 in, 2.25 in (57 mm) and 3
+    in for wet/dry side, and retailers list the wet side as 3 x 3 in. Older MP40wES: wet and dry side both 3 in
+    dia x 2.25 in long.'
+  tank_range: 50-500+ gal (190-1,800 L)
+  modes: 'Controllable: constant, Lagoon, Reef Crest, Short Pulse, Gyre, Tidal Swell, Nutrient Transport, Feed,
+    Night, Wave Auto-Tune; wireless sync/anti-sync; ReefLink/EcoSmart Live'
+  status: discontinued
+  checked: '2026-11-12'
+  sources:
+  - https://www.marine-aquatics.eu/inshop/files/ecotech-marine/VorTech_QD_QUIETDRIVE_Datasheet_info-en.pdf
+  - https://support.ecotechmarine.com/hc/en-us/article_attachments/4402323654935
+  - https://www.bulkreefsupply.com/vortech-mp40w-qd-propeller-pump-ecotech-marine.html
+  notes: Power 9-38 W per the EcoTech datasheet. Retailers list a measured max of about 47 W in Gyre mode, which
+    is unverified. Unlike the MP10 and MP60, the MP40wQD has a completely new wet side, dry side, motor, PSU and
+    driver compared with the MP40wES. The datasheet says '40% more output' than the MP40wES, which was rated 1,000-3,200
+    gph and 9-28 W. Wet-side LENGTH is uncertain (2.25 in or 3 in). The diameter (3 in) is consistent across sources.
+    Max glass 0.75 in (19 mm). Superseded by the MP40mQD and listed as retired by retailers.
+ecotech_mp60wqd:
+  kind: powerhead
+  brand: EcoTech Marine
+  model: VorTech MP60wQD
+  pump_type: propeller
+  description: EcoTech Marine VorTech MP60wQD (propeller powerhead)
+  rated_flow: 7500 GPH
+  rated_flow_basis: 'EcoTech: ''7,500+ gph''; delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 87 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (below the wet-side size 102 mm)'
+  power: 60 W
+  dimensions: Wet side 4 x 3 in (102 x 76 mm); dry side 4 x 2.80 in (102 x 71 mm) per EcoTech MP-series spec sheet
+    (ES era, via Aqua Lab Aquaria). saltwateraquarium.com lists the mQD with wet/dry swapped (wet 4.00 x 2.80 in).
+  tank_range: 120-1,000+ gal (450-3,800 L)
+  modes: 'Controllable: same QuietDrive mode set as MP40wQD'
+  status: discontinued
+  checked: '2026-11-12'
+  sources:
+  - https://www.marine-aquatics.eu/inshop/files/ecotech-marine/VorTech_QD_QUIETDRIVE_Datasheet_info-en.pdf
+  - https://cdn.shopify.com/s/files/1/0725/3709/files/VorTech_MPwQD_Comparison_Spec_Sheet_Aqua_Lab_Aquaria.pdf
+  - https://www.saltwateraquarium.com/mp60-vortech-mobius-quiet-drive-pump-mp60m-qd-ecotech-marine/
+  notes: Power 10-60 W. Glass 0.375-1.00 in (9.5-26 mm). Per the datasheet, the MP60wQD keeps the MP60wES motor,
+    wet side and PSU and only the driver is new. Superseded by the MP60mQD.
+ecotech_mp10mqd:
+  kind: powerhead
+  brand: EcoTech Marine
+  model: VorTech MP10mQD
+  pump_type: propeller
+  description: EcoTech Marine VorTech MP10mQD (propeller powerhead)
+  rated_flow: 2500 GPH
+  rated_flow_basis: EcoTech's current page (retailers still print 1,500 gph; EcoTech gives no reason for the change);
+    delivered flow = rated x derating 0.7 (A-205)
+  outlet:
+    shape: circle
+    diameter: 50 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (below the wet-side size 64 mm)'
+  power: 19 W
+  dimensions: Wet side 2.50 x 1.5 in (63.5 x 38.1 mm); dry side 2.50 x 2 in (63.5 x 50.8 mm); clearance 2.25 in
+    (57 mm) (retailer listing)
+  tank_range: 2.5-50+ gal (9.5-190 L)
+  modes: 'Controllable: QuietDrive modes plus Mobius (Bluetooth) app control'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://ecotechmarine.com/vortech
+  - https://www.saltwateraquarium.com/mp10-vortech-mobius-quiet-drive-pump-mp10mqd-ecotech-marine/
+  notes: Flow and power (8-19 W) come from ecotechmarine.com/vortech. The retailer still prints the older 200-1,500
+    gph figure. EcoTech's page gives 2,500 gph, so the two disagree, and the reason (new rating method or new wet
+    side) is not stated. Max glass 0.375 in (9.5 mm).
+ecotech_mp40mqd:
+  kind: powerhead
+  brand: EcoTech Marine
+  model: VorTech MP40mQD
+  pump_type: propeller
+  description: EcoTech Marine VorTech MP40mQD (propeller powerhead)
+  rated_flow: 5000 GPH
+  rated_flow_basis: EcoTech's current page; delivered flow = rated x derating 0.7 (A-205)
+  outlet:
+    shape: circle
+    diameter: 71 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (below the wet-side size 76 mm)'
+  power: 37 W
+  dimensions: Wet side 3.00 x 3.00 in (76 x 76 mm) per retailer listing
+  tank_range: 50-500+ gal (190-1,800 L)
+  modes: 'Controllable: QuietDrive modes plus Mobius (Bluetooth) app control'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://ecotechmarine.com/vortech
+  - https://www.fishtanksdirect.com/vortech-mp40wqd-pump-wireless-quiet-drive.aspx
+  notes: Flow and power (9-37 W) come from ecotechmarine.com/vortech. Max glass 0.75 in (19 mm). Retailers treat
+    it as the Mobius-ready successor of the MP40wQD with the same QD wet side. The shared wet side is not confirmed
+    by EcoTech.
+ecotech_mp60mqd:
+  kind: powerhead
+  brand: EcoTech Marine
+  model: VorTech MP60mQD
+  pump_type: propeller
+  description: EcoTech Marine VorTech MP60mQD (propeller powerhead)
+  rated_flow: 9000 GPH
+  rated_flow_basis: EcoTech's current page; delivered flow = rated x derating 0.7 (A-205)
+  outlet:
+    shape: circle
+    diameter: 95 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (below the wet-side size 102 mm)'
+  power: 60 W
+  dimensions: Wet side 4.00 x 2.80 in (102 x 71 mm), dry side 4.00 x 3.00 in (102 x 76 mm), clearance 3.30 in (84
+    mm) per retailer listing
+  tank_range: 120-1,000+ gal (450-3,800 L)
+  modes: 'Controllable: QuietDrive modes plus Mobius (Bluetooth) app control'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://ecotechmarine.com/vortech
+  - https://www.saltwateraquarium.com/mp60-vortech-mobius-quiet-drive-pump-mp60m-qd-ecotech-marine/
+  notes: Flow and power (10-60 W) come from ecotechmarine.com/vortech. The retailer still shows 3,500-7,500 gph.
+    Glass 0.375-1.00 in (9.5-26 mm).
+neptune_wav:
+  kind: powerhead
+  brand: Neptune Systems
+  model: WAV
+  pump_type: propeller
+  description: Neptune Systems WAV (propeller powerhead)
+  rated_flow: 4000 GPH
+  rated_flow_basis: 'Neptune: ''~4000+ gph''; delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 63 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (no wet-side size published)'
+  power: 35 W
+  dimensions: 'Not published by Neptune (''compact size''). BRS staff Q&A: about 4.25 in back to front and about
+    3.25 x 3 in. Another retailer: pump 3 1/4 in H x 2 3/4 in W, mount 3 x 3 in, pump with mount 4.5 in long.'
+  tank_range: not published
+  modes: 'Controllable (Apex via 1LINK/Aquabus, 24 V DC): random flow modes, mirror, inverse, patterned flow via
+    scheduling graph'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://www.neptunesystems.com/products/wav/
+  - https://help.neptunesystems.com/wav/
+  - https://www.bulkreefsupply.com/wav-single-pump-neptune-systems.html
+  notes: Power is given as 'less than 35 W at the wall'. Neptune's EB632 guide says 'up to 30 watts'. Fully submerged
+    pump on a magnet mount for glass up to 1 in, with 40 degrees of pivot and 360 degrees of rotation. BRS staff
+    say 1% speed gives about 1,800 gph. Early reviews (2014) quoted 3,000-3,200 gph, so the rating has changed over
+    time. Body dimensions come from retailers only.
+ai_nero_3:
+  kind: powerhead
+  brand: Aqua Illumination
+  model: Nero 3
+  pump_type: propeller
+  description: Aqua Illumination Nero 3 (propeller powerhead)
+  rated_flow: 2000 GPH
+  rated_flow_basis: AI; delivered flow = rated x derating 0.7 (A-205)
+  outlet:
+    shape: circle
+    diameter: 39 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (capped at the wet-side size 39 mm)'
+  power: 20 W
+  dimensions: Wet side 1.54 x 2.25 in
+  tank_range: 5-60 gal
+  modes: 'Controllable (MyAI app/Bluetooth, wired controller): Random, Pulse, Constant, Schedule, Feed, All-Off'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://shop.aquaillumination.com/products/nero-3
+  notes: Power is 'up to 20W @ 120VAC'. Max glass 0.5 in (13 mm). The wet-side figure does not say which axis is
+    which, so no outlet was derived.
+ai_nero_5:
+  kind: powerhead
+  brand: Aqua Illumination
+  model: Nero 5
+  pump_type: propeller
+  description: Aqua Illumination Nero 5 (propeller powerhead)
+  rated_flow: 3000 GPH
+  rated_flow_basis: AI; delivered flow = rated x derating 0.7 (A-205)
+  outlet:
+    shape: circle
+    diameter: 53 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (capped at the wet-side size 53 mm)'
+  power: 30 W
+  dimensions: Wet side 2.1 x 2.8 in (a retailer lists 2.1 x 2.8 x 2.8 in L x W x H)
+  tank_range: 40-100 gal
+  modes: 'Controllable (MyAI app/Bluetooth, wired controller): Random, Pulse, Constant, Schedule, Feed, All-Off'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://shop.aquaillumination.com/products/nero-5
+  - https://www.bulkreefsupply.com/nero-5-powerhead-3000-gph-aqua-illumination.html
+  notes: Power is 'up to 30W @ 120VAC'. Max glass 0.63 in (16 mm) on AI's current page. Some older or retailer listings
+    say 0.5 in (13 mm). If the 2.8 x 2.8 in face is the front, an upper-bound outlet would be about 71 mm, but the
+    orientation is not stated, so this is left null.
+maxspect_gyre_xf330:
+  kind: powerhead
+  brand: Maxspect
+  model: Gyre XF330 (Cloud Edition)
+  pump_type: crossflow
+  description: Maxspect Gyre XF330 (Cloud Edition) (cross-flow powerhead)
+  rated_flow: 9000 L/h
+  rated_flow_basis: Maxspect; delivered flow = rated x derating 0.7 (A-205)
+  outlet:
+    shape: rect
+    width: 265 mm
+    height: 34 mm
+  outlet_basis: 'upper bound: body length x smallest body dimension (the slot size is not published). A slot smaller
+    than this gives a stronger jet, so the momentum here leans low.'
+  power: 35 W
+  dimensions: 265 x 65 x 34 mm (10.5 x 2.5 x 1.25 in); pump weight 575 g
+  tank_range: 100-500 L (26-132 US gal)
+  modes: 'Controllable (Gyre 300 controller / Cloud Edition app): over 20 wave pattern presets; flow cage and flow
+    directors give straight, swing left/right, wide and spot flow'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://www.maxspect.com/index.php?option=com_content&view=article&id=617:gyre-300-ce&catid=93&lang=en-GB
+  - https://www.bulkreefsupply.com/gyre-xf330-cloud-edition-pump-only-2350-gph-maxspect.html
+  notes: Power 5-35 W. Glass 15 mm standard, 20 mm reinforced. BRS markets it as 2,350 GPH. Flow rating method not
+    stated.
+maxspect_gyre_xf350:
+  kind: powerhead
+  brand: Maxspect
+  model: Gyre XF350 (Cloud Edition)
+  pump_type: crossflow
+  description: Maxspect Gyre XF350 (Cloud Edition) (cross-flow powerhead)
+  rated_flow: 20000 L/h
+  rated_flow_basis: Maxspect; delivered flow = rated x derating 0.7 (A-205)
+  outlet:
+    shape: rect
+    width: 325 mm
+    height: 38 mm
+  outlet_basis: 'upper bound: body length x smallest body dimension (the slot size is not published). A slot smaller
+    than this gives a stronger jet, so the momentum here leans low.'
+  power: 52 W
+  dimensions: 325 x 75 x 38 mm (12.75 x 3 x 1.5 in); pump weight 645 g
+  tank_range: 300-3,000 L (79-792 US gal)
+  modes: 'Controllable: as XF330 (over 20 presets, flow directors)'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://www.maxspect.com/index.php?option=com_content&view=article&id=617:gyre-300-ce&catid=93&lang=en-GB
+  - https://www.bulkreefsupply.com/gyre-xf350-pump-kit-with-controller-5280-gph-maxspect.html
+  notes: Power 5-52 W. Glass 20 mm standard, 25 mm reinforced. Some retailer URLs mislabel the XF350 as '2350 GPH'.
+    The manufacturer figure is 20,000 l/h.
+maxspect_gyre_xf280:
+  kind: powerhead
+  brand: Maxspect
+  model: Gyre XF280
+  pump_type: crossflow
+  description: Maxspect Gyre XF280 (cross-flow powerhead)
+  rated_flow: 6000 GPH
+  rated_flow_basis: 'BRS listing (2017 launch coverage: 22,500 l/h, the same within 1 %); delivered flow = rated
+    x derating 0.7 (A-205)'
+  outlet:
+    shape: rect
+    width: 376 mm
+    height: 51 mm
+  outlet_basis: 'upper bound: body length x smallest body dimension (the slot size is not published). A slot smaller
+    than this gives a stronger jet, so the momentum here leans low.'
+  power: 80 W
+  dimensions: 14.8 x 3.8 x 2 in (L x W x H) per BRS
+  tank_range: 50-800+ gal (BRS also says 'up to 1000+ gallons'); 750-3,800 L per launch coverage
+  modes: Controllable with XF280-specific Advanced Controller (Gyre 200 series modes)
+  status: discontinued
+  checked: '2026-11-12'
+  sources:
+  - https://www.bulkreefsupply.com/xf280-gyre-pump-only-6000-gph-maxspect.html
+  notes: 'Gyre 200 series. Not on maxspect.com, which lists only the Gyre 300 CE and MJ-GF, so ''discontinued''
+    is my inference. All data is from a retailer because no manufacturer page was found. Power 10-80 W. Max glass
+    32 mm (1.26 in). Sister models: XF230 (2,300 gph, 8-35 W) and XF250 (5,300 gph, 8-60 W), both retailer figures.'
+maxspect_mj_gf308:
+  kind: powerhead
+  brand: Maxspect
+  model: MJ-GF 308
+  pump_type: crossflow
+  description: Maxspect MJ-GF 308 (cross-flow powerhead)
+  rated_flow: 8000 L/h
+  rated_flow_basis: Maxspect; delivered flow = rated x derating 0.7 (A-205)
+  outlet:
+    shape: rect
+    width: 225 mm
+    height: 41 mm
+  outlet_basis: 'upper bound: body length x smallest body dimension (the slot size is not published). A slot smaller
+    than this gives a stronger jet, so the momentum here leans low.'
+  power: 25 W
+  dimensions: L225 x W81 x H41 mm (8.75 x 3.25 x 1.5 in); pump 457 g
+  tank_range: 50-500 L (13-132 US gal)
+  modes: 'Controllable: speed, frequency, linkage, feeding, random, rapid pulsing, slow pulsing, gradual speed,
+    constant speed'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://www.maxspect.com/index.php?option=com_content&view=article&id=1114:gf308-316&catid=94&lang=en-GB
+  notes: Maxspect calls it a gyre generator. Glass 15 mm standard. Newer, lower-cost gyre line than the XF300 series.
+maxspect_mj_gf316:
+  kind: powerhead
+  brand: Maxspect
+  model: MJ-GF 316
+  pump_type: crossflow
+  description: Maxspect MJ-GF 316 (cross-flow powerhead)
+  rated_flow: 16000 L/h
+  rated_flow_basis: Maxspect; delivered flow = rated x derating 0.7 (A-205)
+  outlet:
+    shape: rect
+    width: 309 mm
+    height: 47 mm
+  outlet_basis: 'upper bound: body length x smallest body dimension (the slot size is not published). A slot smaller
+    than this gives a stronger jet, so the momentum here leans low.'
+  power: 45 W
+  dimensions: L309 x W88 x H47 mm (12.25 x 3.5 x 1.75 in); pump 711 g
+  tank_range: 100-1000 L (26-264 US gal)
+  modes: 'Controllable: as MJ-GF 308'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://www.maxspect.com/index.php?option=com_content&view=article&id=1114:gf308-316&catid=94&lang=en-GB
+  notes: Glass 20 mm standard.
+redsea_reefwave_25:
+  kind: powerhead
+  brand: Red Sea
+  model: ReefWave 25
+  pump_type: crossflow
+  description: Red Sea ReefWave 25 (cross-flow powerhead)
+  rated_flow: 7500 L/h
+  rated_flow_basis: 'Red Sea: ''true maximum flow rate''; delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: rect
+    width: 230 mm
+    height: 40 mm
+  outlet_basis: 'upper bound: body length x smallest body dimension (the slot size is not published). A slot smaller
+    than this gives a stronger jet, so the momentum here leans low.'
+  power: 25 W
+  dimensions: '23 x 4 x 7 cm (9 x 1.6 x 2.8 in); retailer: 9 in long, 1.6 in tall, 2.8 in from glass to pump edge'
+  tank_range: 45-120 cm (1.5-4 ft) aquarium length
+  modes: 'Controllable (ReefBeat app): preset waves, Wave Library custom waves, daily schedule of up to 10 waves,
+    Feed mode, grouping'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://redseafish.com/smart-hardware/reefwave/
+  - https://www.saltwateraquarium.com/reefwave-20-gyre-flow-pump-red-sea/
+  notes: Power 4-25 W. Max glass 15 mm (5/8 in). Cable 3 m. Red Sea calls the rating the 'true maximum flow rate'.
+    One retailer lists 1960 GPH.
+redsea_reefwave_45:
+  kind: powerhead
+  brand: Red Sea
+  model: ReefWave 45
+  pump_type: crossflow
+  description: Red Sea ReefWave 45 (cross-flow powerhead)
+  rated_flow: 15000 L/h
+  rated_flow_basis: 'Red Sea: ''true maximum flow rate''; delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: rect
+    width: 315 mm
+    height: 50 mm
+  outlet_basis: 'upper bound: body length x smallest body dimension (the slot size is not published). A slot smaller
+    than this gives a stronger jet, so the momentum here leans low.'
+  power: 45 W
+  dimensions: 31.5 x 5 x 8 cm (12.4 x 2 x 3.2 in)
+  tank_range: 60-200 cm (2-6 ft) aquarium length
+  modes: 'Controllable (ReefBeat app): as ReefWave 25'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://redseafish.com/smart-hardware/reefwave/
+  notes: Power 8-45 W. Max glass 20 mm (3/4 in). Cable 3 m.
+tunze_nanostream_6040:
+  kind: powerhead
+  brand: Tunze
+  model: Turbelle nanostream 6040
+  pump_type: propeller
+  description: Tunze Turbelle nanostream 6040 (propeller powerhead)
+  rated_flow: 4500 L/h
+  rated_flow_basis: 'Tunze: approx. 200-4,500 l/h with the 7020 controller (maximum used); delivered flow = rated
+    x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 40 mm
+  outlet_basis: manufacturer
+  power: 13 W
+  dimensions: 60 x 43 x 68 mm without flow deflector and Magnet Holder
+  tank_range: 20-500 L (5.3-132 USgal.)
+  modes: Controllable via Turbelle Controller 7020 (speed, wave/pulse programmes, night mode); Fish Care function
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://tunze.com/usa/Turbelle-nanostream-6040/6040.005
+  - https://shop.tunze.com/fileadmin/gebrauchsanleitungen/x6040.8888.pdf
+  - https://riffgrotte.de/media/0e/ce/2a/1730297905/x6040.anleitung.pdf
+  notes: Power 1.5-13 W, 12 V SELV. Silence Magnet Holder for glass up to 15 mm. Outlet 'ø40 mm (1.57 in)' per the
+    Tunze page and manual. Article 6040.005. BRS lists the 6040 as discontinued in the US, but Tunze still lists
+    it.
+tunze_nanostream_6055:
+  kind: powerhead
+  brand: Tunze
+  model: Turbelle nanostream 6055
+  pump_type: propeller
+  description: Tunze Turbelle nanostream 6055 (propeller powerhead)
+  rated_flow: 5500 L/h
+  rated_flow_basis: 'Tunze: 1,000-5,500 l/h (maximum used); delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 40 mm
+  outlet_basis: manufacturer
+  power: 18 W
+  dimensions: diam. 70 mm (2.7 in)
+  tank_range: 40-500 L (11-132 USgal.)
+  modes: 'Controllable (Turbelle controller / Multicontroller): speed, pulse/wave, night mode; Fish Care'
+  status: discontinued
+  checked: '2026-11-12'
+  sources:
+  - https://cdn.shopify.com/s/files/1/0486/6372/4197/files/gebrauchsanleitung-und-ersatzteilliste-tunze-nanostream-6015.pdf
+  - https://www.bulkreefsupply.com/tunze-turbelle-nanostream-6055-controllable.html
+  notes: Data from the Tunze combined manual (6015/6025/6045/6055/6095, 03/2022), hosted by a retailer. Power 4-18
+    W. The manual gives the outlet as 'ø40/15 mm'. 40 mm is the main outlet. The manual does not explain the 15
+    mm (probably the narrow-jet insert), so that reading is unverified. Glass up to 15 mm. No longer in Tunze's
+    current stream-pump lists, so 'discontinued' is inferred. The 6075 appears to be the successor in that size
+    class, which is also inferred.
+tunze_nanostream_6095:
+  kind: powerhead
+  brand: Tunze
+  model: Turbelle nanostream 6095 (Wide Flow)
+  pump_type: propeller
+  description: Tunze Turbelle nanostream 6095 (Wide Flow) (propeller powerhead)
+  rated_flow: 9500 L/h
+  rated_flow_basis: 'Tunze: 2,000-9,500 l/h (maximum used); delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 50 mm
+  outlet_basis: manufacturer
+  power: 21 W
+  dimensions: diam. 70 mm (2.7 in)
+  tank_range: 100-1000 L (26-264 USgal.)
+  modes: 'Controllable (Turbelle controller / Multicontroller): speed, pulse/wave, night mode; Fish Care'
+  status: discontinued
+  checked: '2026-11-12'
+  sources:
+  - https://cdn.shopify.com/s/files/1/0486/6372/4197/files/gebrauchsanleitung-und-ersatzteilliste-tunze-nanostream-6015.pdf
+  notes: Power 5-21 W. The manual gives the output as 'ø50/10 mm (1.96/.39 in)'. 50 mm is the wide-flow outlet.
+    The 10 mm is not explained. Glass up to 15 mm. Not in Tunze's current lists, so 'discontinued' is inferred.
+tunze_stream_6105_eco:
+  kind: powerhead
+  brand: Tunze
+  model: Turbelle stream 6105 eco
+  pump_type: propeller
+  description: Tunze Turbelle stream 6105 eco (propeller powerhead)
+  rated_flow: 12000 L/h
+  rated_flow_basis: 'Tunze: approx. 3,000-12,000 l/h at 12 V (maximum used); delivered flow = rated x derating 0.7
+    (A-205)'
+  outlet:
+    shape: circle
+    diameter: 63 mm
+  outlet_basis: manufacturer
+  power: 11 W
+  dimensions: ø90 mm (3.5 in)
+  tank_range: 200-2,000 L (53-528 USgal.)
+  modes: Controllable via Turbelle Controller 7020 and TUNZE HUB (WiFi); Fish Care
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://tunze.com/usa/Turbelle-stream-6105-eco/6105.005
+  - https://shop.tunze.com/fileadmin/gebrauchsanleitungen/x6125.8888.pdf
+  notes: Article 6105.005. Power 3-11 W at 12 V, 11 W at 12,000 l/h. The output is given as 'ø63 mm and ø75 mm'.
+    Two propeller housings are supplied ('second propeller housing for best protection'), so the outlet is 63 or
+    75 mm depending on the housing fitted. 63 mm is used here. Glass up to 15 mm. The 24 V sibling, stream 6255
+    eco, uses the same ø90 body and ø63/ø75 outputs and gives 5,000 to about 17,000 l/h at 10-31 W for tanks over
+    2,000 L. The older 6105 (pre-eco, 6105.000) is a different pump, about 700-3,400 gph per BRS, and is not covered
+    here.
+tunze_nanostream_6075:
+  kind: powerhead
+  brand: Tunze
+  model: Turbelle nanostream 6075
+  pump_type: propeller
+  description: Tunze Turbelle nanostream 6075 (propeller powerhead)
+  rated_flow: 7500 L/h
+  rated_flow_basis: 'Tunze: 2,700-7,500 l/h (maximum used); delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 44 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (no wet-side size published)'
+  power: 8 W
+  dimensions: not published in the manual technical data
+  tank_range: reef up to 500 L (132 USgal.); freshwater up to 1,000 L
+  modes: Controllable via Turbelle Controller (12 V DC SELV)
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://tunze.com/usa/Turbelle-nanostream-6075/6075.005
+  - https://shop.tunze.com/fileadmin/gebrauchsanleitungen/x6075.8888.pdf
+  notes: Added because it is Tunze's current controllable nanostream above the 6040. It was not on the original
+    list. Power 1-8 W. Glass up to 15 mm.
+tunze_stream_3_6150:
+  kind: powerhead
+  brand: Tunze
+  model: Turbelle stream 3 (6150)
+  pump_type: propeller
+  description: Tunze Turbelle stream 3 (6150) (propeller powerhead)
+  rated_flow: 15000 L/h
+  rated_flow_basis: 'Tunze: 2,500-15,000 l/h (maximum used); delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 63 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (no wet-side size published)'
+  power: 50 W
+  dimensions: 93 x 70.6 x 184 mm (L x W x H) (3.7 x 2.7 x 7.2 in)
+  tank_range: up to 3,000 L
+  modes: Controllable via Turbelle Controller 7020; 0.8 Hz FishCare; daily automatic 30 s back-flush at 30% power
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://tunze.com/usa/Turbelle-stream-3/6150.005
+  - https://shop.tunze.com/fileadmin/gebrauchsanleitungen/x6151.8888.pdf
+  notes: Power 6 to max. 50 W (the marketing text says 3.5-50 W). Supplied with flow deflector, protective grating
+    and flow rectifier, which Tunze says gives more than 3 m of flow length. Intake slits max 7.8 mm. The manual
+    mentions both 'rotor and propeller', so it is classed as propeller. Outlet shape and size are not given. Glass
+    15 mm (stream 3) or 19 mm (stream 3+, 6150.006). The manual's English text says 'up to 3,000 liters (516 USgal.)',
+    which is a Tunze typo for 793 USgal.
+sicce_xstream_sdc:
+  kind: powerhead
+  brand: Sicce
+  model: XStream SDC
+  pump_type: propeller
+  description: Sicce XStream SDC (propeller powerhead)
+  rated_flow: 8500 L/h
+  rated_flow_basis: 'Sicce: 1,000-8,500 l/h Q-max (maximum used); delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 38 mm
+  outlet_basis: measured from Sicce's dimensioned drawing, about +/-3 mm
+  power: 12 W
+  dimensions: 60 x 65.5 mm front face, 105.5 mm overall length incl. magnet mount (Sicce drawing)
+  tank_range: not published
+  modes: 'Controllable (ContrALL app / included controller): Sinusoidal, Pulse, Constant Speed, Tide, Custom Tide,
+    Custom Waves, Mix; presets Lagoonal Ripple, Sharp Break, Reef Crest, Slow Current, Fast Current'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://www.sicce.com/en/products/stream-pumps/xstream-sdc.html
+  - https://www.sicce.com/media/wysiwyg/Misure_prodotti/XStream-misure.png
+  - https://www.sicce.com/media/wysiwyg/ISTRUZIONI/80N657-C_XStream_SDC_Instruction.pdf
+  notes: 12 V DC pump. Magnet mount for glass up to 20 mm. Sicce uses the same dimension drawing for the XStream
+    and XStream SDC, so they share a housing as shown. The XStream-E is no longer on sicce.com and appears to be
+    superseded by the SDC (inferred).
+sicce_xstream_8000:
+  kind: powerhead
+  brand: Sicce
+  model: XStream 8000
+  pump_type: propeller
+  description: Sicce XStream 8000 (propeller powerhead)
+  rated_flow: 8000 L/h
+  rated_flow_basis: 'Sicce: Q-max; delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 38 mm
+  outlet_basis: measured from Sicce's dimensioned drawing, about +/-3 mm
+  power: 12 W
+  dimensions: 60 x 65.5 mm front face, 105.5 mm overall length (Sicce drawing)
+  tank_range: not published
+  modes: Not controllable (230-240 V synchronous). Fixed flow.
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://www.sicce.com/en/products/stream-pumps/xstream.html
+  - https://www.sicce.com/media/wysiwyg/Misure_prodotti/XStream-misure.png
+  notes: Largest of the XStream 3500 (4 W), 5000 (6 W), 6500 (8 W) and 8000 (12 W). All share the drawn housing.
+    Glass up to 20 mm. Sicce's own 'controllable' wording is not on the page, and 'not controllable' is inferred
+    from the mains-voltage listing.
+sicce_voyager_nano_1000:
+  kind: powerhead
+  brand: Sicce
+  model: Voyager NANO 1000
+  pump_type: propeller
+  description: Sicce Voyager NANO 1000 (propeller powerhead)
+  rated_flow: 1000 L/h
+  rated_flow_basis: 'Sicce: Q-max; delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 32 mm
+  outlet_basis: measured from Sicce's dimensioned drawing, about +/-3 mm
+  power: 2.8 W
+  dimensions: 60 x 51 mm front face, 95 mm overall length incl. magnet mount (Sicce drawing)
+  tank_range: marine 30-80 L; freshwater 60-120 L
+  modes: Not controllable (230-240 V)
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://www.sicce.com/en/products/stream-pumps/voyager-nano.html
+  - https://www.sicce.com/media/wysiwyg/Misure_prodotti/Voyager-Nano-misure.png
+  notes: Glass up to 10 mm. US retailers sell it as '270 GPH', and one lists 1.5 W, which conflicts with Sicce's
+    2.8 W.
+sicce_voyager_nano_2000:
+  kind: powerhead
+  brand: Sicce
+  model: Voyager NANO 2000
+  pump_type: propeller
+  description: Sicce Voyager NANO 2000 (propeller powerhead)
+  rated_flow: 2000 L/h
+  rated_flow_basis: 'Sicce: Q-max; delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 32 mm
+  outlet_basis: measured from Sicce's dimensioned drawing, about +/-3 mm
+  power: 3 W
+  dimensions: 60 x 51 mm front face, 95 mm overall length (Sicce drawing)
+  tank_range: marine 80-140 L; freshwater 120-200 L
+  modes: Not controllable (230-240 V)
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://www.sicce.com/en/products/stream-pumps/voyager-nano.html
+  - https://www.sicce.com/media/wysiwyg/Misure_prodotti/Voyager-Nano-misure.png
+  notes: Glass up to 10 mm. Sold in the US as '530 GPH'.
+sicce_voyager_hp10:
+  kind: powerhead
+  brand: Sicce
+  model: Voyager HP 10
+  pump_type: propeller
+  description: Sicce Voyager HP 10 (propeller powerhead)
+  rated_flow: 15000 L/h
+  rated_flow_basis: 'Sicce: Q-max; delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 45 mm
+  outlet_basis: measured from Sicce's dimensioned drawing, about +/-3 mm
+  power: 25 W
+  dimensions: 91 x 93 mm front face, 163 mm overall length (Sicce drawing, shared by HP 7/8/9/10)
+  tank_range: marine 800-1000 L; freshwater 1000-2000 L
+  modes: Not controllable (230-240 V)
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://www.sicce.com/en/products/stream-pumps/voyager.html
+  - https://www.sicce.com/media/wysiwyg/Misure_prodotti/Voyager%20misure.png
+  notes: HP 7 / 8 / 9 / 10 = 10,500 / 12,000 / 13,500 / 15,000 l/h at 17 / 18 / 24 / 25 W, all in the same housing.
+    Glass up to 20 mm. Voyager 2/3/4 (3,000 / 4,500 / 6,000 l/h, 81 x 78 x 150 mm) have a six-hole nozzle face,
+    so no single outlet diameter applies, and they are not listed here.
+jebao_mlw_10:
+  kind: powerhead
+  brand: Jebao / Jecod
+  model: MLW-10
+  pump_type: propeller
+  description: Jebao / Jecod MLW-10 (propeller powerhead)
+  rated_flow: 4000 L/h
+  rated_flow_basis: Jebao (retailer copies; low confidence); delivered flow = rated x derating 0.7 (A-205)
+  outlet:
+    shape: circle
+    diameter: 32 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (no wet-side size published)'
+  power: 10 W
+  dimensions: not found
+  tank_range: aquarium length <=60 cm
+  modes: 'Controllable (LCD controller, WiFi / Jebao Aqua app): sine-wave drive, multiple wave modes, master/slave'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://manuals.plus/ae/1005004395067717
+  - https://reefsupplies.ca/collections/vendors/products/jebao-mlw-10-smart-wave-maker-with-lcd-display-max-1065gph
+  notes: LOW CONFIDENCE. The Jebao manufacturer site (jebao.com) has no reachable English spec pages. Figures come
+    from search excerpts of the manuals.plus copy of the MLW manual (24 V, 10 W, 4000 L/h, tank <=60 cm, glass <=8
+    mm) and a Canadian retailer title. I could not fetch either page directly (403/429).
+jebao_mlw_20:
+  kind: powerhead
+  brand: Jebao / Jecod
+  model: MLW-20
+  pump_type: propeller
+  description: Jebao / Jecod MLW-20 (propeller powerhead)
+  rated_flow: 10000 L/h
+  rated_flow_basis: Jebao (retailer copies; low confidence); delivered flow = rated x derating 0.7 (A-205)
+  outlet:
+    shape: circle
+    diameter: 51 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (below the wet-side size 70 mm)'
+  power: 20 W
+  dimensions: approx. 70 x 70 mm (retailer)
+  tank_range: aquarium length under 100 cm (retailer); 60-100 cm (manual excerpt)
+  modes: 'Controllable (LCD controller, WiFi app): 8 speeds, master/slave wireless'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://reef-aquarium-store.com/jecod-jebao-mlw-20-wi-fi-flow-pumps-sine-wave
+  - https://manuals.plus/ae/1005004395067717
+  notes: LOW CONFIDENCE (retailer data). Glass <12 mm. The retailer says the output is 12 V. Other sources and the
+    manual excerpt say 24 V, so the two conflict.
+jebao_mlw_30:
+  kind: powerhead
+  brand: Jebao / Jecod
+  model: MLW-30
+  pump_type: propeller
+  description: Jebao / Jecod MLW-30 (propeller powerhead)
+  rated_flow: 13000 L/h
+  rated_flow_basis: Jebao (retailer copies; low confidence); delivered flow = rated x derating 0.7 (A-205)
+  outlet:
+    shape: circle
+    diameter: 59 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (no wet-side size published)'
+  power: 30 W
+  dimensions: not found. A manual page gives '2 in dia x 3 in length', but the same wording appears in the SLW-30
+    manual, so it is probably copied and is not used.
+  tank_range: aquarium length 100-150 cm
+  modes: Controllable (LCD controller, WiFi app)
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://manuals.plus/ae/1005010160207628
+  - https://www.desertcart.sg/products/340746427
+  notes: LOW CONFIDENCE (marketplace and manual excerpts only). DC 24 V, max glass 15 mm.
+jebao_slw_20:
+  kind: powerhead
+  brand: Jebao / Jecod
+  model: SLW-20
+  pump_type: propeller
+  description: Jebao / Jecod SLW-20 (propeller powerhead)
+  rated_flow: 10000 L/h
+  rated_flow_basis: Jebao (retailer copies; low confidence); delivered flow = rated x derating 0.7 (A-205)
+  outlet:
+    shape: circle
+    diameter: 51 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (below the wet-side size 70 mm)'
+  power: 20 W
+  dimensions: 70 mm dia x 55 mm deep (fastlight.co.uk); 70 x 70 mm (reef-aquarium-store); ø65 x 45 mm (Jebao manual
+    via manuals.plus search excerpt)
+  tank_range: aquarium length <100 cm (retailer); series '20 to 100 gallons'
+  modes: Controllable (controller, 8 speeds, master/slave; SLW-M variants add WiFi)
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://www.fastlight.co.uk/acatalog/Jebao-Jecod-2020-SLW-Wi-Fi-Circulation-Pumps.html
+  - https://reef-aquarium-store.com/jecod-jebao-slw-20-flow-pumps-sine-wave
+  notes: 'LOW CONFIDENCE (retailer data). 24 V. Glass: 10 mm (fastlight), <12 mm (reef-aquarium-store) or 15 mm
+    (one Jebao manual). The UK retailer has the SLW range on ''2024 clearance pricing'', so it may be being phased
+    out.'
+jebao_slw_30:
+  kind: powerhead
+  brand: Jebao / Jecod
+  model: SLW-30
+  pump_type: propeller
+  description: Jebao / Jecod SLW-30 (propeller powerhead)
+  rated_flow: 13000 L/h
+  rated_flow_basis: Jebao (retailer copies; low confidence); delivered flow = rated x derating 0.7 (A-205)
+  outlet:
+    shape: circle
+    diameter: 59 mm
+  outlet_basis: 'not published: sized so the jet leaves at 1.34 m/s at rated flow, the median of the 12 pumps with
+    a published or measured outlet (below the wet-side size 75 mm)'
+  power: 30 W
+  dimensions: 75 mm dia x 58 mm deep (fastlight.co.uk); ø78 x 50 mm (Jebao manual via search excerpt); 105 x 105
+    mm (reef-aquarium-store, likely incl. mount)
+  tank_range: aquarium length <150 cm (retailer)
+  modes: Controllable (controller, 8 speeds, master/slave)
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://www.fastlight.co.uk/acatalog/Jebao-Jecod-2020-SLW-Wi-Fi-Circulation-Pumps.html
+  - https://reef-aquarium-store.com/jecod-jebao-slw-30-flow-pumps-sine-wave
+  - https://manuals.plus/asin/B0877BYBH4
+  notes: LOW CONFIDENCE. Power is 30 W (fastlight, manual) or 35 W (reef-aquarium-store). Glass 10 mm or <15 mm
+    depending on source. 24 V.
+aquamedic_ecodrift_4_3:
+  kind: powerhead
+  brand: Aqua Medic
+  model: EcoDrift 4.3
+  pump_type: propeller
+  description: Aqua Medic EcoDrift 4.3 (propeller powerhead)
+  rated_flow: 4000 L/h
+  rated_flow_basis: 'Aqua Medic: up to 4,000 l/h; delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 32 mm
+  outlet_basis: retailer-published (Aqua Medic's own manual could not be read)
+  power: 10 W
+  dimensions: 80 x 70 mm
+  tank_range: up to 300 L
+  modes: 'Controllable (app via smartphone/tablet or included controller): several flow patterns, wave simulation,
+    master/slave or cross-flow multi-pump programming, Feed (10 min stop)'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://aquaristikshop.com/aquaristic/Aqua-Medic-EcoDrift-4-3/360060
+  - https://www.aqua-medic.de/ru/download/EcoDrift-x3-manual~d4894
+  notes: Power 3-10 W, 24 V. Magnet holder up to 15 mm glass. Max depth 1.0 m. The flow and tank size match the
+    Aqua Medic x.3 manual (search excerpt). Includes a plug-on 'power diffuser' that the retailer says raises performance
+    by up to 10%.
+aquamedic_ecodrift_8_3:
+  kind: powerhead
+  brand: Aqua Medic
+  model: EcoDrift 8.3
+  pump_type: propeller
+  description: Aqua Medic EcoDrift 8.3 (propeller powerhead)
+  rated_flow: 8000 L/h
+  rated_flow_basis: 'Aqua Medic: up to 8,000 l/h; delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 40 mm
+  outlet_basis: retailer-published (Aqua Medic's own manual could not be read)
+  power: 20 W
+  dimensions: '''1050x85mm'' as printed by the retailer. This is almost certainly a typo for 105 x 85 mm, but that
+    is unverified.'
+  tank_range: up to 800 L
+  modes: 'Controllable: as EcoDrift 4.3'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://aquaristikshop.com/aquaristic/Aqua-Medic-EcoDrift-8-3/360061/
+  - https://www.aqua-medic.de/ru/download/EcoDrift-x3-manual~d4894
+  notes: Power 8-20 W, 24 V. Glass up to 15 mm. Max depth 1.0 m.
+aquamedic_ecodrift_15_3:
+  kind: powerhead
+  brand: Aqua Medic
+  model: EcoDrift 15.3
+  pump_type: propeller
+  description: Aqua Medic EcoDrift 15.3 (propeller powerhead)
+  rated_flow: 15000 L/h
+  rated_flow_basis: 'Aqua Medic: up to 15,000 l/h; delivered flow = rated x derating 0.7 (A-205)'
+  outlet:
+    shape: circle
+    diameter: 63 mm
+  outlet_basis: retailer-published (Aqua Medic's own manual could not be read)
+  power: 35 W
+  dimensions: 136 x 110 mm
+  tank_range: up to 1,500 L
+  modes: 'Controllable: as EcoDrift 4.3'
+  status: current
+  checked: '2026-11-12'
+  sources:
+  - https://www.aquaristikshop.com/aquaristic/Aqua-Medic-EcoDrift-15-1/360062/
+  - https://www.aqua-medic.de/ru/download/EcoDrift-x3-manual~d4894
+  notes: Power 10-35 W. Glass up to 15 mm. The retailer URL says '15-1' but the page content is the 15.3. There
+    is also a 20.3 (up to 20,000 l/h, tanks up to 2,000 L per the manual excerpt), which is not catalogued here.

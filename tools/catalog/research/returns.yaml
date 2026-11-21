@@ -1,0 +1,891 @@
+# ReefFlow equipment library - aquarium RETURN pumps (sump -> display)
+# Compiled 2026-11-12. Values are as published (units as published). null = not published / not found.
+# curve: list of [head, flow] pairs. curve_basis says where the points came from.
+#   "manufacturer table"            - numbers printed by the manufacturer
+#   "read from manufacturer chart"  - digitised by pixel/vector extraction from a manufacturer chart image/PDF;
+#                                     typical reading error is noted per entry.
+# Extra keys used on a few entries: curve_alt / curve_alt_basis (a second, conflicting manufacturer source).
+# Model check note: the simulator's Q = Q0*sqrt(1 - H/H0) is concave in Q(H). Several manufacturers publish
+# charts that are straight lines (Tunze, Eheim, Red Sea G2) or near-linear tables (Sicce catalog, Danner);
+# those are schematic, not measured curves, so treat them as weaker evidence than the digitised curves.
+
+# ---------------------------------------------------------------- EcoTech Marine
+- id: ecotech_vectra_s2
+  brand: EcoTech Marine
+  model: Vectra S2
+  category: return
+  max_flow: "1400 GPH (5300 LPH)"
+  max_head: "11.5 ft (3.5 m)"
+  curve: [["1 ft", "1354 GPH"], ["2 ft", "1213 GPH"], ["3 ft", "1073 GPH"], ["4 ft", "945 GPH"], ["5 ft", "814 GPH"], ["6 ft", "685 GPH"], ["7 ft", "572 GPH"], ["8 ft", "454 GPH"], ["9 ft", "344 GPH"], ["10 ft", "237 GPH"], ["11 ft", "130 GPH"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "72 W (BRS: 'up to 72W', also the PSU rating; EcoTech page gives no wattage)"
+  outlet_size: "0.75 in (19 mm) slip"
+  inlet_size: "1 in (25 mm) slip"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://ecotechmarine.com/vectra
+    - https://ecotechmarine.com/wp-content/uploads/2017/06/S1_Graph.jpg
+    - https://www.bulkreefsupply.com/vectra-s2-mobius-ready-dc-return-pump-1400-gph-ecotech-marine.html
+  notes: >-
+    The curve image on the current Vectra page is the file S1_Graph.jpg, i.e. the first-generation S1 chart.
+    EcoTech shows it for the S2, whose rated Q/H (1400 GPH / 11.5 ft) are the same. Digitised from a 389x200 px
+    image: about +/-10 GPH and +/-0.15 ft. The drawn curve runs from ~76 GPH @ 11.6 ft to ~1363 GPH @ 0.9 ft and
+    does not reach either axis. BRS lists max head as 11.5 ft in the spec section but 10-15 ft in its info table.
+
+- id: ecotech_vectra_m2
+  brand: EcoTech Marine
+  model: Vectra M2
+  category: return
+  max_flow: "2000 GPH (7500 LPH)"
+  max_head: "21.5 ft (6.5 m)"
+  curve: [["2 ft", "1874 GPH"], ["4 ft", "1580 GPH"], ["6 ft", "1316 GPH"], ["8 ft", "1080 GPH"], ["10 ft", "868 GPH"], ["12 ft", "671 GPH"], ["14 ft", "486 GPH"], ["16 ft", "333 GPH"], ["18 ft", "188 GPH"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "96 W (BRS 'up to 96W'; not on EcoTech page)"
+  outlet_size: "1 in (25 mm) slip"
+  inlet_size: "1.25 in (31.75 mm) slip"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://ecotechmarine.com/vectra
+    - https://ecotechmarine.com/wp-content/uploads/2017/01/M1_Graph_03.jpg
+    - https://www.bulkreefsupply.com/vectra-m2-mobius-ready-dc-return-pump-2000-gph-ecotech-marine.html
+  notes: >-
+    The chart on the Vectra page is M1_Graph_03.jpg, the first-generation M1 chart. Its curve tops out near
+    19.5 ft (~100 GPH), lower than the 21.5 ft rating EcoTech now gives the M2, so the M2 curve may sit slightly
+    higher near shut-off. Digitised from a 389x200 px image: about +/-10 GPH and +/-0.3 ft.
+
+- id: ecotech_vectra_l2
+  brand: EcoTech Marine
+  model: Vectra L2
+  category: return
+  max_flow: "3100 GPH (11500 LPH)"
+  max_head: "21.5 ft (6.5 m)"
+  curve: [["2 ft", "2810 GPH"], ["4 ft", "2368 GPH"], ["6 ft", "1968 GPH"], ["8 ft", "1602 GPH"], ["10 ft", "1292 GPH"], ["12 ft", "983 GPH"], ["14 ft", "713 GPH"], ["16 ft", "482 GPH"], ["18 ft", "265 GPH"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "150 W (BRS 'up to 150W', also the PSU rating)"
+  outlet_size: "1.25 in (31.75 mm) slip"
+  inlet_size: "1.5 in (38 mm) slip"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://ecotechmarine.com/vectra
+    - https://ecotechmarine.com/wp-content/uploads/2017/01/L1_Graph_03.jpg
+    - https://www.bulkreefsupply.com/vectra-l2-mobius-ready-dc-return-pump-3100-gph-ecotech-marine.html
+  notes: >-
+    The chart on the Vectra page is L1_Graph_03.jpg (first-generation L1). Its curve tops out near 19.5 ft,
+    not the 21.5 ft rated for the L2. Digitised from a 389x200 px image: about +/-15 GPH and +/-0.3 ft.
+    The drawn curve ends near 2920 GPH at 1.5 ft.
+
+# ---------------------------------------------------------------- Sicce
+- id: sicce_syncra_sdc_6
+  brand: Sicce
+  model: Syncra SDC 6.0
+  category: return
+  max_flow: "5500 l/h (1450 US gph); adjustable 2000-5500 l/h"
+  max_head: "3.5 m (11.5 ft)"
+  curve: [["0 m", "5500 l/h"], ["1 m", "3800 l/h"], ["2 m", "2200 l/h"], ["3 m", "800 l/h"]]
+  curve_basis: "manufacturer table"
+  power_max: "40 W (10-40 W)"
+  outlet_size: "1 in 3/8 GAS on the pump body; included fittings 25/32 mm (EU) or 3/4 in / 1 in PVC slip and 3/4 in / 1 in ID tubing (US)"
+  inlet_size: "1 in 3/8 GAS"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://us.sicce.com/media/wysiwyg/UTSD207-A_EN-DE_catalogo2018_ISSUU.pdf
+    - https://www.sicce.com/en/products/multifunction-pumps/syncra-sdc.html
+    - https://www.sicce.com/media/wysiwyg/ISTRUZIONI/80N618-E_SICCE_Syncra_SDC_Instruction.pdf
+  notes: >-
+    The curve is the 'Technical curves' table in the Sicce 2018 catalog (p.14), measured with an unrestricted
+    vertical pipe. 24 V DC with Wi-Fi controller. Sicce also makes a newer SDC 3.0 (3000 l/h, 2.2 m, 6-35 W).
+
+- id: sicce_syncra_sdc_7
+  brand: Sicce
+  model: Syncra SDC 7.0
+  category: return
+  max_flow: "7000 l/h (1900 US gph); adjustable 3000-7000 l/h"
+  max_head: "5.0 m (16.5 ft)"
+  curve: [["0 m", "7000 l/h"], ["1 m", "5400 l/h"], ["2 m", "4200 l/h"], ["3 m", "2500 l/h"], ["4 m", "1300 l/h"]]
+  curve_basis: "manufacturer table"
+  curve_alt: [["0 m", "6980 l/h"], ["0.5 m", "6680 l/h"], ["1 m", "6220 l/h"], ["1.5 m", "5710 l/h"], ["2 m", "5170 l/h"], ["2.5 m", "4570 l/h"], ["3 m", "3820 l/h"], ["3.5 m", "3070 l/h"], ["4 m", "2080 l/h"], ["4.5 m", "~900-950 l/h"], ["5.0 m", "0 l/h"]]
+  curve_alt_basis: "read from manufacturer chart (Syncra SDC technical data sheet; vector PDF, reading error <1%)"
+  power_max: "65 W (20-65 W)"
+  outlet_size: "1 in 3/8 GAS on the pump body; included fittings 25/32 mm (EU) or 3/4 in / 1 in PVC slip and 3/4 in / 1 in ID tubing (US)"
+  inlet_size: "1 in 3/8 GAS"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://us.sicce.com/media/wysiwyg/UTSD207-A_EN-DE_catalogo2018_ISSUU.pdf
+    - https://www.shop-meeresaquaristik.de/downloads/20194_3_syncrasdctechnicaldata-1.pdf
+    - https://www.sicce.com/en/products/multifunction-pumps/syncra-sdc.html
+  notes: >-
+    The two Sicce sources disagree on the middle of the curve. The 2018 catalog table (curve) is close to
+    linear. The Sicce technical data sheet chart (curve_alt; Sicce document hosted by a German dealer) is concave
+    and close to Red Sea's ReefRun 7000 chart. Treat the curve shape as uncertain. On the data-sheet chart the
+    flow axis below 1000 l/h is not to scale (the 0 to 1000 l/h gap is drawn twice as wide), so curve_alt below
+    1000 l/h is approximate. The data sheet also lists rotation speed 1500-3600 rpm.
+
+- id: sicce_syncra_sdc_9
+  brand: Sicce
+  model: Syncra SDC 9.0
+  category: return
+  max_flow: "9000 l/h (2500 US gph); adjustable 4000-9000 l/h"
+  max_head: "7.0 m (23.0 ft)"
+  curve: [["0 m", "9000 l/h"], ["1 m", "8000 l/h"], ["2 m", "6900 l/h"], ["3 m", "5700 l/h"], ["4 m", "4000 l/h"], ["5 m", "2500 l/h"], ["6 m", "1500 l/h"]]
+  curve_basis: "manufacturer table"
+  curve_alt: [["0 m", "8990 l/h"], ["1 m", "8590 l/h"], ["2 m", "8000 l/h"], ["3 m", "7210 l/h"], ["4 m", "6200 l/h"], ["5 m", "4870 l/h"], ["6 m", "2930 l/h"], ["6.5 m", "1450 l/h"], ["7.0 m", "0 l/h"]]
+  curve_alt_basis: "read from manufacturer chart (Syncra SDC technical data sheet; vector PDF, reading error <1% above 1000 l/h)"
+  power_max: "95 W (30-95 W in catalog, manual and data sheet; the current sicce.com page says 30-90 W)"
+  outlet_size: "1 in 3/8 GAS on the pump body; included fittings 25/32 mm (EU) or 3/4 in / 1 in PVC slip and 3/4 in / 1 in ID tubing (US)"
+  inlet_size: "1 in 3/8 GAS"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://us.sicce.com/media/wysiwyg/UTSD207-A_EN-DE_catalogo2018_ISSUU.pdf
+    - https://www.shop-meeresaquaristik.de/downloads/20194_3_syncrasdctechnicaldata-1.pdf
+    - https://www.sicce.com/en/products/multifunction-pumps/syncra-sdc.html
+  notes: >-
+    As with the 7.0, the catalog table and the data-sheet chart conflict. At 4 m, for example, they give 4000 vs
+    6200 l/h. The data-sheet chart is the more concave of the two.
+
+- id: sicce_syncra_silent_1_5
+  brand: Sicce
+  model: Syncra Silent 1.5
+  category: return
+  max_flow: "1350 l/h (357 US gph @60 Hz)"
+  max_head: "1.8 m (6.0 ft)"
+  curve: [["0 m", "1350 l/h"], ["0.5 m", "1150 l/h"], ["1.0 m", "860 l/h"], ["1.5 m", "400 l/h"]]
+  curve_basis: "manufacturer table"
+  power_max: "23 W (50 Hz and 60 Hz)"
+  outlet_size: "1/2 in hose connector (Sicce accessory list); 13 mm (0.5 in) on the catalog drawing"
+  inlet_size: null
+  dc_controllable: false
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://us.sicce.com/media/wysiwyg/UTSD207-A_EN-DE_catalogo2018_ISSUU.pdf
+    - https://www.sicce.com/en/products/multifunction-pumps/syncra-silent.html
+  notes: "AC synchronous pump. The prechamber has a manual flow-control valve. Curve from the 2018 catalog p.10 table (unrestricted vertical pipe, 50 Hz)."
+
+- id: sicce_syncra_silent_2_0
+  brand: Sicce
+  model: Syncra Silent 2.0
+  category: return
+  max_flow: "2150 l/h (568 US gph @60 Hz)"
+  max_head: "2.0 m (6.5 ft)"
+  curve: [["0 m", "2150 l/h"], ["0.5 m", "1800 l/h"], ["1.0 m", "1350 l/h"], ["1.5 m", "850 l/h"]]
+  curve_basis: "manufacturer table"
+  power_max: "32 W @50 Hz / 35 W @60 Hz"
+  outlet_size: "3/4 in hose connector (Sicce accessory list); 26 mm (1.0 in) on the catalog drawing"
+  inlet_size: "3/4 in hose connector (Sicce accessory list)"
+  dc_controllable: false
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://us.sicce.com/media/wysiwyg/UTSD207-A_EN-DE_catalogo2018_ISSUU.pdf
+    - https://www.sicce.com/en/products/multifunction-pumps/syncra-silent.html
+  notes: "AC. Curve from the 2018 catalog p.10 table at 50 Hz."
+
+- id: sicce_syncra_silent_3_0
+  brand: Sicce
+  model: Syncra Silent 3.0
+  category: return
+  max_flow: "2700 l/h (714 US gph @60 Hz)"
+  max_head: "3.0 m (9.9 ft)"
+  curve: [["0 m", "2700 l/h"], ["0.5 m", "2450 l/h"], ["1.0 m", "2150 l/h"], ["1.5 m", "1800 l/h"], ["2.0 m", "1400 l/h"], ["2.5 m", "800 l/h"]]
+  curve_basis: "manufacturer table"
+  power_max: "45 W @50 Hz / 48 W @60 Hz"
+  outlet_size: "3/4 in hose connector (Sicce accessory list); 26 mm (1.0 in) on the catalog drawing"
+  inlet_size: "3/4 in hose connector (Sicce accessory list)"
+  dc_controllable: false
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://us.sicce.com/media/wysiwyg/UTSD207-A_EN-DE_catalogo2018_ISSUU.pdf
+    - https://www.sicce.com/en/products/multifunction-pumps/syncra-silent.html
+  notes: "AC. Curve from the 2018 catalog p.10 table at 50 Hz."
+
+- id: sicce_syncra_silent_3_5
+  brand: Sicce
+  model: Syncra Silent 3.5
+  category: return
+  max_flow: "2500 l/h (687 US gph @60 Hz)"
+  max_head: "3.7 m (12.5 ft)"
+  curve: [["0 m", "2500 l/h"], ["0.5 m", "2250 l/h"], ["1.0 m", "2050 l/h"], ["1.5 m", "1800 l/h"], ["2.0 m", "1500 l/h"], ["2.5 m", "1200 l/h"], ["3.0 m", "800 l/h"], ["3.5 m", "250 l/h"]]
+  curve_basis: "manufacturer table"
+  power_max: "65 W @50 Hz / 68 W @60 Hz"
+  outlet_size: "3/4 in hose connector (Sicce accessory list); 26 mm (1.0 in) on the catalog drawing"
+  inlet_size: "1 in hose connector (Sicce accessory list)"
+  dc_controllable: false
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://us.sicce.com/media/wysiwyg/UTSD207-A_EN-DE_catalogo2018_ISSUU.pdf
+    - https://www.sicce.com/en/products/multifunction-pumps/syncra-silent.html
+  notes: >-
+    AC. The rated 2500 l/h really is lower than the Syncra 3.0's 2700 l/h. The 3.5 is a higher-head pump
+    (3.7 m), and both the catalog and sicce.com print it this way.
+
+- id: sicce_syncra_silent_4_0
+  brand: Sicce
+  model: Syncra Silent 4.0
+  category: return
+  max_flow: "3500 l/h (951 US gph @60 Hz)"
+  max_head: "3.7 m (12.5 ft)"
+  curve: [["0 m", "3500 l/h"], ["0.5 m", "3200 l/h"], ["1.0 m", "2900 l/h"], ["1.5 m", "2550 l/h"], ["2.0 m", "2150 l/h"], ["2.5 m", "1700 l/h"], ["3.0 m", "1110 l/h"], ["3.5 m", "350 l/h"]]
+  curve_basis: "manufacturer table"
+  power_max: "80 W @50 Hz / 85 W @60 Hz"
+  outlet_size: "3/4 in hose connector (Sicce accessory list); 26 mm (1.0 in) on the catalog drawing"
+  inlet_size: "1 in hose connector (Sicce accessory list)"
+  dc_controllable: false
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://us.sicce.com/media/wysiwyg/UTSD207-A_EN-DE_catalogo2018_ISSUU.pdf
+    - https://www.sicce.com/en/products/multifunction-pumps/syncra-silent.html
+  notes: "AC. Curve from the 2018 catalog p.10 table at 50 Hz. The Syncra 5.0 (5000 l/h, 3.8 m, 105 W) is in the same table."
+
+# ---------------------------------------------------------------- Red Sea
+- id: redsea_reefrun_5500
+  brand: Red Sea
+  model: ReefRun 5500
+  category: return
+  max_flow: "5500 l/h (1450 US gph); 2000-5500 l/h"
+  max_head: "3.5 m (11.5 ft)"
+  curve: [["0.5 m", "4740 l/h"], ["1 m", "4280 l/h"], ["1.5 m", "3720 l/h"], ["2 m", "3030 l/h"], ["2.5 m", "2040 l/h"], ["3 m", "905 l/h"], ["3.5 m", "~190 l/h"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "40 W (10-40 W)"
+  outlet_size: null
+  inlet_size: null
+  dc_controllable: true
+  status: discontinued
+  checked: 2026-11-12
+  sources:
+    - https://g1.redseafish.com/wp-content/uploads/2023/02/7766ECJ_ReefRun-DC-Pump-Manual_EN_CH_JP_-V23A-4web.pdf
+    - https://redseafish.com/?p=6750
+  notes: >-
+    Red Sea's site now lists only ReefRun G2 sizes, so this first-generation pump is treated as superseded; it
+    may still be in retail stock. The manual's data-sheet chart is a schematic. The flow-axis labels are spaced
+    unevenly (0, 1000, 3000, 5000, 7000, 9000 l/h at irregular intervals), so values were read with piecewise-linear
+    interpolation between labels. Treat them as indicative (about +/-5%). Q, H and W ranges are identical to Sicce
+    Syncra SDC 6.0. Needs a controller (sold separately in some markets).
+
+- id: redsea_reefrun_7000
+  brand: Red Sea
+  model: ReefRun 7000
+  category: return
+  max_flow: "7000 l/h (1900 US gph); 3000-7000 l/h"
+  max_head: "5.0 m (16.5 ft)"
+  curve: [["0.5 m", "6530 l/h"], ["1 m", "6130 l/h"], ["1.5 m", "5660 l/h"], ["2 m", "5110 l/h"], ["2.5 m", "4540 l/h"], ["3 m", "3900 l/h"], ["3.5 m", "3170 l/h"], ["4 m", "2200 l/h"], ["4.5 m", "1060 l/h"], ["5 m", "~410 l/h"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "65 W (20-65 W)"
+  outlet_size: null
+  inlet_size: null
+  dc_controllable: true
+  status: discontinued
+  checked: 2026-11-12
+  sources:
+    - https://g1.redseafish.com/wp-content/uploads/2023/02/7766ECJ_ReefRun-DC-Pump-Manual_EN_CH_JP_-V23A-4web.pdf
+    - https://redseafish.com/?p=6750
+  notes: >-
+    Superseded by the ReefRun G2. Read from the schematic chart (non-uniform flow axis; see the ReefRun 5500
+    note), about +/-5%. The chart's 7000 curve meets the zero-head axis near 6850 l/h. Specs are identical to
+    Sicce Syncra SDC 7.0, and the readings agree within ~5% with Sicce's SDC 7.0 data-sheet chart.
+
+- id: redsea_reefrun_9000
+  brand: Red Sea
+  model: ReefRun 9000
+  category: return
+  max_flow: "9000 l/h (2500 US gph); 4000-9000 l/h"
+  max_head: "7.0 m (23.0 ft)"
+  curve: [["0 m", "9000 l/h"], ["0.5 m", "8680 l/h"], ["1 m", "8410 l/h"], ["2 m", "7700 l/h"], ["3 m", "6740 l/h"], ["4 m", "5520 l/h"], ["5 m", "4090 l/h"], ["6 m", "2210 l/h"], ["6.5 m", "970 l/h"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "95 W (30-95 W)"
+  outlet_size: null
+  inlet_size: null
+  dc_controllable: true
+  status: discontinued
+  checked: 2026-11-12
+  sources:
+    - https://g1.redseafish.com/wp-content/uploads/2023/02/7766ECJ_ReefRun-DC-Pump-Manual_EN_CH_JP_-V23A-4web.pdf
+    - https://redseafish.com/?p=6750
+  notes: >-
+    Superseded by the ReefRun G2. Read from the schematic chart (non-uniform flow axis), about +/-5%. Specs are
+    identical to Sicce Syncra SDC 9.0.
+
+- id: redsea_reefrun_g2_4000
+  brand: Red Sea
+  model: ReefRun G2 4000
+  category: return
+  max_flow: "4000 l/h (1060 US gph); 2000-4000 l/h"
+  max_head: "3.4 m (11.2 ft)"
+  curve: null
+  curve_basis: null
+  power_max: "38 W (16-38 W)"
+  outlet_size: "PVC adapters 25 mm or 3/4 in; hose barbs 17/25 mm or 5/8 in / 1 in; 3/4 in male gas thread"
+  inlet_size: null
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://g1.redseafish.com/wp-content/uploads/2025/02/ReefRun-G2-Manual_-ENG_2025-Portrait.pdf
+    - https://redseafish.com/?p=6750
+  notes: >-
+    The G2 manual's chart draws straight lines on an unevenly spaced flow axis, so no curve was taken from it.
+    The line for this model runs from ~3.6 m at zero flow to ~4000 l/h at zero head.
+
+- id: redsea_reefrun_g2_6000
+  brand: Red Sea
+  model: ReefRun G2 6000
+  category: return
+  max_flow: "6500 l/h (1700 US gph); 3600-6500 l/h"
+  max_head: "4.4 m (14.4 ft)"
+  curve: null
+  curve_basis: null
+  power_max: "56 W (22-56 W)"
+  outlet_size: "PVC adapters 25/32 mm or 3/4 in / 1 in; hose barbs 25/32 mm or 1 in / 1-1/4 in; 1 in male gas thread"
+  inlet_size: null
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://g1.redseafish.com/wp-content/uploads/2025/02/ReefRun-G2-Manual_-ENG_2025-Portrait.pdf
+    - https://redseafish.com/?p=6750
+  notes: "The manufacturer chart is schematic straight lines and was not digitised."
+
+- id: redsea_reefrun_g2_8000
+  brand: Red Sea
+  model: ReefRun G2 8000
+  category: return
+  max_flow: "8300 l/h (2200 US gph); 4100-8300 l/h"
+  max_head: "5.3 m (17.4 ft)"
+  curve: null
+  curve_basis: null
+  power_max: "73 W (24-73 W)"
+  outlet_size: "PVC adapter 32 mm or 1 in; hose barbs 25/32 mm or 1 in / 1-1/4 in; 1 in male gas thread"
+  inlet_size: null
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://g1.redseafish.com/wp-content/uploads/2025/02/ReefRun-G2-Manual_-ENG_2025-Portrait.pdf
+    - https://redseafish.com/?p=6750
+    - https://fresh.bulkreefsupply.com/reefrun-g2-8000-controllable-dc-pump-red-sea.html
+  notes: "Ships with an inline flow controller and PSU (BRS). Wi-Fi/app control needs the ReefRun Dual Controller. The manufacturer chart is schematic and was not digitised."
+
+- id: redsea_reefrun_g2_12000
+  brand: Red Sea
+  model: ReefRun G2 12000
+  category: return
+  max_flow: "12000 l/h (3200 US gph); 5000-12000 l/h"
+  max_head: "5.8 m (19 ft) in the manual; 5.9 m on the web page"
+  curve: null
+  curve_basis: null
+  power_max: "105 W (33-105 W)"
+  outlet_size: "PVC adapters 32/40 mm or 1 in / 1-1/4 in; hose barbs 25/32 mm or 1 in / 1-1/4 in; 1 in male gas thread"
+  inlet_size: null
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://g1.redseafish.com/wp-content/uploads/2025/02/ReefRun-G2-Manual_-ENG_2025-Portrait.pdf
+    - https://redseafish.com/?p=6750
+  notes: "The manual's chart is a straight line from ~5.9 m at zero flow to ~12000 l/h at zero head (schematic). Head rating is inconsistent: 5.8 m in the manual vs 5.9 m on the web page."
+
+# ---------------------------------------------------------------- Neptune Systems
+- id: neptune_cor_15
+  brand: Neptune Systems
+  model: COR-15
+  category: return
+  max_flow: "1500 GPH (5700 LPH)"
+  max_head: "14 ft (BRS product spotlight; Neptune does not publish it)"
+  curve: null
+  curve_basis: null
+  power_max: "50 W"
+  outlet_size: "0.75 in slip or 1.25 in BSPP-to-slip union (included fittings)"
+  inlet_size: "1 in slip"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://www.neptunesystems.com/products/cor/
+    - https://www.bulkreefsupply.com/content/post/brstv-product-spotlight-neptune-systems-cor-15-return-pump
+    - https://www.marinedepot.com/neptune-systems-cor-15-intelligent-return-pump
+  notes: >-
+    Powered from an Apex 1LINK port; it cannot run standalone. Neptune publishes no head figure for the COR-15.
+    BRS's spotlight says 14 ft, while the Marine Depot and BRS info tables say 10-15 ft. Neptune recommends
+    1.25 in plumbing for best flow.
+
+- id: neptune_cor_20
+  brand: Neptune Systems
+  model: COR-20
+  category: return
+  max_flow: "2000 GPH (7500 LPH)"
+  max_head: "20 ft (BRS; Neptune does not publish it; the chart curve ends near 19.4 ft)"
+  curve: [["2 ft", "1845 GPH"], ["4 ft", "1557 GPH"], ["6 ft", "1295 GPH"], ["8 ft", "1057 GPH"], ["10 ft", "846 GPH"], ["12 ft", "657 GPH"], ["14 ft", "485 GPH"], ["16 ft", "330 GPH"], ["18 ft", "192 GPH"], ["19 ft", "129 GPH"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "90 W (100 W PSU included)"
+  outlet_size: "0.75 in slip or 1.25 in BSPP-to-slip union (included fittings)"
+  inlet_size: "1 in slip"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://www.neptunesystems.com/products/cor/
+    - https://neptunesystems.wpenginepowered.com/wp-content/uploads/2024/05/flow-graph.png
+    - https://fresh.bulkreefsupply.com/cor-20-intelligent-return-pump-neptune-systems.html
+  notes: >-
+    Neptune's 'Flow Graph' is titled '80W CONSTANT POWER' and runs to 2000 GPH, so it is taken to be the COR-20
+    curve (Neptune's page has only one graph). Digitised from a 365x273 px image: about +/-15 GPH and +/-0.2 ft.
+    The curve runs from ~97 GPH @ 19.4 ft to ~1980 GPH @ ~1 ft. Standalone or Apex-connected.
+
+# ---------------------------------------------------------------- Jebao / Jecod
+- id: jebao_dcp_3500
+  brand: Jebao / Jecod
+  model: DCP-3500
+  category: return
+  max_flow: "925 GPH (~3500 l/h)"
+  max_head: "11.5 ft (retailer); another retailer says 3.2 m"
+  curve: null
+  curve_basis: null
+  power_max: "28 W (retailers; one listing says 23 W)"
+  outlet_size: null
+  inlet_size: null
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://www.reefsupplies.ca/products/jebao-dcp-3500-sine-tech-silent-pump-max-925-gph
+    - https://www.aceuae.com/en-ae/jebao-marine-dc-pump-dcp-3500-28-w/2160163.html
+  notes: >-
+    Retailer data only. The Jebao DCP manual's spec table lists DCP-2500/3000/4000/5000/6500/8000/10000/15000/
+    18000/20000 and does not include a 3500; this appears to be a North American (Jecod) SKU. No official
+    Jebao/Jecod product page could be reached.
+
+- id: jebao_dcp_5000
+  brand: Jebao / Jecod
+  model: DCP-5000
+  category: return
+  max_flow: "5000 l/h (some US retailers say 1450 GPH / 5500 l/h)"
+  max_head: "4.0 m"
+  curve: null
+  curve_basis: null
+  power_max: "40 W"
+  outlet_size: null
+  inlet_size: null
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://static.maritex.eu/file/display/EHgU1ZkcM52M7bgTa61sXdFGhfFpQD6V/Jebao_DCP_Instrukcja_PL_EN.pdf
+  notes: "From the Jebao DCP manual's performance table (PL/EN edition from the distributor Maritex). 24 V DC; speed adjustable 30-100% in 1% steps. No curve is published."
+
+- id: jebao_dcp_6500
+  brand: Jebao / Jecod
+  model: DCP-6500
+  category: return
+  max_flow: "6500 l/h"
+  max_head: "4.5 m"
+  curve: null
+  curve_basis: null
+  power_max: "55 W"
+  outlet_size: null
+  inlet_size: null
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://static.maritex.eu/file/display/EHgU1ZkcM52M7bgTa61sXdFGhfFpQD6V/Jebao_DCP_Instrukcja_PL_EN.pdf
+    - https://www.homeleigh.co.uk/?p=193324
+  notes: "From the Jebao DCP manual table. A UK retailer gives the adjustable range as 1950-6000 l/h, which conflicts with the 6500 l/h maximum."
+
+- id: jebao_dcp_8000
+  brand: Jebao / Jecod
+  model: DCP-8000
+  category: return
+  max_flow: "8000 l/h"
+  max_head: "5.2 m"
+  curve: null
+  curve_basis: null
+  power_max: "65 W"
+  outlet_size: null
+  inlet_size: null
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://static.maritex.eu/file/display/EHgU1ZkcM52M7bgTa61sXdFGhfFpQD6V/Jebao_DCP_Instrukcja_PL_EN.pdf
+    - https://www.homeleigh.co.uk/?p=193324
+  notes: "From the Jebao DCP manual table. 24 V DC."
+
+- id: jebao_dcp_10000
+  brand: Jebao / Jecod
+  model: DCP-10000
+  category: return
+  max_flow: "10000 l/h (~2640 GPH)"
+  max_head: "6.0 m (~19.6 ft)"
+  curve: null
+  curve_basis: null
+  power_max: "80 W"
+  outlet_size: null
+  inlet_size: null
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://static.maritex.eu/file/display/EHgU1ZkcM52M7bgTa61sXdFGhfFpQD6V/Jebao_DCP_Instrukcja_PL_EN.pdf
+    - https://www.homeleigh.co.uk/?p=193324
+  notes: "From the Jebao DCP manual table. 24 V DC. The newer DCT/DCS series was not researched (no easier source found)."
+
+# ---------------------------------------------------------------- Reef Octopus (CoralVue)
+- id: reefoctopus_varios_2
+  brand: Reef Octopus
+  model: VarioS-2
+  category: return
+  max_flow: "792 GPH"
+  max_head: "13 ft"
+  curve: null
+  curve_basis: null
+  power_max: "25 W"
+  outlet_size: null
+  inlet_size: null
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://topshelfaquatics.com/products/varios-6-controllable-dc-pump-1720-gph-reef-octopus
+  notes: "From the retailer's VarioS comparison table only. 24 V DC. The manufacturer site (coralvue.com) refused automated access."
+
+- id: reefoctopus_varios_4
+  brand: Reef Octopus
+  model: VarioS-4
+  category: return
+  max_flow: "1050 GPH"
+  max_head: "14.7 ft (retailer); the manufacturer chart footer says 14 ft and the chart curve ends at ~14.7 ft"
+  curve: [["0 ft", "1050 GPH"], ["1.6 ft", "925 GPH"], ["3.2 ft", "792 GPH"], ["4.9 ft", "660 GPH"], ["6.5 ft", "530 GPH"], ["8.2 ft", "320 GPH"], ["9.8 ft", "210 GPH"], ["11.5 ft", "160 GPH"], ["13.1 ft", "80 GPH"], ["14.7 ft", "0 GPH"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "40 W"
+  outlet_size: "32 mm / 1 in slip PVC or 3/4 in barb"
+  inlet_size: "1.25 in male union thread"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://topshelfaquatics.com/products/varios-4-controllable-dc-pump-1050-gph-reef-octopus
+    - https://topshelfaquatics.com/cdn/shop/files/reef-octopus-varios-4-controllable-dc-pump-1050-gph-reef-octopus-1146288811.jpg
+  notes: >-
+    Reef Octopus-branded 'Average Flow/GPH vs Water Head/Ft' chart, hosted by the retailer Top Shelf Aquatics.
+    Flow values are the labels printed on the chart. Heads were measured from marker positions (+/-0.1 ft); the
+    markers drift slightly off the nominal 1.6 ft grid. 24 V DC.
+
+- id: reefoctopus_varios_6
+  brand: Reef Octopus
+  model: VarioS-6
+  category: return
+  max_flow: "1720 GPH"
+  max_head: "16 ft"
+  curve: [["0 ft", "1720 GPH"], ["1.6 ft", "1600 GPH"], ["3.2 ft", "1320 GPH"], ["4.9 ft", "1050 GPH"], ["6.5 ft", "925 GPH"], ["8.2 ft", "792 GPH"], ["9.8 ft", "530 GPH"], ["11.5 ft", "400 GPH"], ["13.1 ft", "220 GPH"], ["14.7 ft", "80 GPH"], ["16.0 ft", "0 GPH"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "70 W"
+  outlet_size: "32 mm / 1.25 in (barb or PVC coupling)"
+  inlet_size: "1.25 in male union thread"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://topshelfaquatics.com/products/varios-6-controllable-dc-pump-1720-gph-reef-octopus
+    - https://topshelfaquatics.com/cdn/shop/files/reef-octopus-varios-6-controllable-dc-pump-1720-gph-reef-octopus-1146288696.jpg
+  notes: >-
+    Reef Octopus-branded chart hosted by the retailer. Flow values are the printed labels; heads were measured
+    from marker positions. 36 V DC. Several sellers say it is not pressure-rated (no floor-to-floor use). One
+    retailer lists 1902 GPH, which conflicts with the 1720 GPH rating.
+
+- id: reefoctopus_varios_8
+  brand: Reef Octopus
+  model: VarioS-8
+  category: return
+  max_flow: "2700 GPH (rating); the chart's zero-head label is 2800 GPH"
+  max_head: "18 ft (rating); the chart curve reaches zero at ~18.7 ft"
+  curve: [["0 ft", "2800 GPH"], ["1.6 ft", "2500 GPH"], ["3.2 ft", "2200 GPH"], ["4.9 ft", "1900 GPH"], ["6.5 ft", "1720 GPH"], ["8.2 ft", "1320 GPH"], ["9.8 ft", "925 GPH"], ["11.5 ft", "660 GPH"], ["13.1 ft", "530 GPH"], ["14.7 ft", "400 GPH"], ["16.4 ft", "220 GPH"], ["17.0 ft", "80 GPH"], ["18.7 ft", "0 GPH"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "98 W"
+  outlet_size: "32 mm / 1.25 in (barb or PVC coupling)"
+  inlet_size: "1.25 in male union thread"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://topshelfaquatics.com/products/varios-8-controllable-dc-pump-2700-gph-reef-octopus
+    - https://topshelfaquatics.com/cdn/shop/files/reef-octopus-varios-8-controllable-dc-pump-2700-gph-reef-octopus-1146221195.jpg
+  notes: >-
+    Reef Octopus-branded chart hosted by the retailer. Flow values are the printed labels and heads were measured
+    from marker positions. The chart (2800 GPH, ~18.7 ft) is not consistent with the 2700 GPH / 18 ft rating.
+    36 V DC; not pressure-rated per the manufacturer note quoted by retailers.
+
+# ---------------------------------------------------------------- Abyzz (venotec)
+- id: abyzz_a200
+  brand: Abyzz
+  model: A200 / A200 IPU
+  category: return
+  max_flow: "14500 l/h (3800 gph) rated at 100%; 17000 l/h (4500 gph) maximum (BOOSTMODE)"
+  max_head: "8.8 m (28.8 ft)"
+  curve: [["0 m", "14.5 m3/h"], ["1 m", "13.0 m3/h"], ["2 m", "10.9 m3/h"], ["3 m", "9.2 m3/h"], ["4 m", "7.8 m3/h"], ["5 m", "6.4 m3/h"], ["6 m", "5.1 m3/h"], ["7 m", "2.5 m3/h"], ["8 m", "0.7 m3/h"], ["9 m", "0.0 m3/h"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "200 W (4-200 W)"
+  outlet_size: "40 mm (metric, PVC adhesive; imperial adapters available)"
+  inlet_size: "50 mm (metric, PVC adhesive)"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://abyzz.com/pages/downloads
+    - https://cdn.shopify.com/s/files/1/0755/8299/6747/files/datasheet_a200ipu_20797f9a-ace3-482e-ba18-a7a6481160e8.pdf
+    - https://cdn.shopify.com/s/files/1/0755/8299/6747/files/datasheet_a200.pdf
+  notes: >-
+    The curve is the data sheet's 'Q vs p[m], 100% @ 200W' chart, which is the same in the A200 and A200 IPU
+    sheets. It is drawn as a polyline (kink at 6 m), so it is a coarse manufacturer measurement. Digitised from an
+    780x376 px image: about +/-0.1 m3/h. The A200 with the original driver shows 'not available' in the Abyzz
+    shop; the A200 IPU (new driver, same pump) is current. Sine-wave, three-phase synchronous pump with a titanium
+    impeller; max operating pressure 1.2 bar. A second chart in the sheet shows Q rising with speed setting to
+    ~17.4 m3/h at 80-100% (BOOSTMODE), with no head stated.
+
+# ---------------------------------------------------------------- Aqua Medic
+- id: aquamedic_dc_runner_3
+  brand: Aqua Medic
+  model: DC Runner 3.3 (also 3.2)
+  category: return
+  max_flow: "3000 l/h"
+  max_head: "2.7 m"
+  curve: null
+  curve_basis: null
+  power_max: "25 W"
+  outlet_size: "25 mm / 3/4 in"
+  inlet_size: "32 mm / 1 in"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://www.shop-meeresaquaristik.de/downloads/21445_1_dc-runner-1-2-9-2-manual_15537838540.pdf
+    - https://shop.aquarienkontor.de/Pumpen/Foerderpumpen-bis-5000-l-h/Aqua-Medic-DC-Runner-1-3::3189.html
+  notes: >-
+    Values come from the Aqua Medic DC Runner x.2 manual (Aqua Medic document hosted by a dealer). A retailer
+    table gives the same Q, H and W for the current x.3 generation. That table converts 25/32 mm to 1 in /
+    1-1/4 in, whereas Aqua Medic's own manual gives 3/4 in / 1 in. The x.3 manual on aqua-medic.de is behind a
+    bot check and was not read. 24 V DC with an 8-step controller (x.3 adds app control). No curve is published.
+
+- id: aquamedic_dc_runner_5
+  brand: Aqua Medic
+  model: DC Runner 5.3 (also 5.2)
+  category: return
+  max_flow: "5000 l/h"
+  max_head: "3.5 m"
+  curve: null
+  curve_basis: null
+  power_max: "50 W"
+  outlet_size: "32 mm / 1 in"
+  inlet_size: "32 mm / 1 in"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://www.shop-meeresaquaristik.de/downloads/21445_1_dc-runner-1-2-9-2-manual_15537838540.pdf
+    - https://shop.aquarienkontor.de/Pumpen/Foerderpumpen-bis-5000-l-h/Aqua-Medic-DC-Runner-1-3::3189.html
+  notes: "See the DC Runner 3.3 note. The x.2 manual and the x.3 retailer table agree on 5000 l/h, 3.5 m and 50 W."
+
+- id: aquamedic_dc_runner_9
+  brand: Aqua Medic
+  model: DC Runner 9.3 (also 9.2)
+  category: return
+  max_flow: "9000 l/h"
+  max_head: "4.8 m"
+  curve: null
+  curve_basis: null
+  power_max: "65 W"
+  outlet_size: "40 mm / 1-1/4 in"
+  inlet_size: "40 mm / 1-1/4 in"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://www.shop-meeresaquaristik.de/downloads/21445_1_dc-runner-1-2-9-2-manual_15537838540.pdf
+    - https://shop.aquarienkontor.de/Pumpen/Foerderpumpen-bis-5000-l-h/Aqua-Medic-DC-Runner-1-3::3189.html
+  notes: "See the DC Runner 3.3 note. 65 W is in both the manual and the retailer table. The search tool's snippet of the x.3 manual suggested 70 W for one model, but this could not be confirmed."
+
+# ---------------------------------------------------------------- Tunze
+- id: tunze_silence_1073_040
+  brand: Tunze
+  model: Silence 1073.040
+  category: return
+  max_flow: "3000 l/h (792.5 US gal/h); adjustable 300-3000 l/h"
+  max_head: "3 m (118 in)"
+  curve: [["0 m", "3.0 m3/h"], ["1 m", "2.0 m3/h"], ["2 m", "1.0 m3/h"], ["3 m", "0 m3/h"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "42 W @230V/50Hz (47 W @115V/60Hz); range 16-42 W"
+  outlet_size: "3/4 in GAS (F 3/4 in GAS) with hose supports"
+  inlet_size: "3/4 in GAS"
+  dc_controllable: false
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://shop.tunze.com/fileadmin/gebrauchsanleitungen/x1073.0588.pdf
+    - https://shop.tunze.com/us/Recirculation-Pump-Silence/1073.040
+  notes: >-
+    AC pump with manual output adjustment. The manual's 'Pumping capacity and height' chart is a straight line
+    from 3 m to 3 m3/h, so it is schematic and not concave. Tunze states a +/-10% tolerance.
+
+- id: tunze_silence_electronic_1073_050
+  brand: Tunze
+  model: Silence electronic 1073.050
+  category: return
+  max_flow: "3000 l/h (790 US gal/h); 900/1100-3000 l/h"
+  max_head: "3.9 m (153.5 in)"
+  curve: [["0 m", "3.0 m3/h"], ["1.29 m", "2.0 m3/h"], ["2.58 m", "1.0 m3/h"], ["3.87 m", "0 m3/h"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "43 W (10-43 W)"
+  outlet_size: "3/4 in GAS on the manual drawing (F 3/4 in GAS); tunze.com spec says 3/4 in NPT hose connection"
+  inlet_size: "3/4 in GAS"
+  dc_controllable: true
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://tunze.com/IS/en/details/1073.050-recirculation-pump-silence-electronic.html
+    - https://shop.tunze.com/fileadmin/gebrauchsanleitungen/x1073.0588.pdf
+  notes: >-
+    Electronically controlled (Turbelle Controller) with a 100-240 V universal supply. The chart is a straight
+    line from ~3.87 m to 3.0 m3/h (schematic, +/-10%). The low end of the range is 900 l/h in the manual and
+    1100 l/h on the web page. Independent hobbyist test (danireef/reefs.com): ~2140 l/h at the test head and
+    ~4.36 m shut-off.
+
+# ---------------------------------------------------------------- Eheim
+- id: eheim_compacton_2100
+  brand: Eheim
+  model: compactON 2100
+  category: return
+  max_flow: "2100 l/h (adjustable 1400-2100)"
+  max_head: "2.4 m"
+  curve: [["0 m", "~1720 l/h"], ["1 m", "~890 l/h"], ["2.06 m", "0 l/h"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "38 W"
+  outlet_size: "hose 19/27 mm (ID/OD)"
+  inlet_size: "19 mm (suction hose)"
+  dc_controllable: false
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://eheim.com/media/8b/db/05/1720626560/flyer-compacton_d_111601942.pdf
+    - https://eheim.com/en_GB/aquatics/technology/pumps/compacton/compacton-2100
+    - https://eheim.com/media/9b/fd/57/1720626426/20021210024301942.png
+  notes: >-
+    AC pump with manual adjustment. Eheim's 'Leistungsdiagramm' (shared by 1030/1031/1032) draws straight lines
+    on a 360 px image, read to about +/-5%. The chart line (~2.06 m, ~1720 l/h) sits BELOW the rated 2.4 m and
+    2100 l/h, probably reflecting a different setting or losses, but the cause is not stated. The user asked for
+    a compactON 3500; that model does not exist, so the 3000 is included instead.
+
+- id: eheim_compacton_3000
+  brand: Eheim
+  model: compactON 3000
+  category: return
+  max_flow: "3000 l/h (adjustable 1800-3000)"
+  max_head: "2.7 m"
+  curve: [["0 m", "~2390 l/h"], ["1 m", "~1500 l/h"], ["2 m", "~600 l/h"], ["2.66 m", "0 l/h"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "55 W"
+  outlet_size: "hose 19/27 mm (ID/OD)"
+  inlet_size: "19 mm (suction hose)"
+  dc_controllable: false
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://eheim.com/media/8b/db/05/1720626560/flyer-compacton_d_111601942.pdf
+    - https://eheim.com/en_GB/aquatics/technology/pumps/compacton/compacton-5000
+    - https://eheim.com/media/9b/fd/57/1720626426/20021210024301942.png
+  notes: "Included in place of the non-existent 'compactON 3500'. The chart line is straight and lower than the rated 3000 l/h (+/-5% reading)."
+
+- id: eheim_compacton_5000
+  brand: Eheim
+  model: compactON 5000
+  category: return
+  max_flow: "5000 l/h (not adjustable)"
+  max_head: "3.6 m"
+  curve: [["0 m", "~4370 l/h"], ["1 m", "~3130 l/h"], ["2 m", "~1890 l/h"], ["3 m", "~650 l/h"], ["3.52 m", "0 l/h"]]
+  curve_basis: "read from manufacturer chart"
+  power_max: "70 W"
+  outlet_size: "hose 25/34 mm (ID/OD)"
+  inlet_size: "25 mm (suction hose)"
+  dc_controllable: false
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://eheim.com/media/8b/db/05/1720626560/flyer-compacton_d_111601942.pdf
+    - https://eheim.com/en_GB/aquatics/technology/pumps/compacton/compacton-5000
+    - https://eheim.com/media/9b/fd/57/1720626426/20021210024301942.png
+  notes: "AC. The chart line is straight and runs ~13% below the 5000 l/h rating (+/-5% reading). The compactON 9000 (3.7 m, 80 W) and 12000 (4.2 m, 110 W) are also current."
+
+# ---------------------------------------------------------------- Danner (Supreme)
+- id: danner_supreme_mag_drive_7
+  brand: Danner (Supreme)
+  model: Mag-Drive Supreme 7 (now sold as Supreme Aqua-Mag 700, item 02517)
+  category: return
+  max_flow: "700 GPH (2650 l/h)"
+  max_head: "11 ft 8 in shut-off (pumping table); 11 ft 7 in / 3.55 m in the fractionating-pump spec table"
+  curve: [["1 ft", "655 GPH"], ["2 ft", "605 GPH"], ["3 ft", "565 GPH"], ["4 ft", "530 GPH"], ["5 ft", "450 GPH"], ["6 ft", "420 GPH"], ["7 ft", "325 GPH"], ["8 ft", "275 GPH"], ["9 ft", "200 GPH"], ["10 ft", "110 GPH"], ["11.67 ft", "0 GPH"]]
+  curve_basis: "manufacturer table"
+  power_max: "70 W"
+  outlet_size: "1/2 in MPT"
+  inlet_size: "1/2 in FPT"
+  dc_controllable: false
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://bfgsupply.com/media/7161/danner-mfg-catalog-2023.pdf
+  notes: >-
+    Danner Mfg 2023 catalog (p.57, Supreme Aqua-Mag 'Pumping Specifications'), hosted by a distributor. The
+    'Mag-Drive' name has been replaced by 'Aqua-Mag', with the same model numbers and ratings. Note that the
+    table's 1 ft flow (655 GPH) is below the 700 GPH rating. AC magnetic-drive pump, 120 V/60 Hz. The 11.67 ft
+    zero-flow point is the stated shut-off.
+
+- id: danner_supreme_mag_drive_9_5
+  brand: Danner (Supreme)
+  model: Mag-Drive Supreme 9.5 (now sold as Supreme Aqua-Mag 950, item 02710)
+  category: return
+  max_flow: "950 GPH (3595 l/h)"
+  max_head: "13 ft 7 in shut-off (pumping table); 13 ft 6 in / 4.15 m in the fractionating-pump spec table"
+  curve: [["1 ft", "1010 GPH"], ["2 ft", "930 GPH"], ["3 ft", "900 GPH"], ["4 ft", "840 GPH"], ["5 ft", "770 GPH"], ["6 ft", "710 GPH"], ["7 ft", "650 GPH"], ["8 ft", "600 GPH"], ["9 ft", "530 GPH"], ["10 ft", "475 GPH"], ["13.58 ft", "0 GPH"]]
+  curve_basis: "manufacturer table"
+  power_max: "93 W (1.33 A)"
+  outlet_size: "3/4 in MPT"
+  inlet_size: "3/4 in FPT"
+  dc_controllable: false
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://bfgsupply.com/media/7161/danner-mfg-catalog-2023.pdf
+  notes: "Danner 2023 catalog. The 1 ft flow (1010 GPH) exceeds the 950 GPH rating. The table has no points between 10 ft and shut-off. AC, 120 V/60 Hz."
+
+- id: danner_supreme_mag_drive_12
+  brand: Danner (Supreme)
+  model: Mag-Drive Supreme 12 (now sold as Supreme Aqua-Mag 1200, item 02712)
+  category: return
+  max_flow: "1200 GPH (4500 l/h)"
+  max_head: "13 ft 7 in shut-off (pumping table); 13 ft 6 in / 4.15 m in the fractionating-pump spec table"
+  curve: [["1 ft", "1190 GPH"], ["2 ft", "1130 GPH"], ["3 ft", "1065 GPH"], ["4 ft", "940 GPH"], ["5 ft", "900 GPH"], ["6 ft", "840 GPH"], ["7 ft", "795 GPH"], ["8 ft", "730 GPH"], ["9 ft", "630 GPH"], ["10 ft", "570 GPH"], ["13.58 ft", "0 GPH"]]
+  curve_basis: "manufacturer table"
+  power_max: "110 W (1.5 A)"
+  outlet_size: "3/4 in MPT"
+  inlet_size: "3/4 in FPT"
+  dc_controllable: false
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://bfgsupply.com/media/7161/danner-mfg-catalog-2023.pdf
+    - https://www.123ponds.com/02712.html
+  notes: >-
+    Danner 2023 catalog. A retailer (123ponds) reproduces the same table, except its 2 ft and 4 ft rows are
+    missing. Some retailers say '15 ft shut-off', which conflicts with Danner's 13 ft 7 in. The steep drop from
+    10 ft (570 GPH) to 0 at 13.6 ft is as published. AC, 120 V/60 Hz.

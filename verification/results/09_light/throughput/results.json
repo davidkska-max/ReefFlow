@@ -1,0 +1,62 @@
+{
+  "rows": [
+    {
+      "arch": "cuda",
+      "case": "empty tank, plan maps only",
+      "rays": 16777216,
+      "seconds": 0.3805076000280678,
+      "rays_per_s": 44091671.22749307
+    },
+    {
+      "arch": "cuda",
+      "case": "empty tank + node stack",
+      "rays": 16777216,
+      "seconds": 1.760994300013408,
+      "rays_per_s": 9527126.805505423
+    },
+    {
+      "arch": "cuda",
+      "case": "rock, plan maps only",
+      "rays": 16777216,
+      "seconds": 0.7305376000003889,
+      "rays_per_s": 22965574.94096275
+    },
+    {
+      "arch": "cuda",
+      "case": "full (rock + node stack + bounces)",
+      "rays": 16777216,
+      "seconds": 2.0364911999786273,
+      "rays_per_s": 8238295.358298663
+    },
+    {
+      "arch": "cpu",
+      "case": "empty tank, plan maps only",
+      "rays": 2097152,
+      "seconds": 0.12043349997838959,
+      "rays_per_s": 17413360.903538547
+    },
+    {
+      "arch": "cpu",
+      "case": "empty tank + node stack",
+      "rays": 2097152,
+      "seconds": 0.41674029995920137,
+      "rays_per_s": 5032275.496766956
+    },
+    {
+      "arch": "cpu",
+      "case": "rock, plan maps only",
+      "rays": 2097152,
+      "seconds": 0.237177699978929,
+      "rays_per_s": 8842112.897571366
+    },
+    {
+      "arch": "cpu",
+      "case": "full (rock + node stack + bounces)",
+      "rays": 2097152,
+      "seconds": 0.5954727999633178,
+      "rays_per_s": 3521826.6898659156
+    }
+  ],
+  "backend": "cuda",
+  "timestamp": "2026-10-31 10:11:52"
+}

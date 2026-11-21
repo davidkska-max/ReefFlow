@@ -1,0 +1,274 @@
+{
+ "project": "Pump-source verification box",
+ "project_file": null,
+ "backend": "cuda",
+ "precision": "f32",
+ "lattice": "D3Q19",
+ "collision": "rr",
+ "smagorinsky": 0.1,
+ "dx_m": 0.005,
+ "spinup_s": 4.00222438151586,
+ "average_s": 8.00444876303172,
+ "steps": 33960,
+ "sample_every": 10,
+ "samples": 2264,
+ "pump_update_every": 10,
+ "wall_time_s": 123.07380760001251,
+ "mlups": 993.8871419135941,
+ "estimate": {
+  "cells": 3601928,
+  "steps": 33942,
+  "dt_s": 0.0003535533905932738,
+  "gpu_memory_GB": 0.770812592,
+  "host_memory_GB": 0.7203856,
+  "backend": "cuda",
+  "mlups_assumed": 1710.0,
+  "runtime_s_est": 71.49511121403509,
+  "free_vram_GB": 5.0791015625
+ },
+ "model": {
+  "dx_m": 0.005,
+  "shape": [
+   242,
+   122,
+   122
+  ],
+  "cells": 3601928,
+  "fluid_nodes": 3456000,
+  "grid_fluid_extent_m": [
+   1.2,
+   0.6,
+   0.6
+  ],
+  "origin_m": [
+   -0.0025,
+   -0.0025,
+   -0.0025
+  ],
+  "lid_z_m": 0.6,
+  "water_volume_model_m3": 0.43200000000000005,
+  "water_volume_model_gal": 114.12232661872012,
+  "rock_nodes": 0,
+  "rock_volume_m3": 0.0,
+  "rock_meshes": [],
+  "overflow": null,
+  "lattice": {
+   "dt_s": 0.0003535533905932738,
+   "C_U_ms": 14.14213562373095,
+   "u_peak_est_ms": 1.414213562373095,
+   "nu_lat": 1.3293607486307094e-05,
+   "tau_molecular": 0.5000398808224589,
+   "sound_speed_ms": 8.164965809277259
+  },
+  "pumps": [
+   {
+    "name": "PH",
+    "kind": "powerhead",
+    "archetype": "narrow_jet_propeller",
+    "outlet": "circle D = 32.0 mm",
+    "outlet_area_m2": 0.000804247719318987,
+    "position_m": [
+     0.07,
+     0.3,
+     0.3
+    ],
+    "aim": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "rated_flow_m3s": 0.0015772549100000002,
+    "rated_flow_GPH": 1500.0,
+    "delivered_flow_m3s": 0.001104078437,
+    "delivered_flow_GPH": 1050.0,
+    "delivered_flow_Lh": 3974.6823732000007,
+    "flow_basis": "rated x derating 0.7",
+    "nozzle_velocity_ms": 1.372808912575967,
+    "momentum_flux_N": 1.550549559021964,
+    "mode": "constant",
+    "mean_momentum_flux_N": 1.550549559021964,
+    "turbulence_intensity": 0.0,
+    "outlet_model": "circle D = 43.9 mm",
+    "outlet_model_area_m2": 0.0015156887184965438,
+    "source_nodes": 240,
+    "equivalent_velocity_ms": 0.9999999999999999,
+    "turbulence_tcorr_s": 0.043929885202430956,
+    "notes": [
+     "equivalent velocity 1.37 m/s exceeds the cap 1.00 m/s; outlet enlarged to circle D = 43.9 mm at the same momentum flux"
+    ]
+   }
+  ]
+ },
+ "notes": [
+  "PH: equivalent velocity 1.37 m/s exceeds the cap 1.00 m/s; outlet enlarged to circle D = 43.9 mm at the same momentum flux"
+ ],
+ "metrics": {
+  "water_volume_m3": 0.43200000000000005,
+  "mean_speed": 0.04062586902897912,
+  "median_speed": 0.02857543507200315,
+  "p10_speed": 0.008072826626785254,
+  "p90_speed": 0.07962163347230859,
+  "mean_velocity_magnitude": 0.034156982946629236,
+  "dead_speed_threshold": 0.025,
+  "dead_fraction": 0.4194971064814815,
+  "dead_fraction_meanvel": 0.5497196180555556,
+  "high_fraction": 0.00545630787037037,
+  "rock_top_speed": NaN,
+  "sand_speed": 0.008975854496858329,
+  "plane_25": 0.03200026612174715,
+  "plane_50": 0.0919816774588924,
+  "plane_75": 0.03027286422038872,
+  "mean_tke": 0.0007094860424637274,
+  "mean_sigma": 0.013835796294984428,
+  "global_turbulence_intensity": 0.5353325299117202
+ },
+ "metrics_stat_uncertainty": {
+  "water_volume_m3": 0.0,
+  "mean_speed": 0.0031816672151449305,
+  "median_speed": 0.002084183115457488,
+  "p10_speed": 0.00037158391955451357,
+  "p90_speed": 0.00890483728521889,
+  "mean_velocity_magnitude": 0.002924103478600477,
+  "dead_speed_threshold": 0.0,
+  "dead_fraction": 0.0554624863689657,
+  "dead_fraction_meanvel": 0.05525368036190657,
+  "high_fraction": 0.0002640573427850177,
+  "rock_top_speed": NaN,
+  "sand_speed": 0.0007966354133607636,
+  "plane_25": 0.0029360701540240897,
+  "plane_50": 0.004186694318600939,
+  "plane_75": 0.002318590462657724,
+  "mean_tke": 4.6377291545977945e-05,
+  "mean_sigma": 0.0009023057420106956,
+  "global_turbulence_intensity": 0.016367614357851928
+ },
+ "batches": [
+  {
+   "water_volume_m3": 0.43200000000000005,
+   "mean_speed": 0.03248839305856661,
+   "median_speed": 0.020890610438421095,
+   "p10_speed": 0.006766516150729725,
+   "p90_speed": 0.06407145368991342,
+   "mean_velocity_magnitude": 0.0294104002961495,
+   "dead_speed_threshold": 0.025,
+   "dead_fraction": 0.6384184027777777,
+   "dead_fraction_meanvel": 0.6756828703703703,
+   "high_fraction": 0.005123842592592592,
+   "rock_top_speed": NaN,
+   "sand_speed": 0.006989597647008511,
+   "plane_25": 0.025142055112606643,
+   "plane_50": 0.081262496657639,
+   "plane_75": 0.025262584548325355,
+   "mean_tke": 0.000395519961214587,
+   "mean_sigma": 0.007477438758795915,
+   "global_turbulence_intensity": 0.4998162167854817
+  },
+  {
+   "water_volume_m3": 0.43200000000000005,
+   "mean_speed": 0.039031983228093356,
+   "median_speed": 0.02669955642737653,
+   "p10_speed": 0.007732621403033357,
+   "p90_speed": 0.08094541510623675,
+   "mean_velocity_magnitude": 0.03558718758125124,
+   "dead_speed_threshold": 0.025,
+   "dead_fraction": 0.46376938657407407,
+   "dead_fraction_meanvel": 0.5033003472222223,
+   "high_fraction": 0.0055998263888888886,
+   "rock_top_speed": NaN,
+   "sand_speed": 0.008386282448023773,
+   "plane_25": 0.02962169093635824,
+   "plane_50": 0.09035265031366274,
+   "plane_75": 0.027779043528111325,
+   "mean_tke": 0.00046774529592155564,
+   "mean_sigma": 0.008913804826936812,
+   "global_turbulence_intensity": 0.4524165319072982
+  },
+  {
+   "water_volume_m3": 0.43200000000000005,
+   "mean_speed": 0.04385335164550943,
+   "median_speed": 0.028953852850446455,
+   "p10_speed": 0.008045031008239535,
+   "p90_speed": 0.0967202215627336,
+   "mean_velocity_magnitude": 0.039989762685023474,
+   "dead_speed_threshold": 0.025,
+   "dead_fraction": 0.4128602430555556,
+   "dead_fraction_meanvel": 0.4524623842592593,
+   "high_fraction": 0.0062126736111111115,
+   "rock_top_speed": NaN,
+   "sand_speed": 0.010315135520227907,
+   "plane_25": 0.03460690530363803,
+   "plane_50": 0.09527939258722638,
+   "plane_75": 0.03243863957993909,
+   "mean_tke": 0.0005405175466615016,
+   "mean_sigma": 0.010344131100621837,
+   "global_turbulence_intensity": 0.4328689926589276
+  },
+  {
+   "water_volume_m3": 0.43200000000000005,
+   "mean_speed": 0.04712974818374711,
+   "median_speed": 0.030346783854412508,
+   "p10_speed": 0.008526899073385346,
+   "p90_speed": 0.10419769918092851,
+   "mean_velocity_magnitude": 0.04283742292602918,
+   "dead_speed_threshold": 0.025,
+   "dead_fraction": 0.3959418402777778,
+   "dead_fraction_meanvel": 0.43270109953703706,
+   "high_fraction": 0.0062120949074074075,
+   "rock_top_speed": NaN,
+   "sand_speed": 0.010212402372173123,
+   "plane_25": 0.03863041313438569,
+   "plane_50": 0.10103217027704144,
+   "plane_75": 0.03561118922517913,
+   "mean_tke": 0.0006107470131496173,
+   "mean_sigma": 0.011659129486628901,
+   "global_turbulence_intensity": 0.4281440639040607
+  }
+ ],
+ "mass_rel_drift": 2.7750336917264917e-08,
+ "ke_spinup_end": 0.0019257362242098204,
+ "ke_avg_first_half": 0.0023928186131848225,
+ "ke_avg_second_half": 0.0030731178836365405,
+ "u_max_overall_ms": 1.7039281751981303,
+ "u_max_overall_lattice": 0.12048591673374176,
+ "fraction_time_above_u_lat_0.15": 0.0,
+ "probe_names": [
+  "left 30%",
+  "left 70%",
+  "centre 30%",
+  "centre 70%",
+  "right 30%",
+  "right 70%"
+ ],
+ "probe_nodes": [
+  [
+   48,
+   61,
+   36
+  ],
+  [
+   48,
+   61,
+   84
+  ],
+  [
+   121,
+   61,
+   36
+  ],
+  [
+   121,
+   61,
+   84
+  ],
+  [
+   193,
+   61,
+   36
+  ],
+  [
+   193,
+   61,
+   84
+  ]
+ ]
+}

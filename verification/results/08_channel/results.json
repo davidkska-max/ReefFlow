@@ -1,0 +1,55 @@
+{
+  "cases": [
+    {
+      "label": "Re_tau 2000, h = 16, bounce-back only",
+      "Re_tau": 2000,
+      "h": 16,
+      "y1_plus": 62.5,
+      "Ub_over_utau": 10.894,
+      "Ub_ref": 21.7,
+      "Ub_rel_err": -0.49797235023041475
+    },
+    {
+      "label": "Re_tau 2000, h = 16, wall model v1 (added viscosity only)",
+      "Re_tau": 2000,
+      "h": 16,
+      "y1_plus": 62.5,
+      "Ub_over_utau": 10.853,
+      "Ub_ref": 21.7,
+      "Ub_rel_err": -0.49986175115207376
+    },
+    {
+      "label": "Re_tau 2000, h = 16, wall model v2 (relaxation-time override)",
+      "Re_tau": 2000,
+      "h": 16,
+      "y1_plus": 62.5,
+      "Ub_over_utau": null,
+      "Ub_ref": 21.7,
+      "Ub_rel_err": null,
+      "note": "diverged (also with 2 % initial perturbation)"
+    },
+    {
+      "label": "Re_tau 2000, h = 32, bounce-back only",
+      "Re_tau": 2000.0,
+      "h": 32,
+      "y1_plus": 31.250000000000004,
+      "Ub_over_utau": 12.838519550500072,
+      "Ub_ref": 21.7,
+      "Ub_rel_err": -0.4083631543548354,
+      "profile_max_rel_err_outer": 0.4900161985621113
+    },
+    {
+      "label": "Re_tau 500, h = 32, bounce-back only (tank-like y+)",
+      "Re_tau": 500.0,
+      "h": 32,
+      "y1_plus": 7.812500000000001,
+      "Ub_over_utau": 13.021029485794314,
+      "Ub_ref": 18.004130545651925,
+      "Ub_rel_err": -0.2767754347938258,
+      "profile_max_rel_err_outer": 0.3665724352540376
+    }
+  ],
+  "acceptance_wall_model": "|Ub/u_tau - ref| <= 7 % (not met: model diverged)",
+  "backend": null,
+  "timestamp": "2026-10-31 10:32:13"
+}

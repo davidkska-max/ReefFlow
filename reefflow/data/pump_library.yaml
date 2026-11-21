@@ -1,0 +1,63 @@
+# ReefFlow generic pump archetypes.
+#
+# These are GENERIC starting points, not models of any specific product. Every
+# field can be overridden per pump in the project file.
+#
+# IMPORTANT: manufacturer flow ratings are free-flow (zero-head) values measured
+# under ideal conditions. They overstate the flow a powerhead actually delivers
+# through its outlet in a tank. `derating` (delivered / rated flow) is an
+# editable starting assumption (ASSUMPTIONS A-205); the report shows how much
+# results move for +/-20 % on it.
+#
+# Fields
+#   kind          powerhead (momentum source, no net mass) | return (mass + momentum source)
+#   outlet        circle: diameter | rect: width x height (width along the pump's 'up' x aim axis)
+#   rated_flow    free-flow rating
+#   derating      delivered/rated flow (powerheads). Returns use the pump curve instead.
+#   housing       optional solid body behind the outlet. OFF by default: the model has no
+#                 intake path through a solid housing, so the pump then draws its water across
+#                 the housing face, and the suction there cancels ~45 % of the jet's momentum
+#                 flux (verification 7, DECISIONS D-202). Without a housing the source region
+#                 acts as propeller disc and intake together and delivers J exactly.
+#   turbulence    inflow-turbulence intensity I of the source (DECISIONS D-204). 0.05 reproduces
+#                 the turbulent round-jet far field (verification 7); larger values make the jet
+#                 break up sooner (shorter throw), smaller values keep it laminar too long.
+#   pump_curve    returns only: Q = Q0 sqrt(1 - H/H0) (generic centrifugal curve, PLAN C4)
+
+narrow_jet_propeller:
+  kind: powerhead
+  description: Propeller powerhead with a small round outlet (concentrated jet).
+  outlet: {shape: circle, diameter: 32 mm}
+  rated_flow: 1500 GPH
+  derating: 0.7
+  housing: null
+  turbulence: 0.05
+
+wide_jet_propeller:
+  kind: powerhead
+  description: Propeller powerhead with a large round outlet (broad, slower jet).
+  outlet: {shape: circle, diameter: 60 mm}
+  rated_flow: 2600 GPH
+  derating: 0.7
+  housing: null
+  turbulence: 0.05
+
+crossflow_gyre:
+  kind: powerhead
+  description: Cross-flow ("gyre") pump producing a wide, thin sheet of flow.
+  outlet: {shape: rect, width: 230 mm, height: 32 mm}
+  rated_flow: 2000 GPH
+  derating: 0.7
+  housing: null
+  turbulence: 0.05
+
+return_nozzle:
+  kind: return
+  description: Return line nozzle (3/4 in loc-line style) fed by a sump pump.
+  outlet: {shape: circle, diameter: 19 mm}
+  rated_flow: 800 GPH          # pump's zero-head flow Q0
+  pump_curve: {max_head: 10 ft}          # shut-off head H0
+  static_head: 4 ft            # sump water surface to tank water surface
+  fittings_allowance: 1 ft     # pipe, check valve, elbows, nozzle (editable)
+  housing: null
+  turbulence: 0.05

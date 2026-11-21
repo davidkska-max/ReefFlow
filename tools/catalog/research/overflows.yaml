@@ -1,0 +1,570 @@
+# ReefFlow overflow catalogue + generic drain capacity references
+# Compiled 2026-11-12. Values are as published; null = not published / not found.
+#
+# Box convention (ReefFlow): width = along the glass, depth = out from the glass,
+# height = vertical. For internal/through-glass overflows `box` is the IN-TANK
+# (display-side) box and `external_box` is the rear plumbing box behind the glass.
+# For hang-on-back units `box` is the overall published size; the in-tank part is
+# smaller and is not separately published unless noted.
+#
+# Confidence flags used in notes:
+#   [mfr]       read on the manufacturer's own page / manual / PDF
+#   [retailer]  read on a retailer listing (usually copies the mfr table)
+#   [indexed]   mfr page is offline/password-gated; value taken from a search-engine
+#               index snippet of that mfr page, not read directly
+#   [forum]     hobbyist forum / used listing; low confidence
+#
+# Weir crest depth below the water surface is NOT published for any product below
+# (Reef Savvy and Modular Marine give only qualitative/related statements, noted).
+
+products:
+
+  # ---------------------------------------------------------------- Synergy Reef
+  - id: synergy_reef_shadow_16_v3
+    brand: Synergy Reef
+    model: 16" Shadow Overflow V3
+    category: overflow
+    mount: internal
+    box: {width: "16 in", depth: "1.6 in", height: "5.5 in"}
+    external_box: {width: "16 in", depth: "3.75 in", height: "7 in"}
+    rated_flow: "400-2500 GPH"
+    rated_flow_basis: "Mfr: '2,500 GPH Silent BeanAnimal Performance' with three 1.5 in rear bulkheads plumbed full-siphon + open-channel + emergency. 400 GPH is the stated lower end. Mfr also says suits tanks 10-400 gal."
+    drains: "3 x 1.5 in rear bulkheads (molded in; 1.5 in PVC pipe kits). Tank holes drilled with 63 mm diamond hole saw (mfr accessory 'correct size' for V3)."
+    returns: "Not part of the box per fetched text; Synergy sells a 'Loc-Line Return Kit for 3/4 in Return' alongside it."
+    design: "BeanAnimal (full siphon + open channel + emergency)"
+    status: current
+    checked: 2026-11-12
+    sources:
+      - https://synergyreef.com/collections/shadow-overflow (Shopify product JSON for handle 16-shadow-overflow, read 2026-11-12) [mfr]
+      - https://aquariumdepot.ca/products/synergy-reef-16-shadow-overflow-v3 [retailer, via search index; page later 404/429]
+      - https://coastalpets.co.za/products/synergy-reef-16-shadow-overflow [retailer, via search index]
+    notes: "Rated flow, 1.6 in internal box thickness, three 1.5 in bulkheads and 63 mm hole are from the mfr's own product text. Box/external-box W x D x H (16 x 1.6 x 5.5; 16 x 3.75 x 7 in) are from retailer listings (same figures on several retailers); mfr page text read did not list them. Retailer tank-thickness range: 1/4 to 3/4 in glass or acrylic. A Reef2Reef user calls 1500 GPH the practical 'sweet spot' [forum]. Some retailers still list 'up to 1500 GPH' (older Shadow figure). Synergy's product tags include 'Ghost Overflow'. V2 (2021, 'new sealed rear lid and rear box') is superseded by V3; no separate V2 spec captured."
+
+  - id: synergy_reef_overflow_16_v1
+    brand: Synergy Reef
+    model: Synergy Reef Overflow 16" (original / first-gen Shadow, 2015-2016)
+    category: overflow
+    mount: internal
+    box: {width: "16 in", depth: "1.35 in", height: "5.75 in"}
+    external_box: {width: "16 in", depth: "3.5 in", height: "6 in"}
+    rated_flow: "1500 GPH"
+    rated_flow_basis: "Stated by Reef Builders launch article (2015) and repeated in 2016 slim-overflow roundup; drain configuration behind the rating not stated."
+    drains: "3 x 1 in standard ABS bulkheads"
+    design: "3-drain box with removable magnetic weir (laser-cut teeth); plumbing style not stated in source"
+    status: discontinued
+    checked: 2026-11-12
+    sources:
+      - https://reefbuilders.com/2015/06/16/synergy-reef-overflow
+      - https://reefbuilders.com/2016/10/10/slim-overflows-are-taking-over-from-reef-ready-aquariums/
+    notes: "Superseded by Shadow V2/V3. Fits non-tempered glass or acrylic up to 5/8 in (15 mm). Price at launch $199.99. A 20 in Synergy overflow also existed (installation manual reportedly uses 60 mm holes for both 16 in and 20 in, and a forum post attributes 2500 GPH to the 'older 20 in model'); no published dimensions found, so it is not catalogued."
+
+  # ---------------------------------------------------------------- Modular Marine
+  # modularmarine.com showed an "Opening Soon / temporarily closed" password page on
+  # 2026-11-12; product pages could not be read directly. Values below are from the
+  # search-engine index of the official product pages [indexed] unless marked.
+  - id: modular_marine_lp_800
+    brand: Modular Marine
+    model: 800 gph LOW PROFILE Overflow Box with REMOVABLE WEIR
+    category: overflow
+    mount: internal
+    box: {width: "8 in", depth: "1.125 in", height: "3.75 in"}
+    external_box: {width: "8 in", depth: "3 in", height: "6.25 in"}
+    rated_flow: "800+ GPH"
+    rated_flow_basis: "'800+ GPH capability' - drain configuration behind the rating not stated."
+    drains: "Mounts through the glass with 2 x 1 in bulkheads; drain fittings in the plumbing box not confirmed (one reseller snippet mentions three 1/2 in bulkhead drains) [low confidence]."
+    design: "Low-profile skimmer box (pull-off for cleaning) + external plumbing box; ramped teeth"
+    status: unknown (mfr store closed 'Opening Soon' on 2026-11-12)
+    checked: 2026-11-12
+    sources:
+      - https://modularmarine.com/products/800-gph-low-profile-overflow-box-with-removable-weir [indexed]
+    notes: "3/8 in cast acrylic mounting wall. Mfr states the exterior plumbing box mounts at the same height as the skimmer box (so it will not overflow if drain valves are closed). No published tank-size rating."
+
+  - id: modular_marine_lp_1200
+    brand: Modular Marine
+    model: 1200 gph LOW PROFILE Overflow Box with REMOVABLE WEIR
+    category: overflow
+    mount: internal
+    box: {width: "11.875 in", depth: "1.125 in", height: "3.75 in"}
+    external_box: {width: "11.875 in", depth: "3 in", height: "6.25 in"}
+    rated_flow: "1200+ GPH"
+    rated_flow_basis: "'1200+ GPH capability' - drain configuration behind the rating not stated. Mfr suggests aquariums up to 150 gal."
+    drains: "Kit: 2 x 1 in bulkheads (through-glass mount) and 3 x 3/4 in uniseals (per Amazon listing text) [retailer]."
+    design: "Low-profile skimmer box + external plumbing box; 3 drain positions"
+    status: unknown (mfr store closed 'Opening Soon' on 2026-11-12)
+    checked: 2026-11-12
+    sources:
+      - https://modularmarine.com/products/1200-gph-low-profile-overflow-box-with-removable-weir [indexed]
+      - https://www.amazon.com/Modular-Marine-PROFILE-Overflow-REMOVABLE/dp/B076PYRLVF [retailer, via search index]
+    notes: "Fits walls up to 1 in thick per listing. White variant listed with same dimensions (1/4 in cell-cast acrylic)."
+
+  - id: modular_marine_lp_1800
+    brand: Modular Marine
+    model: 1800 gph LOW PROFILE Overflow Box with REMOVABLE WEIR
+    category: overflow
+    mount: internal
+    box: {width: "18 in", depth: "1.25 in", height: "5.5 in"}
+    external_box: {width: "18 in", depth: "4.25 in", height: "7 in"}
+    rated_flow: "1800 GPH"
+    rated_flow_basis: "Product title rating; drain configuration behind it not stated. Mfr recommends aquariums up to 200 gal."
+    drains: "3 x 1.5 in bulkhead drains (mfr: size/quantity customisable); mounts through glass with 2 x 2 in bulkheads."
+    design: "Low-profile skimmer box + external plumbing box; 3 drains (BeanAnimal-capable)"
+    status: unknown (mfr store closed 'Opening Soon' on 2026-11-12)
+    checked: 2026-11-12
+    sources:
+      - https://modularmarine.com/products/1800-gph-low-profile-overflow-box-with-removable-weir [indexed]
+    notes: "Mfr says the design keeps the water line hidden behind trim (no numeric weir depth). A forum post describes a unit with 1/2 in uniseal drain holes instead - configuration appears to have varied by build [forum]."
+
+  - id: modular_marine_lp_2400
+    brand: Modular Marine
+    model: 2400 gph LOW PROFILE Overflow Box with REMOVABLE WEIR
+    category: overflow
+    mount: internal
+    box: {width: "24 in", depth: "1.375 in", height: "5.5 in"}
+    external_box: {width: "20 in", depth: "4.25 in", height: "7 in"}
+    rated_flow: "2400+ GPH"
+    rated_flow_basis: "'2400+ GPH capability'; drain configuration behind it not stated. Mfr recommends aquariums up to 300 gal."
+    drains: "3 x 1.5 in bulkhead drains (customisable); mounts through glass with 2 x 2 in bulkheads (3 in glass hole saw included)."
+    design: "Low-profile skimmer box + external plumbing box; 3 drains (BeanAnimal-capable)"
+    status: unknown (mfr store closed 'Opening Soon' on 2026-11-12)
+    checked: 2026-11-12
+    sources:
+      - https://modularmarine.com/products/2400-gph-low-profile-overflow-box-with-removable-weir [indexed]
+    notes: "Fits walls up to 1.5 in thick. Note external box (20 in) is narrower than the in-tank box (24 in) per the indexed text. Larger 3000/3600 GPH and custom 48 in versions were also listed."
+
+  # ---------------------------------------------------------------- Reef Savvy
+  - id: reef_savvy_ghost_21
+    brand: Reef Savvy
+    model: Ghost Overflow 21"
+    category: overflow
+    mount: built_in
+    box: {width: "21 in", depth: "1.25 in", height: null}
+    external_box: {width: null, depth: "2.5 in", height: null}
+    rated_flow: null
+    rated_flow_basis: "Not published on the mfr page. A reefs.com MACNA 2017 interview with Reef Savvy's president reportedly calls the 21 in model 'conservatively rated at 2000 gph' (could not be read directly - 403; search-snippet only)."
+    drains: "3 drains (size not published); countersunk/chamfered bulkheads; Direct Connect fittings slip x FPT"
+    design: "Mfr's preferred method is BeanAnimal; Durso and Herbie also mentioned"
+    status: current (sold only on Reef Savvy aquariums)
+    checked: 2026-11-12
+    sources:
+      - https://www.reefsavvy.com/ghost [mfr]
+      - https://www.reefsavvy.com/ [mfr]
+    notes: "Mfr: 53 laser-cut slots, each 1.125 in; 3/8 in polycarbonate cover; running water level inside the box 'approximately 1.5 in from the surface or lower' (this is the in-box level, not the weir crest). Width 21 in is the model name."
+
+  - id: reef_savvy_ghost_retail_2016
+    brand: Reef Savvy
+    model: Ghost Overflow (stand-alone retail version, c. 2016)
+    category: overflow
+    mount: internal
+    box: {width: null, depth: "1.25 in", height: null}
+    external_box: {width: null, depth: "3 in", height: null}
+    rated_flow: "up to 2000 GPH"
+    rated_flow_basis: "As reported by Reef Builders 2016 roundup; drain setup not stated."
+    drains: null
+    design: "Hand-made acrylic, removable comb screen"
+    status: discontinued (as a stand-alone retail product; now built into Reef Savvy tanks)
+    checked: 2026-11-12
+    sources:
+      - https://reefbuilders.com/2016/10/10/slim-overflows-are-taking-over-from-reef-ready-aquariums/
+    notes: "Reef Builders gives '3 inch wide external box' (front-to-back). $250 at the time. Forum users mention 16 in and 20 in sizes [forum]; no published dimensions found."
+
+  # ---------------------------------------------------------------- Glass-Holes
+  # glass-holes.com no longer resolves (DNS ENOTFOUND on 2026-11-12); forum posts say
+  # the company went out of business. Only forum-level data exists.
+  - id: glass_holes_700
+    brand: Glass-Holes (Glass-Holes.com)
+    model: 700 GPH Overflow Kit
+    category: overflow
+    mount: internal
+    box: {width: null, depth: null, height: null}
+    rated_flow: "700 GPH"
+    rated_flow_basis: "Kit name; basis not published (single gravity drain)."
+    drains: "1 x 1.5 in bulkhead (thread x slip) with 1.5 in street elbow; tank hole 2-3/8 in (diamond hole saw supplied). Some kits listed 2 x 1/2 in return bulkheads (1-1/8 in hole saw)."
+    design: "Single-drain gravity box (Enkamat-lined for noise)"
+    status: discontinued
+    checked: 2026-11-12
+    sources:
+      - https://reefs.com/forum/equipment/116392-glass-holes-700gph-overflow-kit-specs.html [forum, via search index]
+      - https://www.chicagoreefs.com/threads/www-glass-holes-com-overflow-700gph-kit.11764/ [forum, read 2026-11-12]
+    notes: "A used-kit forum listing reportedly measured the box at roughly 6.25 in wide x 2 in front-to-back x 6 in tall, rated '200-700 GPH' for 20-75 gal (seller measurement, not verified - left null). Reef Builders/Reefs.com note the range ran 200 to 3000 GPH in five sizes."
+
+  - id: glass_holes_1500
+    brand: Glass-Holes (Glass-Holes.com)
+    model: 1500 GPH Overflow Kit
+    category: overflow
+    mount: internal
+    box: {width: null, depth: null, height: null}
+    rated_flow: "1500 GPH"
+    rated_flow_basis: "Kit name; basis not published."
+    drains: "2 x 1.5 in bulkheads (forum: the only Glass-Holes kit with two bulkheads)"
+    design: "Two-drain gravity box"
+    status: discontinued
+    checked: 2026-11-12
+    sources:
+      - https://forums.reefcentral.com/threads/herbie-style-glass-holes-overflow.1839382/ [forum, via search index]
+    notes: "Forum reviewer: 'a foot wide' (approx. 12 in) and 'not silent'. No published dimensions."
+
+  # ---------------------------------------------------------------- Eshopps PF (HOB)
+  - id: eshopps_pf_300
+    brand: Eshopps
+    model: PF-300 HOB Overflow
+    category: overflow
+    mount: hang_on_back
+    box: {width: "6 in", depth: "3 in", height: "10 in"}
+    rated_flow: "300 GPH"
+    rated_flow_basis: "'Max Flow Rate' with one U-tube siphon into one 1 in bulkhead; recommended tank 35-75 gal."
+    drains: "1 x 1 in bulkhead; 1 U-tube"
+    design: "Hang-on-back U-tube siphon overflow"
+    status: current
+    checked: 2026-11-12
+    sources:
+      - https://www.bulkreefsupply.com/pf-800-hob-overflow-eshopps.html [retailer, Eshopps series table]
+      - https://www.bulkreefsupply.com/pf-1200-hob-overflow-eshopps.html [retailer]
+    notes: "Published as '6 x 3 x 10 in' without axis labels; read as W x D x H (consistent with the PF-800 '3 in required between tank and wall'). This is the overall unit, not the in-tank box."
+
+  - id: eshopps_pf_800
+    brand: Eshopps
+    model: PF-800 HOB Overflow
+    category: overflow
+    mount: hang_on_back
+    box: {width: "8 in", depth: "3 in", height: "10 in"}
+    rated_flow: "800 GPH"
+    rated_flow_basis: "'Max Flow Rate' with one U-tube siphon into one 1 in bulkhead; recommended tank 75-125 gal."
+    drains: "1 x 1 in bulkhead; 1 U-tube"
+    design: "Hang-on-back U-tube siphon overflow"
+    status: current
+    checked: 2026-11-12
+    sources:
+      - https://www.bulkreefsupply.com/pf-800-hob-overflow-eshopps.html [retailer]
+      - https://www.aquacave.com/eshopps-pf800-overflow-box-125-gal-tank-single.html [retailer]
+    notes: "Aquacave: 'only 3 in. required between your tank and your wall.' JL Aquatics lists '10 L x 8 W x 3 D' (same numbers, different labelling). 800 GPH through a single 1 in bulkhead is well above the gravity figures in drain_capacity below - treat as optimistic."
+
+  - id: eshopps_pf_1200
+    brand: Eshopps
+    model: PF-1200 HOB Overflow
+    category: overflow
+    mount: hang_on_back
+    box: {width: "10 in", depth: "3 in", height: "10 in"}
+    rated_flow: "1200 GPH"
+    rated_flow_basis: "'Max Flow Rate' with two U-tube siphons into two 1 in bulkheads; recommended tank 150-200 gal."
+    drains: "2 x 1 in bulkheads; 2 U-tubes"
+    design: "Hang-on-back dual U-tube siphon overflow"
+    status: current
+    checked: 2026-11-12
+    sources:
+      - https://www.bulkreefsupply.com/pf-1200-hob-overflow-eshopps.html [retailer]
+      - https://www.saltwateraquarium.com/pf-1200-dual-overflow-box-eshopps/ [retailer, search index]
+    notes: "Premium Aquatics lists the PF-1200 at 1000 GPH (and PF-1000 at 900 GPH); the BRS/Aquacave Eshopps table says 1200 GPH. Same series also has PF-Nano 200 GPH, PF-1000 1000 GPH, PF-1800 1600 GPH (2 x 1.5 in)."
+
+  # ---------------------------------------------------------------- CPR CS (HOB)
+  # CPR "How to select the right CS overflow" PDF gives flow, tank size, depth behind
+  # tank and width. Retail pages add lettered dimensions (A-K) referring to a drawing
+  # that does not define the letters, so height is left null.
+  - id: cpr_cs50
+    brand: CPR Aquatic
+    model: CS50 C-Siphon Overflow
+    category: overflow
+    mount: hang_on_back
+    box: {width: "6 in", depth: "3 7/8 in", height: null}
+    rated_flow: "300 GPH"
+    rated_flow_basis: "CPR flow rate; tanks up to 60 gal. CPR: do not choose a CS overflow rated below the pump's actual (head-corrected) flow."
+    drains: "1 x 3/4 in bulkhead"
+    design: "Hang-on-back siphon overflow (C-Siphon), single drain"
+    status: current
+    checked: 2026-11-12
+    sources:
+      - https://static1.squarespace.com/static/56a938e705f8e221c385148e/t/56b436eab09f955970a79771/1454651115141/How+to+Select+A+CS+Overflow.pdf [mfr]
+      - https://saltwateraquarium.com/cs50-overflow-box-300-gph-cpr-aquatics [retailer]
+      - https://www.bulkreefsupply.com/deluxe-cs50-overflow-with-lid-and-air-pump-cpr-aquatics.html [retailer]
+    notes: "depth = CPR 'depth behind tank' (clearance needed behind the glass), not the in-tank box. BRS lettered dims (undefined letters): A 6.5, B 7.5, C 1.5, D 1.25, E 3 7/8, F 4.75, G 7.25, H 5.5, I 3.5, J 2.75, K 3 in."
+
+  - id: cpr_cs90
+    brand: CPR Aquatic
+    model: CS90 C-Siphon Overflow
+    category: overflow
+    mount: hang_on_back
+    box: {width: "7 1/4 in", depth: "4 3/8 in", height: null}
+    rated_flow: "600 GPH"
+    rated_flow_basis: "CPR flow rate; tanks up to 125 gal."
+    drains: "1 x 1 in bulkhead (a BRS Q&A says bulkhead ID measures 1.25 in)"
+    design: "Hang-on-back siphon overflow (C-Siphon), single drain"
+    status: current
+    checked: 2026-11-12
+    sources:
+      - https://static1.squarespace.com/static/56a938e705f8e221c385148e/t/56b436eab09f955970a79771/1454651115141/How+to+Select+A+CS+Overflow.pdf [mfr]
+      - https://www.saltwateraquarium.com/cs90-overflow-box-600-gph-cpr-aquatics [retailer]
+      - https://www.bulkreefsupply.com/deluxe-cs90-with-lid-and-aqua-lifter.html [retailer]
+    notes: "BRS lettered dims (undefined letters): A 7, B 8.5, C 1 3/8, D 1.5, E 4 3/8, F 5, G 8.75, H 5 7/8, I 3 3/8, J 2.75, K 3.75 in."
+
+  - id: cpr_cs102
+    brand: CPR Aquatic
+    model: CS102 C-Siphon Overflow
+    category: overflow
+    mount: hang_on_back
+    box: {width: "9 3/8 in", depth: "4 1/2 in", height: null}
+    rated_flow: "1200 GPH"
+    rated_flow_basis: "CPR flow rate; tanks up to 250 gal."
+    drains: "2 x 1 in bulkheads (BRS staff confirmed two outlets, 2017)"
+    design: "Hang-on-back siphon overflow (C-Siphon), dual drain"
+    status: current
+    checked: 2026-11-12
+    sources:
+      - https://static1.squarespace.com/static/56a938e705f8e221c385148e/t/56b436eab09f955970a79771/1454651115141/How+to+Select+A+CS+Overflow.pdf [mfr]
+      - https://www.bulkreefsupply.com/deluxe-cs102-with-lid-and-aqua-lifter.html [retailer]
+    notes: "BRS lettered dims (undefined letters): A 7 3/8, B 8 7/8, C 1 3/8, D 1.5, E 4 3/8, F 5 1/8, G 9.25, H 6, I 3.25, J 3 1/8, K 3 5/8 in (another BRS Deluxe listing gives slightly larger A/B/C/E/K). Same CPR table: CS100 800 GPH, CS202 1500 GPH, CS150 1600 GPH, CS302 3000 GPH."
+
+  # ---------------------------------------------------------------- Red Sea Reefer (built-in)
+  # Red Sea does not publish overflow-box dimensions or drain pipe sizes in the G2/G2+
+  # manuals. The G2 manual publishes a 'Recommended flow rate for return pumps' table
+  # and warns: "The use of higher rated pumps will result in a higher water level in
+  # the aquarium unless an appropriate modification is made to the surface skimmer
+  # combs." The G2+ manual replaces the table with pump models (ReefRun 5500 =
+  # 2000-5500 l/h; ReefRun 7000 = 3000-7000 l/h). G3/G3+: no per-model overflow or
+  # flow figures found (Red Sea only claims 'up to 50% more water circulation').
+  # All Reefers use the same drain design: flow-regulated main downpipe (fine
+  # adjustment valve; ReefGate gate valve on G3+) + open secondary bypass pipe.
+  - id: red_sea_reefer_170
+    brand: Red Sea
+    model: REEFER 170 (G2 / G2+)
+    category: overflow
+    mount: built_in
+    box: {width: null, depth: null, height: null}
+    rated_flow: "2000 L/h (530 GPH)"
+    rated_flow_basis: "G2 manual 'Recommended flow rate for return pumps'. G2+ manual: 1x ReefRun 5500 (2000-5500 l/h)."
+    drains: "Main valved downpipe + secondary overflow bypass pipe (sizes not published)"
+    design: "Valved main downpipe (Herbie-like) + open bypass"
+    status: current (G2+); G2 discontinued
+    checked: 2026-11-12
+    sources: &redsea_src
+      - https://g1.redseafish.com/wp-content/uploads/2022/04/5501G2_REEFER-G2-Series-Operation-Manual_EN_FR_DE_JP_CH_-v22a-WEB.pdf [mfr]
+      - https://g1.redseafish.com/wp-content/uploads/2023/09/5501G2P_REEFER-G2plus-Series-Manual_EN_FR_DE_-V23B_web.pdf [mfr]
+    notes: "Central overflow box; dimensions not published."
+
+  - id: red_sea_reefer_250
+    brand: Red Sea
+    model: REEFER 250 (G2 / G2+)
+    category: overflow
+    mount: built_in
+    box: {width: null, depth: null, height: null}
+    rated_flow: "2500 L/h (660 GPH)"
+    rated_flow_basis: "G2 manual recommended return flow. G2+: 1x ReefRun 5500."
+    drains: "Main valved downpipe + secondary overflow bypass pipe (sizes not published)"
+    design: "Valved main downpipe + open bypass"
+    status: current (G2+); G2 discontinued
+    checked: 2026-11-12
+    sources: *redsea_src
+    notes: "G2 table also: Nano 2000 L/h, 200 G2 2000 L/h, 300 G2 3000 L/h."
+
+  - id: red_sea_reefer_350
+    brand: Red Sea
+    model: REEFER 350 (G2 / G2+)
+    category: overflow
+    mount: built_in
+    box: {width: null, depth: null, height: null}
+    rated_flow: "3000 L/h (790 GPH)"
+    rated_flow_basis: "G2 manual recommended return flow. G2+: 1x ReefRun 5500."
+    drains: "Main valved downpipe + secondary overflow bypass pipe (sizes not published)"
+    design: "Valved main downpipe + open bypass"
+    status: current (G2+); G2 discontinued
+    checked: 2026-11-12
+    sources: *redsea_src
+    notes: null
+
+  - id: red_sea_reefer_425
+    brand: Red Sea
+    model: REEFER 425 (G2 / G2+)
+    category: overflow
+    mount: built_in
+    box: {width: null, depth: null, height: null}
+    rated_flow: "4000 L/h (1060 GPH)"
+    rated_flow_basis: "G2 manual recommended return flow. G2+: 1x ReefRun 5500."
+    drains: "Main valved downpipe + secondary overflow bypass pipe (sizes not published)"
+    design: "Valved main downpipe + open bypass"
+    status: current (G2+); G2 discontinued
+    checked: 2026-11-12
+    sources: *redsea_src
+    notes: null
+
+  - id: red_sea_reefer_525
+    brand: Red Sea
+    model: REEFER 525 (G2 / G2+)
+    category: overflow
+    mount: built_in
+    box: {width: null, depth: null, height: null}
+    rated_flow: "5000 L/h (1325 GPH)"
+    rated_flow_basis: "G2 manual recommended return flow (English table). G2+: 1x ReefRun 7000 (3000-7000 l/h)."
+    drains: "Main valved downpipe + secondary overflow bypass pipe (sizes not published)"
+    design: "Valved main downpipe + open bypass"
+    status: current (G2+); G2 discontinued
+    checked: 2026-11-12
+    sources: *redsea_src
+    notes: "The JP/CH table in the same G2 manual prints '5000lph/1060gph' - a conversion typo (5000 L/h = 1321 US GPH)."
+
+  - id: red_sea_reefer_625
+    brand: Red Sea
+    model: REEFER 625 (G2 / G2+)
+    category: overflow
+    mount: built_in
+    box: {width: null, depth: null, height: null}
+    rated_flow: "6000 L/h (1600 GPH)"
+    rated_flow_basis: "G2 manual recommended return flow. G2+: 1x ReefRun 7000."
+    drains: "Main valved downpipe + secondary overflow bypass pipe (sizes not published)"
+    design: "Valved main downpipe + open bypass"
+    status: current (G2+); G2 discontinued
+    checked: 2026-11-12
+    sources: *redsea_src
+    notes: "G2 table also: Peninsula P500 6000 L/h, P650 7000 L/h."
+
+  - id: red_sea_reefer_750
+    brand: Red Sea
+    model: REEFER 750 (G2 / G2+)
+    category: overflow
+    mount: built_in
+    box: {width: null, depth: null, height: null}
+    rated_flow: "7000 L/h (1850 GPH)"
+    rated_flow_basis: "G2 manual recommended return flow. G2+: 2x ReefRun 5500 or 1x ReefRun 7000."
+    drains: "Main valved downpipe + secondary overflow bypass pipe (sizes not published)"
+    design: "Valved main downpipe + open bypass"
+    status: current (G2+); G2 discontinued
+    checked: 2026-11-12
+    sources: *redsea_src
+    notes: null
+
+  - id: red_sea_reefer_900
+    brand: Red Sea
+    model: REEFER 900 (G2 / G2+)
+    category: overflow
+    mount: built_in
+    box: {width: null, depth: null, height: null}
+    rated_flow: "10000 L/h (2640 GPH)"
+    rated_flow_basis: "G2 manual recommended return flow. G2+: 2x ReefRun 7000."
+    drains: "Main valved downpipe + secondary overflow bypass pipe (sizes not published)"
+    design: "Valved main downpipe + open bypass"
+    status: current (G2+); G2 discontinued
+    checked: 2026-11-12
+    sources: *redsea_src
+    notes: "G2 table also: S-850 9000 L/h, S-1000 10000 L/h."
+
+# Not catalogued (no published overflow-box dimensions or overflow flow rating found):
+#  - Waterbox (Reef / Infinia / Peninsula / Marine X): spec page publishes drain sizes
+#    only, e.g. INFINIA REEF main drain DN32 + emergency DN32 + return DN25; REEF LX
+#    main 2 x DN25 + emergency DN32. https://www.waterboxaquariums.com/specs/marine/
+#  - Innovative Marine NUVO: INT tanks have 3 x 1 in pre-drilled BeanAnimal holes and a
+#    3/4 in return; EXT tanks 1 in drains. Only "recommended return flow" ranges are
+#    published (e.g. INT 75: 1000-2000 GPH; INT 170: 1700-3400 GPH, per retailer
+#    listings), not overflow capacity or box dims.
+#  - Synergy "coast-to-coast" / "Pinnacle" overflow: no such Synergy Reef product found;
+#    Synergy's current overflow line is the 16 in Shadow V3 only.
+
+drain_capacity:
+  # Per-pipe flow references. "siphon" = full (air-free) siphon; "gravity" = vented /
+  # Durso / open-channel. Pipe size = nominal bulkhead/pipe size. null = source gives
+  # no figure. Siphon capacity depends strongly on vertical drop and fittings; none of
+  # these sources state a drop except Aquaculator (4 ft).
+
+  # --- Source 1: WetWebMedia, Scott Vallembois, "Flow rates of various bulkheads"
+  #     (measured: timed 50 gal through each bulkhead; water held just above the
+  #     bulkhead top; Durso-style standpipe straight down to sump).
+  - pipe: "3/4 in"
+    siphon: "489 GPH (measured, siphon for entire trial)"
+    gravity: "165 GPH (measured)"
+    source: "WetWebMedia - Scott Vallembois, bulkhead flow-rate test, http://wetwebmedia.com/BulkheadFloRateArt.htm"
+    notes: "Single measured runs. Author recommends running 'considerably less' than these figures."
+  - pipe: "1 in"
+    siphon: "957 GPH (measured, siphon for entire trial)"
+    gravity: "350 GPH (measured; ~320 with 5 ft horizontal run; ~160 with run + intake strainer)"
+    source: "WetWebMedia - Scott Vallembois, http://wetwebmedia.com/BulkheadFloRateArt.htm"
+    notes: "Megaflow 1 in bulkhead with ~4 in water above the Durso inlet measured 379 GPH."
+  - pipe: "1.25 in"
+    siphon: null
+    gravity: null
+    source: "WetWebMedia - Scott Vallembois (size not tested)"
+    notes: null
+  - pipe: "1.5 in"
+    siphon: null
+    gravity: "975 GPH (measured; ~835 with 5 ft horizontal run; ~715 with run + strainer)"
+    source: "WetWebMedia - Scott Vallembois, http://wetwebmedia.com/BulkheadFloRateArt.htm"
+    notes: "No siphon run reported for 1.5 in."
+  - pipe: "2 in"
+    siphon: "1475 GPH (partial siphon during trial; not a full-siphon figure)"
+    gravity: "1350 GPH (measured; ~1270 with 5 ft run; ~1050 with run + strainer)"
+    source: "WetWebMedia - Scott Vallembois, http://wetwebmedia.com/BulkheadFloRateArt.htm"
+    notes: "Article conclusion: flow 'can more than double if a siphon effect occurs'."
+
+  # --- Source 2: Durso Standpipes FAQ (Richard Durso), per bulkhead with Durso standpipe
+  - pipe: "3/4 in"
+    siphon: null
+    gravity: "~350 GPH (marked unconfirmed by the source)"
+    source: "Durso Standpipes FAQ 'What flow rates are possible with a Durso Standpipe?', https://www.dursostandpipes.com/frequently-asked-questions/flow-rates/"
+    notes: null
+  - pipe: "1 in"
+    siphon: null
+    gravity: "~600 GPH"
+    source: "Durso Standpipes FAQ, https://www.dursostandpipes.com/frequently-asked-questions/flow-rates/"
+    notes: "FAQ says users have reached 800-1000 GPH through 1 in by changing teeth spacing/vent hole (not recommended). Durso's 1 in standpipe is built from 1.25 in pipe."
+  - pipe: "1.5 in"
+    siphon: null
+    gravity: "~1500 GPH"
+    source: "Durso Standpipes FAQ, https://www.dursostandpipes.com/frequently-asked-questions/flow-rates/"
+    notes: "FAQ says the overflow teeth spacing and the bulkhead, not the standpipe, usually limit flow."
+
+  # --- Source 3: Simplicity Aquatics rule-of-thumb table (bulkhead size vs max flow)
+  - pipe: "3/4 in"
+    siphon: null
+    gravity: "up to 325 GPH"
+    source: "Simplicity Aquatics, 'How to Choose the Right Size Return Pump', https://www.simplicityaquatics.com/blog/how-to-choose-the-right-size-pump-for-my-aquarium/"
+    notes: "Table is not labelled gravity, but the page adds 'flow rate through a siphon drain will generally be significantly higher than a gravity drain', implying gravity. Recommends >= 5 in linear weir."
+  - pipe: "1 in"
+    siphon: null
+    gravity: "up to 600 GPH"
+    source: "Simplicity Aquatics (as above)"
+    notes: "Recommends >= 9 in linear weir. Also lists 1/2 in: up to 150 GPH, >= 2 in weir."
+  - pipe: "1.5 in"
+    siphon: null
+    gravity: "up to 1300 GPH"
+    source: "Simplicity Aquatics (as above)"
+    notes: "Recommends >= 20 in linear weir. A Reef Central forum chart quotes the same series (1 in 590, 1.5 in 1300, 2 in 2300) - likely a common origin."
+  - pipe: "2 in"
+    siphon: null
+    gravity: "up to 2300 GPH"
+    source: "Simplicity Aquatics (as above)"
+    notes: "Recommends >= 35 in linear weir."
+
+  # --- Source 4: BeanAnimal original write-up (system-level, not per pipe)
+  - pipe: "1 in bulkheads with 1.5 in standpipes/drains (x3: siphon + open channel + emergency)"
+    siphon: "system total 2000 GPH 'silently ... with plenty of headroom', emergency dry"
+    gravity: null
+    source: "BeanAnimal, 'Silent & Fail-Safe Aquarium Overflow System' (2008), https://beananimal.com/projects/silent-and-fail-safe-aquarium-overflow-system/"
+    notes: "Author's own tank (running since Nov 2005). Split between siphon and open-channel pipes not given; no drop height given. States a full siphon handles 'MUCH MORE' than an air-mixed drain and that larger bulkheads are suitable. No per-size table in the write-up."
+
+  # --- Source 5: Aquaculator calculator page (unattributed web calculator - low weight)
+  - pipe: "3/4 in"
+    siphon: "~800 GPH"
+    gravity: "~220 GPH"
+    source: "Aquaculator overflow pipe-size calculator, https://aquaculator.com/aquarium-overflow-pipe-size-calculator/"
+    notes: "Schedule 40; siphon at an assumed 4 ft drop; 'Torricelli' basis, no formula or author published; area column uses nominal size as ID. Use only as a cross-check."
+  - pipe: "1 in"
+    siphon: "~1500 GPH"
+    gravity: "~350 GPH"
+    source: "Aquaculator (as above)"
+    notes: "Gravity figure matches WWM measurement; siphon higher than WWM's measured 957 (different/unknown drop)."
+  - pipe: "1.25 in"
+    siphon: "~2400 GPH"
+    gravity: "~600 GPH"
+    source: "Aquaculator (as above)"
+    notes: "Only source found with a 1.25 in figure."
+  - pipe: "1.5 in"
+    siphon: "~3200 GPH"
+    gravity: "~950 GPH"
+    source: "Aquaculator (as above)"
+    notes: null
+  - pipe: "2 in"
+    siphon: null
+    gravity: null
+    source: "Aquaculator (size not listed)"
+    notes: null
+
+  # --- Checked, no numbers: Bulk Reef Supply / Marine Depot "Overflow Boxes and Drain
+  #     Styles - Durso, Herbie, and BeanAnimal" (R. Farnsworth, updated 2024-03-28)
+  #     gives only qualitative comparisons. Glass-Holes.com and Synergy drain tables:
+  #     Glass-Holes site is gone; Synergy's overflow guide pages publish no per-pipe
+  #     capacity (they say capacity depends on pipe size, fittings and drop).

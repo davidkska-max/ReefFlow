@@ -1,0 +1,41 @@
+# ReefFlow coral profiles: STARTING POINTS for scoring, not authoritative husbandry
+# values (spec "Outputs and metrics" item 5; ASSUMPTIONS A-306). Edit freely or add
+# profiles in the project file under criteria.coral_profiles.
+#
+# Flow (time-averaged speed <|u|> sampled 15 mm off the rock surface):
+#   speed_ideal   [lo, hi]  score 1 inside; ramps to 0 at 0.5 x lo and 1.5 x hi
+#   turbulence    [ti0, ti1] turbulence intensity sigma/<|u|>: modifier 0.6 at <= ti0 -> 1.0 at >= ti1
+#   jet_speed, jet_ti       penalty for sustained laminar jet impingement: speed above
+#                           jet_speed with intensity below jet_ti (full penalty at 1.5 x jet_speed, TI = 0)
+# Light (meter-equivalent horizontal PAR, umol m^-2 s^-1, from the lighting model):
+#   par_ideal     [lo, hi]  score 1 inside; ramps to 0 at 0.7 x lo
+#   par_limit     upper limit (bleaching risk): ramps from 1 at hi to 0 at par_limit
+#
+# Speeds in m/s.
+
+SPS:
+  description: "Small-polyp stony corals (Acropora, Montipora...): high light, strong turbulent flow."
+  speed_ideal: [0.10, 0.30]
+  turbulence: [0.15, 0.40]
+  jet_speed: 0.40
+  jet_ti: 0.15
+  par_ideal: [250, 450]
+  par_limit: 600
+
+LPS:
+  description: "Large-polyp stony corals (Euphyllia, Acanthastrea...): moderate light and flow."
+  speed_ideal: [0.05, 0.15]
+  turbulence: [0.10, 0.30]
+  jet_speed: 0.25
+  jet_ti: 0.15
+  par_ideal: [75, 200]
+  par_limit: 350
+
+soft:
+  description: "Soft corals and zoanthids: low-moderate light, low-moderate flow."
+  speed_ideal: [0.03, 0.10]
+  turbulence: [0.05, 0.25]
+  jet_speed: 0.20
+  jet_ti: 0.15
+  par_ideal: [50, 150]
+  par_limit: 300

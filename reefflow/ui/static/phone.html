@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<title>ReefFlow photos</title>
+<style>
+  :root { --ink: #102a33; --muted: #5d7480; --accent: #0f7fa3; --ok: #2e8b57; --warn: #c27c0e; --err: #b33a3a; --card: #fff; --bg: #eef3f5; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); }
+  header { background: var(--ink); color: #fff; padding: 14px 16px 12px; position: sticky; top: 0; z-index: 2; }
+  header h1 { margin: 0; font-size: 18px; font-weight: 650; }
+  header .sub { font-size: 13px; opacity: .8; margin-top: 2px; }
+  .bar { height: 6px; background: rgba(255,255,255,.18); border-radius: 3px; margin-top: 10px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; background: #5fd0a0; width: 0; transition: width .3s; }
+  main { padding: 12px 12px 40px; max-width: 640px; margin: 0 auto; }
+  .seg { display: flex; background: #dde6ea; border-radius: 10px; padding: 3px; margin: 4px 0 12px; }
+  .seg button { flex: 1; border: 0; background: none; padding: 10px 6px; font: inherit; font-weight: 600; color: var(--muted); border-radius: 8px; min-height: 44px; }
+  .seg button.on { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+  details.tips { background: #fff; border-radius: 12px; padding: 10px 14px; margin-bottom: 14px; }
+  details.tips summary { font-weight: 650; cursor: pointer; min-height: 32px; }
+  details.tips li { margin: 4px 0; }
+  .card { background: var(--card); border-radius: 14px; padding: 14px; margin-bottom: 12px; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+  .card.done { outline: 2px solid #9fd8b8; }
+  .head { display: flex; align-items: center; gap: 8px; }
+  .head h2 { font-size: 17px; margin: 0; flex: 1; }
+  .chip { font-size: 12px; font-weight: 650; border-radius: 99px; padding: 2px 9px; background: #e3ecf0; color: var(--muted); white-space: nowrap; }
+  .chip.required { background: #fde9d6; color: #8a4b0b; }
+  .chip.ok { background: #dcf3e6; color: #1f6b43; }
+  .row { display: flex; gap: 12px; align-items: flex-start; margin-top: 10px; }
+  .row svg { flex: 0 0 96px; height: 96px; }
+  .how { font-size: 15px; }
+  .tip { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .btns { display: flex; gap: 8px; margin-top: 12px; }
+  .btns label, .btns button { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 48px; border-radius: 10px;
+    font: inherit; font-weight: 650; border: 1px solid #c9d6dc; background: #f6f9fa; color: var(--ink); text-align: center; padding: 0 10px; }
+  .btns label.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btns input { display: none; }
+  .thumb { margin-top: 10px; display: flex; gap: 10px; align-items: center; }
+  .thumb img { width: 96px; height: 72px; object-fit: cover; border-radius: 8px; background: #dde6ea; }
+  .thumb .t { font-size: 14px; }
+  .prog { height: 6px; background: #e3ecf0; border-radius: 3px; overflow: hidden; margin-top: 6px; }
+  .prog > i { display: block; height: 100%; width: 0; background: var(--accent); }
+  .err { color: var(--err); font-size: 14px; margin-top: 8px; }
+  .next { background: #fff; border-radius: 12px; padding: 12px 14px; font-size: 15px; }
+  .next b { color: var(--ok); }
+  .gone { text-align: center; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>ReefFlow · tank photos</h1>
+  <div class="sub" id="sub">connecting…</div>
+  <div class="bar"><i id="bar"></i></div>
+</header>
+<main id="main"></main>
+<script>
+(() => {
+  const base = location.pathname.replace(/\/+$/, '');
+  const main = document.getElementById('main');
+  let info = null, mode = 'filled';
+  try { mode = localStorage.getItem('rf_mode') || 'filled'; } catch (e) { /* private mode */ }
+  const local = {};          // shot id -> {url, state, pct, err}
+
+  const h = (tag, attrs = {}, ...kids) => {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
+      else if (k === 'html') e.innerHTML = v;
+      else if (v !== false && v !== null && v !== undefined) e.setAttribute(k, v === true ? '' : v);
+    }
+    for (const c of kids.flat()) if (c !== null && c !== undefined && c !== false) e.append(c.nodeType ? c : document.createTextNode(String(c)));
+    return e;
+  };
+
+  // little diagrams: plan view (from above) or side view, with the phone and where it looks
+  const SVG = {
+    plan(px, py, dx, dy) {
+      return `<svg viewBox="0 0 96 96"><rect x="18" y="22" width="60" height="38" rx="2" fill="#cfe8f1" stroke="#41606e" stroke-width="2"/>
+        <text x="48" y="56" font-size="8" text-anchor="middle" fill="#5d7480">FRONT</text>
+        <path d="M18 60 H78" stroke="#0f7fa3" stroke-width="3"/>
+        <g transform="translate(${px} ${py}) rotate(${Math.atan2(dy, dx) * 180 / Math.PI + 90})"><rect x="-5" y="-8" width="10" height="16" rx="2" fill="#102a33"/>
+        <path d="M0 -10 L0 -22" stroke="#e2a227" stroke-width="2.5" marker-end="url(#a)"/></g>
+        <defs><marker id="a" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#e2a227"/></marker></defs></svg>`;
+    },
+    side(px, py, ang) {
+      return `<svg viewBox="0 0 96 96"><rect x="20" y="40" width="56" height="40" rx="2" fill="#cfe8f1" stroke="#41606e" stroke-width="2"/>
+        <path d="M20 48 H76" stroke="#3aa0d0" stroke-width="1.5" stroke-dasharray="3 2"/><path d="M22 78 q10 -14 22 -6 q8 -12 20 -2 v8 h-42z" fill="#b9a688"/>
+        <text x="48" y="92" font-size="9" text-anchor="middle" fill="#5d7480">seen from the side</text>
+        <g transform="translate(${px} ${py}) rotate(${ang})"><rect x="-5" y="-8" width="10" height="16" rx="2" fill="#102a33"/>
+        <path d="M0 10 L0 22" stroke="#e2a227" stroke-width="2.5" marker-end="url(#b)"/></g>
+        <defs><marker id="b" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#e2a227"/></marker></defs></svg>`;
+    },
+  };
+  const DIAGRAM = {
+    front: () => SVG.plan(48, 88, 0, -1), left: () => SVG.plan(6, 41, 1, 0), right: () => SVG.plan(90, 41, -1, 0),
+    back: () => SVG.plan(48, 10, 0, 1), top: () => SVG.side(48, 18, 0), front_high: () => SVG.side(10, 22, -50),
+  };
+  const MODE_TIP = {
+    filled: {
+      top: 'Switch pumps and wavemakers off 2–3 minutes before, so the surface is flat and bubbles settle. Lift or swing the lights aside: every corner of the tank and the sand must be visible.',
+      front: 'Room lights off, tank lights on white/daylight. Wipe the glass. Avoid your reflection: stand a little back and zoom in 2×.',
+      left: 'Same as the front: lights on white, room dark, glass clean.', right: 'Same as the front: lights on white, room dark, glass clean.',
+      front_high: 'Keep the whole tank in the picture, top of the frame to the stand.', back: 'Only if the back glass is not painted or covered.',
+    },
+    dry: {
+      top: 'Straight down over the middle of the tank. A step stool helps.',
+      front: 'Even light, no strong shadows. Keep the whole front glass in the picture.',
+      left: 'Keep the whole end glass in the picture.', right: 'Keep the whole end glass in the picture.',
+      front_high: 'Keep the whole tank in the picture, top of the frame to the stand.', back: 'Keep the whole back glass in the picture.',
+    },
+  };
+
+  async function getInfo() {
+    const r = await fetch(base + '/info', { cache: 'no-store' });
+    if (!r.ok) throw new Error((await r.json().catch(() => ({}))).detail || r.statusText);
+    info = await r.json();
+    render();
+  }
+
+  // send the camera JPEG as it is (keeps the lens data in EXIF); re-encode anything else (HEIC, huge files)
+  async function prepare(file) {
+    const okType = /^image\/(jpeg|png|webp)$/.test(file.type);
+    if (okType && file.size <= 25e6) return { blob: file, name: file.name || 'photo.jpg' };
+    const bmp = await createImageBitmap(file);
+    const k = Math.min(1, 4000 / Math.max(bmp.width, bmp.height));
+    const c = document.createElement('canvas');
+    c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+    c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+    const blob = await new Promise(res => c.toBlob(res, 'image/jpeg', 0.92));
+    return { blob, name: (file.name || 'photo').replace(/\.[^.]+$/, '') + '.jpg' };
+  }
+
+  function upload(shot, file) {
+    const L = local[shot.id] = { url: URL.createObjectURL(file), state: 'preparing', pct: 0, err: null };
+    render();
+    prepare(file).then(({ blob, name }) => {
+      const fd = new FormData();
+      fd.append('shot', shot.id);
+      fd.append('file', blob, name);
+      const x = new XMLHttpRequest();
+      x.open('POST', base + '/photo');
+      x.upload.onprogress = (e) => { if (e.lengthComputable) { L.pct = e.loaded / e.total; L.state = 'uploading'; paintProgress(shot.id); } };
+      x.onload = () => {
+        let j = {};
+        try { j = JSON.parse(x.responseText); } catch (e) { /* not JSON */ }
+        if (x.status >= 200 && x.status < 300) { L.state = 'done'; L.view = j.view; info = j.info; if (navigator.vibrate) navigator.vibrate(40); }
+        else { L.state = 'error'; L.err = j.detail || `upload failed (${x.status})`; }
+        render();
+      };
+      x.onerror = () => { L.state = 'error'; L.err = 'upload failed: is the phone still on the same Wi-Fi as the computer?'; render(); };
+      L.state = 'uploading';
+      render();
+      x.send(fd);
+    }).catch(e => { L.state = 'error'; L.err = 'could not read this photo: ' + e.message; render(); });
+  }
+
+  function paintProgress(id) {
+    const p = document.querySelector(`[data-prog="${id}"]`);
+    if (p) p.style.width = `${Math.round(local[id].pct * 100)}%`;
+  }
+
+  function card(s) {
+    const L = local[s.id];
+    const done = !!s.photo;
+    const pick = (capture) => h('input', { type: 'file', accept: 'image/*', capture: capture ? 'environment' : null,
+      onchange: (e) => { const f = e.target.files[0]; e.target.value = ''; if (f) upload(s, f); } });
+    const chip = done ? h('span', { class: 'chip ok' }, '✓ sent') : h('span', { class: 'chip ' + s.need }, s.need);
+    const c = h('section', { class: 'card' + (done ? ' done' : ''), id: 'shot-' + s.id },
+      h('div', { class: 'head' }, h('h2', {}, s.title), chip),
+      h('div', { class: 'row' }, h('span', { html: DIAGRAM[s.id]() }),
+        h('div', {}, h('div', { class: 'how' }, s.how), h('div', { class: 'tip' }, MODE_TIP[mode][s.id]))));
+    if (L && L.state !== 'done') {
+      c.append(h('div', { class: 'thumb' }, h('img', { src: L.url, alt: '' }),
+        h('div', { class: 't', style: 'flex:1' }, L.state === 'error' ? 'Not sent' : L.state === 'preparing' ? 'Preparing…' : 'Sending…',
+          L.state !== 'error' ? h('div', { class: 'prog' }, h('i', { 'data-prog': s.id, style: `width:${Math.round(L.pct * 100)}%` })) : null)));
+      if (L.err) c.append(h('div', { class: 'err' }, L.err));
+    } else if (done) {
+      c.append(h('div', { class: 'thumb' }, L ? h('img', { src: L.url, alt: '' }) : null,
+        h('div', { class: 't' }, `Received on the computer as “${s.photo}”.`, L && L.view && !L.view.focal_from_exif ? h('div', { class: 'tip' }, 'No lens data in this photo; the computer will estimate it.') : null)));
+    }
+    const busy = L && (L.state === 'uploading' || L.state === 'preparing');
+    if (!busy) {
+      c.append(h('div', { class: 'btns' },
+        h('label', { class: 'primary' }, done ? '📷 Retake' : '📷 Take photo', pick(true)),
+        h('label', {}, 'From photos', pick(false))));
+    }
+    return c;
+  }
+
+  function render() {
+    if (!info) return;
+    const sent = info.shots.filter(s => s.photo).length, req = info.shots.filter(s => s.need === 'required');
+    const reqDone = req.every(s => s.photo);
+    document.getElementById('sub').textContent = `${info.project} · ${sent} of ${info.shots.length} photos sent`;
+    document.getElementById('bar').style.width = `${Math.round(100 * sent / info.shots.length)}%`;
+    const open = document.querySelector('details.tips')?.open ?? true;
+    main.replaceChildren(
+      h('div', { class: 'seg' },
+        h('button', { class: mode === 'filled' ? 'on' : '', onclick: () => setMode('filled') }, '💧 Tank is filled'),
+        h('button', { class: mode === 'dry' ? 'on' : '', onclick: () => setMode('dry') }, 'Dry (new setup)')),
+      h('details', { class: 'tips', open: open || null },
+        h('summary', {}, 'Before you start'),
+        h('ul', {},
+          h('li', {}, h('b', {}, 'Every photo must show the whole tank'), ': the top of the frame and where the tank sits on the stand, at both ends (the computer uses these corners to work out where the phone was).'),
+          mode === 'filled' ? h('li', {}, 'Pumps and wavemakers off for the top photo; lights on white; room lights off.') : h('li', {}, 'Even room light; no strong shadows across the rock.'),
+          h('li', {}, 'Hold the phone level; do not use the ultra-wide (0.5×) lens.'),
+          h('li', {}, 'Each photo goes straight to ReefFlow on your computer. Retake replaces it.'))),
+      ...info.shots.map(card),
+      h('div', { class: 'next' }, reqDone
+        ? h('span', {}, h('b', {}, '✓ Front and top received. '), 'On the computer, open the Photos tab: click the tank corners in each photo, check the rock outline, then Carve.')
+        : 'The front and top photos are needed; the others make the 3-D rock more accurate.'));
+  }
+
+  function setMode(m) { mode = m; try { localStorage.setItem('rf_mode', m); } catch (e) { /* ignore */ } render(); }
+
+  getInfo().catch(e => {
+    document.getElementById('sub').textContent = 'not connected';
+    main.replaceChildren(h('div', { class: 'gone card' }, h('h2', {}, 'This link is not working'), h('p', {}, e.message),
+      h('p', { class: 'tip' }, 'On the computer, press “Use my phone” again and scan the new QR code.')));
+  });
+  setInterval(() => { if (!Object.values(local).some(l => l.state === 'uploading')) getInfo().catch(() => {}); }, 15000);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+{
+  "cases": [
+    {
+      "lattice": "D3Q19",
+      "shape": [
+        128,
+        64,
+        64
+      ],
+      "F0": 0.0003,
+      "F_total": 0.06240000203251839,
+      "steps": 40010,
+      "momentum_injection_max_rel_err": 7.341715990705211e-08,
+      "mass_initial": 484344.00000002387,
+      "mass_max_rel_drift": 2.067010274053871e-08,
+      "flux": {
+        "40": {
+          "mean_net_over_fwd": -3.208317866665311e-05,
+          "rms_net_over_fwd": 0.00691514415666461,
+          "mean_fwd_flux": 2.5968711376190186
+        },
+        "64": {
+          "mean_net_over_fwd": -3.26105764543172e-05,
+          "rms_net_over_fwd": 0.004645018372684717,
+          "mean_fwd_flux": 3.857954502105713
+        },
+        "96": {
+          "mean_net_over_fwd": -3.784763612202369e-05,
+          "rms_net_over_fwd": 0.0034088040702044964,
+          "mean_fwd_flux": 5.228703498840332
+        }
+      },
+      "max_jet_velocity": 0.049218159168958664,
+      "pass": true
+    },
+    {
+      "lattice": "D3Q27",
+      "shape": [
+        128,
+        64,
+        64
+      ],
+      "F0": 0.0003,
+      "F_total": 0.06240000203251839,
+      "steps": 40010,
+      "momentum_injection_max_rel_err": 2.363670437155463e-08,
+      "mass_initial": 484343.9999999649,
+      "mass_max_rel_drift": 1.4060336117616146e-08,
+      "flux": {
+        "40": {
+          "mean_net_over_fwd": -3.957831359002739e-05,
+          "rms_net_over_fwd": 0.007217195816338062,
+          "mean_fwd_flux": 2.030942440032959
+        },
+        "64": {
+          "mean_net_over_fwd": -4.5540542487287894e-05,
+          "rms_net_over_fwd": 0.005828453693538904,
+          "mean_fwd_flux": 2.5081875324249268
+        },
+        "96": {
+          "mean_net_over_fwd": 8.107817848213017e-06,
+          "rms_net_over_fwd": 0.004199696239084005,
+          "mean_fwd_flux": 3.432711362838745
+        }
+      },
+      "max_jet_velocity": 0.052685122936964035,
+      "pass": true
+    }
+  ],
+  "runtime_s": 83.93858390004607,
+  "backend": "cuda",
+  "timestamp": "2026-10-30 18:01:41"
+}

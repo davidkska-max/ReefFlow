@@ -1,0 +1,57 @@
+{
+  "cases": [
+    {
+      "B": 5.206309164604013,
+      "x0_over_D": 2.503131338544961,
+      "S": 0.10431642781565856,
+      "x0_spread_over_D": 3.417288525183932,
+      "potential_core_over_D": 8.4,
+      "J0_over_tophat": 0.8331076994050547,
+      "momentum_flux_ratio_range_x5_25": [
+        1.0135744075234414,
+        1.1108902559609184
+      ],
+      "pass": true,
+      "lattice": "D3Q19",
+      "Cs": 0.1,
+      "D_cells": 10,
+      "U_j": 0.08,
+      "runtime_s": 416,
+      "sponge_nu_max": 0.05
+    }
+  ],
+  "B_range": [
+    4.5,
+    6.7
+  ],
+  "S_range": [
+    0.077,
+    0.112
+  ],
+  "literature": [
+    [
+      "Wygnanski & Fiedler 1969",
+      5.0,
+      0.086
+    ],
+    [
+      "Panchapakesan & Lumley 1993",
+      6.06,
+      0.096
+    ],
+    [
+      "Hussein et al. 1994 LDA",
+      5.8,
+      0.094
+    ],
+    [
+      "Hussein et al. 1994 HW",
+      5.9,
+      0.102
+    ]
+  ],
+  "tag": "_Cs0.10",
+  "note": "D3Q27 and Cs=0.12/0.17 runs interrupted (GPU shared with another application); rerun pending.",
+  "backend": "cuda",
+  "timestamp": "2026-10-30 20:59:02"
+}

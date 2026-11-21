@@ -1,0 +1,817 @@
+# ReefFlow light-fixture reference data
+# Compiled 2026-11-12. Values are as published by the cited source; null = not published / not found.
+# Conventions:
+#   par        = PPFD in umol/m2/s
+#   depth      = depth below the water surface; "n/a (in air)" for open-air bench tests
+#   mount_height = fixture face to water surface (or, for in-air tests, fixture-to-sensor distance, stated as such)
+#   footprint  = housing dimensions unless an emitting-area figure is published (none of these makers publish one)
+#   "derived" in notes = arithmetic done by the compiler from published numbers, NOT a published value.
+# No manufacturer in this list publishes total PPF (umol/s) or efficacy (umol/J) for these fixtures.
+
+# --------------------------------------------------------------------------
+# Aqua Illumination
+# --------------------------------------------------------------------------
+- id: ai_prime_16hd
+  brand: Aqua Illumination
+  model: Prime 16HD Reef
+  category: light
+  type: led_puck
+  power_max: "59 W at full power (spec table); same page also says 'a maximum of 55 watts from the wall'"
+  ppf: null
+  efficacy: null
+  par_data:
+    - {par: 100, depth: "24 in", mount_height: null, position: "peak (centre)", settings: "not stated", source: "https://www.aquaillumination.com/products/prime (manufacturer: 'a peak PAR of 100uMol at a depth of 24 inches')"}
+  footprint: {length: "4.88 in (12.4 cm)", width: "4.88 in (12.4 cm)", height: "1.34 in (3.4 cm)", note: "housing; emitting cluster size not published"}
+  optic: "TIR lenses, >90% optical efficiency, diffuse exit surface; beam angle not published"
+  channels:
+    - {name: cool white, count: 4}
+    - {name: blue, count: 4}
+    - {name: royal blue, count: 4}
+    - {name: red (photo red), count: 1}
+    - {name: green, count: 1}
+    - {name: violet, count: 1}
+    - {name: UV, count: 1}
+    - {name: moonlight, count: 1}
+  coverage: "24 in x 24 in spread (manufacturer). Mounting height not published."
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://www.aquaillumination.com/products/prime
+  notes: "Two wattage figures on the same manufacturer page (59 W vs 55 W). 17 LEDs total incl. 1 moonlight; single cluster."
+
+- id: ai_hydra_32hd
+  brand: Aqua Illumination
+  model: Hydra 32HD (Reef)
+  category: light
+  type: led_puck
+  power_max: "95 W from the wall (AI spec table); BRS lists 90 W"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "7.28 in (18.5 cm)", width: "5.375 in (13.7 cm)", height: "1.42 in (3.6 cm)", note: "housing; 2 LED clusters"}
+  optic: "TIR optics (BRS listing); beam angle not published for the reef version (BRS freshwater listing mentions 80 deg lenses for the freshwater model only)"
+  channels:
+    - {name: cool white, count: 8}
+    - {name: blue, count: 8}
+    - {name: royal blue, count: 8}
+    - {name: red (photo red), count: 2}
+    - {name: green, count: 2}
+    - {name: violet, count: 2}
+    - {name: UV, count: 2}
+    - {name: moonlight, count: 2}
+  coverage: "Effective spread 24 x 24 in, effective depth 24 in, recommended mounting height 8-10 in (BRS product page). BRStv testing found 12-14 in above water optimal (14 in best; 6 in gave a strong hotspot); 1 per 24 in of tank length for LPS/soft, 1 per 12-15 in for SPS."
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://www.aquaillumination.com/products/hydra
+    - https://www.bulkreefsupply.com/hydra-32-hd-led-reef-light-white-aqua-illumination.html
+    - https://www.bulkreefsupply.com/content/post/brstv-investigates-hydra32-vs-hydra64
+    - https://www.bulkreefsupply.com/content/post/aqua-illumination-hydra-32-hd-led-top-faq
+  notes: "LED counts are from retailer listings giving per-cluster 4 CW/4 B/4 RB/1 red/1 green/1 violet/1 UV/1 moon x 2 clusters (= '32(+2)'); AI's own page gives no per-colour count. 7 colour channels + moonlight. AI publishes PAR maps only as images (scanned at 24 in height, 0.5 in resolution) - no numeric values extracted. BRStv published no absolute PAR numbers for this fixture."
+
+- id: ai_hydra_64hd
+  brand: Aqua Illumination
+  model: Hydra 64HD (Reef)
+  category: light
+  type: led_puck
+  power_max: "135 W from the wall (AI spec table)"
+  ppf: null
+  efficacy: null
+  par_data:
+    - {par: 335, depth: "average over tank volume (depths not stated)", mount_height: "6 in", position: "average of grid", settings: "all 7 channels 100%", source: "BRStv Investigates (independent) https://www.bulkreefsupply.com/content/post/brstv-investigates-hydra-64-led-light"}
+    - {par: ">1000", depth: "not stated", mount_height: "6 in", position: "centre hotspot", settings: "all 7 channels 100%", source: "BRStv Investigates (independent) https://www.bulkreefsupply.com/content/post/brstv-investigates-hydra-64-led-light"}
+  footprint: {length: "11.875 in (30.2 cm)", width: "5.375 in (13.7 cm)", height: "1.42 in (3.6 cm)", note: "housing; 4 LED clusters"}
+  optic: "TIR optics; beam angle not published"
+  channels:
+    - {name: cool white, count: 16}
+    - {name: blue, count: 16}
+    - {name: royal blue, count: 16}
+    - {name: red (photo red), count: 4}
+    - {name: green, count: 4}
+    - {name: violet, count: 4}
+    - {name: UV, count: 4}
+    - {name: moonlight, count: 4}
+  coverage: "BRStv: 12 in above water best balance over 24 x 24 in (an older BRS article lists 14 in). Manufacturer coverage not stated on current page."
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://www.aquaillumination.com/products/hydra
+    - https://www.bulkreefsupply.com/content/post/brstv-investigates-hydra-64-led-light
+    - https://completeaquatics.co.uk/ai-hydra-64-hd-white
+  notes: "LED counts from retailer per-cluster listing (4 CW/4 B/4 RB/1 red/1 green/1 violet/1 UV/1 moon) x 4 clusters = '64(+4)'; not on AI's own page. BRStv 6 in test: tank size/depths not given in article text (BRStv standard tank is a 24 in cube) - treat as indicative only."
+
+- id: ai_blade_coral_grow_21
+  brand: Aqua Illumination
+  model: Blade Coral Grow 21 in
+  category: light
+  type: led_bar
+  power_max: "40 W (manufacturer); measured 42.2 W at the wall by Reef Builders"
+  ppf: null
+  efficacy: null
+  par_data:
+    - {par: 76, depth: "n/a (in air)", mount_height: "24 in fixture-to-sensor", position: "peak", settings: "not stated (measured draw 42.2 W, i.e. full power)", source: "Reef Builders 2024 independent test https://reefbuilders.com/2024/10/01/radion-g6-gnc-bluray-x-and-ai-blade-coral-grow-led-light-test"}
+    - {par: 49.7, depth: "n/a (in air)", mount_height: "30 in fixture-to-sensor", position: "peak", settings: "as above", source: "Reef Builders 2024"}
+    - {par: 42.3, depth: "n/a (in air)", mount_height: "24 in fixture-to-sensor", position: "average, 3x3 ft grid (169 pts, 3 in spacing)", settings: "as above", source: "Reef Builders 2024"}
+    - {par: 33.4, depth: "n/a (in air)", mount_height: "30 in fixture-to-sensor", position: "average, 3x3 ft grid (169 pts)", settings: "as above", source: "Reef Builders 2024"}
+    - {par: 56.7, depth: "n/a (in air)", mount_height: "24 in fixture-to-sensor", position: "average, central 2x2 ft (81 pts)", settings: "as above", source: "Reef Builders 2024"}
+    - {par: 41.2, depth: "n/a (in air)", mount_height: "30 in fixture-to-sensor", position: "average, central 2x2 ft (81 pts)", settings: "as above", source: "Reef Builders 2024"}
+    - {par: 73.19, depth: "n/a (in air)", mount_height: "23.25 in fixture-to-sensor", position: "centre single point", settings: "as above", source: "Reef Builders 2024"}
+  footprint: {length: "21.1 in (53.6 cm)", width: "2.8 in (7 cm)", height: "0.7 in (1.6 cm)", note: "housing"}
+  optic: "EdgeField optics, 95 deg spread (manufacturer)"
+  channels:
+    - {name: royal blue, count_per_cluster: 12}
+    - {name: blue, count_per_cluster: 6}
+    - {name: cool white, count_per_cluster: 6}
+  coverage: "not published"
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://www.aquaillumination.com/products/blade-coral-grow
+    - https://reefbuilders.com/2024/10/01/radion-g6-gnc-bluray-x-and-ai-blade-coral-grow-led-light-test
+  notes: "Clusters per length not published. Reef Builders measured with LI-COR LI-192SA + LI-1000, fixture length along Y axis, 5-reading average per point. Derived (compiler): grid-total 7149.2 x (0.0762 m)^2 = ~41.5 umol/s landing inside the 3x3 ft plane at 24 in - a lower bound on PPF, not a published PPF."
+
+- id: ai_blade_coral_grow_48
+  brand: Aqua Illumination
+  model: Blade Coral Grow 48 in
+  category: light
+  type: led_bar
+  power_max: "100 W (manufacturer)"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "48.1 in (122.2 cm)", width: "2.8 in (7 cm)", height: "0.7 in (1.6 cm)", note: "housing"}
+  optic: "EdgeField optics, 95 deg spread (manufacturer)"
+  channels:
+    - {name: royal blue, count_per_cluster: 12}
+    - {name: blue, count_per_cluster: 6}
+    - {name: cool white, count_per_cluster: 6}
+  coverage: "not published"
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://www.aquaillumination.com/products/blade-coral-grow
+  notes: "Full Blade Coral Grow range (nominal length / W): 12/20, 21/40, 30/60, 39/80, 48/100, 57/120, 66/140; actual lengths 12.1/21.1/30.1/39.1/48.1/57.1/66.1 in. Scale the 21 in PAR data (separate entry) roughly by power if needed - that scaling is an assumption."
+
+- id: ai_blade_coral_glow_48
+  brand: Aqua Illumination
+  model: Blade Coral Glow 48 in
+  category: light
+  type: led_bar
+  power_max: "100 W (manufacturer)"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "48.1 in (122.2 cm)", width: "2.8 in (7 cm)", height: "0.7 in (1.6 cm)", note: "housing"}
+  optic: "95 deg spread (manufacturer)"
+  channels:
+    - {name: royal blue, count_per_cluster: 12}
+    - {name: violet 430 nm, count_per_cluster: 6}
+    - {name: violet 415 nm, count_per_cluster: 3}
+    - {name: UV/violet 405 nm, count_per_cluster: 3}
+  coverage: "not published"
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://www.aquaillumination.com/products/blade-coral-glow
+  notes: "Same length/wattage table as Coral Grow (12 in 20 W ... 66 in 140 W). Supplemental actinic strip; no PAR published."
+
+# --------------------------------------------------------------------------
+# EcoTech Marine Radion G6
+# --------------------------------------------------------------------------
+- id: ecotech_radion_xr15_g6_pro
+  brand: EcoTech Marine
+  model: Radion XR15 G6 Pro
+  category: light
+  type: led_puck
+  power_max: "95 W max"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "7 in (18 cm)", width: "7 in (18 cm)", height: "1.5 in (3.9 cm)", note: "housing"}
+  optic: "HEI optic, standard spread 124-126 deg (G6 XR15); optional narrow lens kit 85-87 deg with 167-169% PFD"
+  channels:
+    - {name: cool white, count: 8}
+    - {name: warm white, count: 4}
+    - {name: royal blue, count: 16}
+    - {name: blue, count: 8}
+    - {name: violet 430 nm, count: 4}
+    - {name: violet 415 nm, count: 2}
+    - {name: UV 405 nm, count: 1}
+    - {name: UV 395 nm, count: 2}
+    - {name: green, count: 3}
+    - {name: red, count: 2}
+    - {name: moonlight, count: 1}
+  coverage: "not stated per model; EcoTech multi-light rail recommends ~7 in (18 cm) above tank edge"
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://ecotechmarine.com/radion
+    - https://ecotechmarine.com/wp-content/uploads/2023/12/High-Intensity-Lens-Kit-Narrow-Angle-Optic_web.pdf
+  notes: "51 LEDs. EcoTech does not publish the colour-to-control-channel mapping on the page."
+
+- id: ecotech_radion_xr15_g6_blue
+  brand: EcoTech Marine
+  model: Radion XR15 G6 Blue
+  category: light
+  type: led_puck
+  power_max: "95 W max"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "7 in (18 cm)", width: "7 in (18 cm)", height: "1.5 in (3.9 cm)", note: "housing"}
+  optic: "HEI optic, standard spread 124-126 deg (G6 XR15); narrow lens kit 85-87 deg"
+  channels:
+    - {name: cool white, count: 4}
+    - {name: warm white, count: 2}
+    - {name: royal blue, count: 16}
+    - {name: blue, count: 16}
+    - {name: violet 430 nm, count: 6}
+    - {name: violet 415 nm, count: 2}
+    - {name: UV 405 nm, count: 1}
+    - {name: UV 395 nm, count: 2}
+    - {name: red, count: 1}
+    - {name: moonlight, count: 1}
+  coverage: "not stated"
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://ecotechmarine.com/radion
+    - https://ecotechmarine.com/wp-content/uploads/2023/12/High-Intensity-Lens-Kit-Narrow-Angle-Optic_web.pdf
+  notes: "51 LEDs, no green."
+
+- id: ecotech_radion_xr30_g6_pro
+  brand: EcoTech Marine
+  model: Radion XR30 G6 Pro
+  category: light
+  type: led_panel
+  power_max: "215 W max (manufacturer); measured 215.9 W by Reef Builders"
+  ppf: null
+  efficacy: null
+  par_data:
+    - {par: 173.2, depth: "n/a (in air)", mount_height: "24 in fixture-to-sensor", position: "peak", settings: "not stated (measured 215.9 W = full power)", source: "Reef Builders 2024 independent test https://reefbuilders.com/2024/10/01/radion-g6-gnc-bluray-x-and-ai-blade-coral-grow-led-light-test"}
+    - {par: 111.7, depth: "n/a (in air)", mount_height: "30 in fixture-to-sensor", position: "peak", settings: "as above", source: "Reef Builders 2024"}
+    - {par: 124.9, depth: "n/a (in air)", mount_height: "24 in fixture-to-sensor", position: "average, 3x3 ft grid (169 pts, 3 in spacing)", settings: "as above", source: "Reef Builders 2024"}
+    - {par: 92.4, depth: "n/a (in air)", mount_height: "30 in fixture-to-sensor", position: "average, 3x3 ft grid", settings: "as above", source: "Reef Builders 2024"}
+    - {par: 150.9, depth: "n/a (in air)", mount_height: "24 in fixture-to-sensor", position: "average, central 2x2 ft (81 pts)", settings: "as above", source: "Reef Builders 2024"}
+    - {par: 103.0, depth: "n/a (in air)", mount_height: "30 in fixture-to-sensor", position: "average, central 2x2 ft (81 pts)", settings: "as above", source: "Reef Builders 2024"}
+    - {par: 172.0, depth: "n/a (in air)", mount_height: "23.25 in fixture-to-sensor", position: "centre single point", settings: "as above", source: "Reef Builders 2024"}
+  footprint: {length: "11.8 in (30 cm)", width: "7 in (18 cm)", height: "1.5 in (3.9 cm)", note: "housing"}
+  optic: "HEI optic, standard spread 124-125 deg (G6 XR30; page headline 126.3 deg vs 110.5 deg G5); narrow lens kit 67-77 deg with 177-186% PFD"
+  channels:
+    - {name: cool white, count: 16}
+    - {name: warm white, count: 8}
+    - {name: royal blue, count: 32}
+    - {name: blue, count: 16}
+    - {name: violet 430 nm, count: 8}
+    - {name: violet 415 nm, count: 4}
+    - {name: UV 405 nm, count: 2}
+    - {name: UV 395 nm, count: 4}
+    - {name: green, count: 6}
+    - {name: red, count: 4}
+    - {name: moonlight, count: 1}
+  coverage: "'even PAR over almost 4ft of coverage area' (manufacturer, model not specified); multi-light rail ~7 in above tank edge. Retailers quote 8-10 in mounting height (not verified on manufacturer page)."
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://ecotechmarine.com/radion
+    - https://ecotechmarine.com/wp-content/uploads/2023/12/High-Intensity-Lens-Kit-Narrow-Angle-Optic_web.pdf
+    - https://reefbuilders.com/2024/10/01/radion-g6-gnc-bluray-x-and-ai-blade-coral-grow-led-light-test
+  notes: "101 LEDs. Good validation case: Reef Builders grid at 24/30 in, LI-COR LI-192SA, fixture long axis along Y. Derived (compiler): 3x3 ft grid total 21115.4 x (0.0762 m)^2 = ~122.6 umol/s intercepted within 3x3 ft at 24 in -> lower bound on PPF, ~0.57 umol/J of wall power intercepted. Not a published PPF."
+
+- id: ecotech_radion_xr30_g6_blue
+  brand: EcoTech Marine
+  model: Radion XR30 G6 Blue
+  category: light
+  type: led_panel
+  power_max: "215 W max"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "11.8 in (30 cm)", width: "7 in (18 cm)", height: "1.5 in (3.9 cm)", note: "housing"}
+  optic: "HEI optic, standard spread 124-125 deg (G6 XR30); narrow lens kit 67-77 deg"
+  channels:
+    - {name: cool white, count: 8}
+    - {name: warm white, count: 4}
+    - {name: royal blue, count: 32}
+    - {name: blue, count: 32}
+    - {name: violet 430 nm, count: 12}
+    - {name: violet 415 nm, count: 4}
+    - {name: UV 405 nm, count: 2}
+    - {name: UV 395 nm, count: 4}
+    - {name: red, count: 2}
+    - {name: moonlight, count: 1}
+  coverage: "not stated per model"
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://ecotechmarine.com/radion
+    - https://ecotechmarine.com/wp-content/uploads/2023/12/High-Intensity-Lens-Kit-Narrow-Angle-Optic_web.pdf
+  notes: "101 LEDs, no green."
+
+# --------------------------------------------------------------------------
+# Kessil (single Dense Matrix array - effectively a point-ish source + reflector)
+# --------------------------------------------------------------------------
+- id: kessil_a160we
+  brand: Kessil
+  model: A160WE (Tuna Blue / Tuna Sun)
+  category: light
+  type: led_puck
+  power_max: "40 W maximum (manual)"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "4 in body height", width: "2.48 in diameter (body)", note: "retailer figures (5 in overall incl. knobs); single Dense Matrix array, array size not published"}
+  optic: "single lens over Dense Matrix array; beam angle not published"
+  channels: ["spectral tuning knob (Tuna Blue: 10,000 K to actinic; Tuna Sun: 6,000-9,000 K)", "intensity"]
+  coverage: "Kessil brochure: 24x24 in soft coral, 20x20 in mixed reef; mount 12 in (soft coral) / 8 in (mixed reef) above water. Manual: hang 1-2 ft above the object to be illuminated."
+  status: "unclear - manual still on kessil.com downloads, but no product page (404) and not in current saltwater lineup"
+  checked: 2026-11-12
+  sources:
+    - https://kessil.com/downloads/A160/5870062_A5_User%20Manual%20for%20A160WE.pdf
+    - https://kessil.com/downloads/A360X/5870133_A4_Brochures%20for%20A360X.pdf
+    - https://www.bulkreefsupply.com/kessil-a160we-tuna-blue-led-light.html
+  notes: "Only 2 control dimensions (colour + intensity), not discrete channels. Dimensions from retailers, not Kessil."
+
+- id: kessil_a360x
+  brand: Kessil
+  model: A360X Tuna Blue (successor A360XE)
+  category: light
+  type: led_puck
+  power_max: "90 W max (A360X brochure and A360XE page)"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "4.3 in diameter (11 cm)", width: "4.3 in diameter", height: "2.1 in (5.3 cm)", note: "housing; single Dense Matrix array, array size not published"}
+  optic: "bare unit beam not published; optional reflectors 55 deg (narrow) and 35 deg; brochure: narrow reflector 'triples centre light intensity'"
+  channels: ["Tuna Blue + Red + Green + Purple (violet+indigo) via colour and intensity control (A360XE page)"]
+  coverage: "A360X brochure (2019): 36x36 in mixed reef / 24x24 in SPS; mount 8-12 in mixed reef, 4-6 in SPS. A360XE page (current): 24x24 in mixed reef / 20x20 in SPS. BRS FAQ: 8 in above water without reflector, 13 in with narrow reflector."
+  status: "A360X superseded by A360XE (kessil.com lists A360XE as current saltwater model)"
+  checked: 2026-11-12
+  sources:
+    - https://kessil.com/downloads/A360X/5870133_A4_Brochures%20for%20A360X.pdf
+    - https://kessil.com/products/saltwater_A360XE.php
+    - https://www.bulkreefsupply.com/content/post/kessil-a360x-tuna-blue-top-faq
+  notes: "Kessil's own coverage figures changed between the 2019 brochure and the current A360XE page - note the conflict. A360XE claimed 15% more output than A360X at the same power (no absolute value). No numeric PAR published by Kessil; independent numbers found were low-quality (blog/forum) and are omitted."
+
+- id: kessil_a500x
+  brand: Kessil
+  model: A500X Tuna Blue
+  category: light
+  type: led_puck
+  power_max: "185 W maximum (manual and product page)"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "5.23 in diameter (13.3 cm)", width: "5.23 in diameter", height: "3.68 in (9.36 cm)", note: "housing; single Dense Matrix array"}
+  optic: "standard ~130 deg (per BRStv); Reflector-55 included in box; optional Reflector-35"
+  channels: ["Tuna Blue + Red + Green + Purple (violet+indigo) via colour and intensity control"]
+  coverage: "Manufacturer: 36x36 in SPS dominant (also mixed reef). BRStv: 130 deg standard as close as 9 in above water for tanks to 24 in deep; 55 deg reflector up to ~12 in, penetrates ~36 in; 35 deg up to ~24 in above water, tanks to 48 in deep."
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://kessil.com/downloads/A500X/5870146_A2_User%20Manual%20for%20A500X.pdf
+    - https://kessil.com/products/saltwater_A500X.php
+    - https://bulkreefsupply.com/content/post/brstv-investigates-kessil-a500x-led-light
+  notes: "BRStv reported only percentages of grid points in target ranges (69% within 200-350 PAR at 100%; 85% within 75-150 at 30%) over a 24x24 in tank - no absolute PAR values. The 130 deg figure comes from BRS, not Kessil."
+
+- id: kessil_ap9x
+  brand: Kessil
+  model: AP9X (successor AP9XE)
+  category: light
+  type: led_panel
+  power_max: "185 W max (AP9XE page; BRS says AP9X 'maximum of 185 watts')"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "16.46 in (41.8 cm)", width: "5.71 in (14.5 cm)", height: "1.42 in (3.6 cm)", note: "AP9XE housing dimensions; two Dense Matrix arrays (57 chips each, 114 total) - array size/spacing not published"}
+  optic: "elliptical optics for long tanks (BRS); angle not published"
+  channels: ["Tuna Blue + Red + Green + Purple (violet+indigo)"]
+  coverage: "AP9XE page: up to 48x24 in mixed reef / 36x24 in SPS dominant. BRS FAQ: 10 in above water over 24x24 in (hotspot), up to 15 in above water for 36-48 in long tanks."
+  status: "AP9X superseded by AP9XE (current on kessil.com)"
+  checked: 2026-11-12
+  sources:
+    - https://kessil.com/products/saltwater_AP9XE.php
+    - https://www.bulkreefsupply.com/content/post/md-kessil-ap9x-the-new-aquarium-led-from-kessil
+    - https://bulkreefsupply.com/content/post/kessil-ap9x-led-light-top-faqs
+  notes: "Dimensions and chip count are from the AP9XE page; assumed identical housing for AP9X (not verified). Model as two point-like arrays along the long axis."
+
+# --------------------------------------------------------------------------
+# Red Sea ReefLED (G1 discontinued, G2 current)
+# --------------------------------------------------------------------------
+- id: redsea_reefled_50
+  brand: Red Sea
+  model: ReefLED 50 (G1)
+  category: light
+  type: led_puck
+  power_max: "50 W (channel split 40 W REEF-SPEC blue + 10 W 8,000 K white; 3 W moonlight separate)"
+  ppf: null
+  efficacy: null
+  par_data:
+    - {par: 500, depth: "0 (surface)", mount_height: "17 cm (7 in)", position: "centre of 50x50x50 cm tank", settings: "not stated", source: "Red Sea spec table https://redseafish.com/pdp-demo-complete/"}
+    - {par: 100, depth: "50 cm (20 in)", mount_height: "17 cm (7 in)", position: "centre of 50x50x50 cm tank", settings: "not stated", source: "Red Sea spec table https://redseafish.com/pdp-demo-complete/"}
+  footprint: {length: "12 cm (4.7 in)", width: "12 cm (4.7 in)", height: "5 cm (2 in)", note: "housing; compact LED array"}
+  optic: "not published"
+  channels: ["REEF-SPEC blue (~23,000 K)", "8,000 K white", "moonlight"]
+  coverage: "max water depth 50 cm / 20 in (Red Sea). Charterhouse guide: 50x50 cm, mount 20-25 cm."
+  status: discontinued
+  checked: 2026-11-12
+  sources:
+    - https://redseafish.com/pdp-demo-complete/
+    - https://www.bulkreefsupply.com/reefled-50-led-light-fixture-redsea.html
+    - https://charterhouse-aquatics.com/blogs/help-guides/red-sea-reefled-par-spectrum-and-mounting-guide
+  notes: "Replaced by ReefLED G2 60. Red Sea spec figures came from a redseafish.com page titled 'PDP Demo complete' - official domain but an odd page; one other Red Sea page reportedly shows 160 PAR at 50 cm for the 50 (apparent layout error). Channel wattages from retailer listings."
+
+- id: redsea_reefled_90
+  brand: Red Sea
+  model: ReefLED 90 (G1)
+  category: light
+  type: led_puck
+  power_max: "90 W (80 W REEF-SPEC blue + 10 W 8,000 K white; 3 W moonlight)"
+  ppf: null
+  efficacy: null
+  par_data:
+    - {par: 500, depth: "0 (surface)", mount_height: "21 cm (8 in)", position: "centre of 60x60x60 cm tank", settings: "not stated", source: "Red Sea spec table https://redseafish.com/pdp-demo-complete/"}
+    - {par: 150, depth: "50 cm (20 in)", mount_height: "21 cm (8 in)", position: "centre of 60x60x60 cm tank", settings: "not stated", source: "Red Sea spec table"}
+    - {par: 185, depth: "12 in", mount_height: "8.5 in", position: "average of 36-pt grid, TWO fixtures over 48x24 in 120 gal", settings: "15,000 K preset", source: "BRStv Investigates (independent) https://www.bulkreefsupply.com/content/post/par-spectrum-and-everything-in-between-this-is-the-red-sea-reefled-brstv-investigates"}
+    - {par: 235, depth: "12 in", mount_height: "8.5 in", position: "centre peak, two fixtures over 48 in tank", settings: "15,000 K preset", source: "BRStv Investigates"}
+    - {par: 155, depth: "12 in", mount_height: "8.5 in", position: "outer ring low, two fixtures over 48 in tank", settings: "15,000 K preset", source: "BRStv Investigates"}
+    - {par: 168, depth: "18 in", mount_height: "8.5 in", position: "average, two fixtures over 48 in tank", settings: "15,000 K preset", source: "BRStv Investigates"}
+  footprint: {length: "15.5 cm (6.1 in)", width: "13.5 cm (5.3 in)", height: "5.7 cm (2.2 in)", note: "housing"}
+  optic: "not published"
+  channels: ["REEF-SPEC blue", "8,000 K white", "moonlight"]
+  coverage: "60x60x60 cm; max water depth 60 cm / 24 in (Red Sea). BRStv: 8.5 in above water recommended."
+  status: discontinued
+  checked: 2026-11-12
+  sources:
+    - https://redseafish.com/pdp-demo-complete/
+    - https://www.bulkreefsupply.com/content/post/par-spectrum-and-everything-in-between-this-is-the-red-sea-reefled-brstv-investigates
+  notes: "Replaced by ReefLED G2 115 (same housing dimensions). BRStv two-fixture data are a multi-light check, not single-fixture. Red Sea G1 Kelvin table (model unspecified): 15,000 K = 100% power, 500 PAR; 12,000 K = 78% power, 440 PAR; 20,000 K = 94%, 470; 23,000 K = 90%, 450 - suggests the 'surface' figure is at the 15,000 K preset."
+
+- id: redsea_reefled_160s
+  brand: Red Sea
+  model: ReefLED 160S (G1)
+  category: light
+  type: led_puck
+  power_max: "160 W (140 W REEF-SPEC blue + 20 W white; 3 W moonlight)"
+  ppf: null
+  efficacy: null
+  par_data:
+    - {par: 550, depth: "0 (surface)", mount_height: "31 cm (12 in)", position: "centre of 80x80x80 cm tank", settings: "not stated", source: "Red Sea spec table https://redseafish.com/pdp-demo-complete/"}
+    - {par: 160, depth: "50 cm (20 in)", mount_height: "31 cm (12 in)", position: "centre of 80x80x80 cm tank", settings: "not stated", source: "Red Sea spec table"}
+  footprint: {length: "18 cm (7 in)", width: "16 cm (6.3 in)", height: "6.4 cm (2.5 in)", note: "housing"}
+  optic: "patent-pending 'stadium-shaped' lens flattening the beam centre into a rectangular spread; clip-on visor"
+  channels: ["REEF-SPEC blue 23,000 K", "white (9,000 K per Reef Builders; 8,000 K per BRS)", "moonlight"]
+  coverage: "Max spread 32x32 in (BRS); units up to 75 cm / 30 in apart (Red Sea via Reef Builders); max water depth 80 cm / 32 in."
+  status: discontinued
+  checked: 2026-11-12
+  sources:
+    - https://redseafish.com/pdp-demo-complete/
+    - https://reefbuilders.com/2020/09/22/red-sea-reefled-160s
+    - https://www.bulkreefsupply.com/reefled-160s-led-light-fixture-redsea.html
+  notes: "Replaced by ReefLED G2 170. Retailers commonly quote 580 PAR at surface (vs 550 on the Red Sea page) - unresolved. Red Sea: 3 units on a Reefer 3XL 900 gave 200-350 PAR 'almost everywhere' (no depth/height)."
+
+- id: redsea_reefled_g2_60
+  brand: Red Sea
+  model: ReefLED G2 60
+  category: light
+  type: led_puck
+  power_max: "60 W"
+  ppf: null
+  efficacy: null
+  par_data:
+    - {par: 500, depth: "0 (surface)", mount_height: "17 cm (7 in)", position: "centre of 50x50x50 cm tank", settings: "not stated", source: "https://redseafish.com/smart-hardware/reefled/tech-specs/"}
+    - {par: 100, depth: "50 cm (20 in)", mount_height: "17 cm (7 in)", position: "centre", settings: "not stated", source: "https://redseafish.com/smart-hardware/reefled/tech-specs/"}
+  footprint: {length: "12 cm (4.7 in)", width: "12 cm (4.7 in)", height: "5 cm (2 in)", note: "housing"}
+  optic: "not published"
+  channels: null
+  coverage: "max water depth 50 cm / 20 in"
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://redseafish.com/smart-hardware/reefled/
+    - https://redseafish.com/smart-hardware/reefled/tech-specs/
+  notes: "G2 PUR table (model unspecified, 100% power): 12,000 K PAR 600; 15,000 K 570; 20,000 K 540; 23,000 K 500. Per-channel split not published on spec page."
+
+- id: redsea_reefled_g2_115
+  brand: Red Sea
+  model: ReefLED G2 115
+  category: light
+  type: led_puck
+  power_max: "115 W"
+  ppf: null
+  efficacy: null
+  par_data:
+    - {par: 500, depth: "0 (surface)", mount_height: "21 cm (8 in)", position: "centre of 60x60x60 cm tank", settings: "not stated", source: "https://redseafish.com/smart-hardware/reefled/tech-specs/"}
+    - {par: 150, depth: "50 cm (20 in)", mount_height: "21 cm (8 in)", position: "centre", settings: "not stated", source: "https://redseafish.com/smart-hardware/reefled/tech-specs/"}
+  footprint: {length: "15.5 cm (6.1 in)", width: "13.5 cm (5.3 in)", height: "5.7 cm (2.2 in)", note: "housing"}
+  optic: "not published"
+  channels: null
+  coverage: "max water depth 60 cm / 24 in"
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://redseafish.com/smart-hardware/reefled/tech-specs/
+  notes: "Same PAR spec figures as the G1 ReefLED 90 despite +25 W."
+
+- id: redsea_reefled_g2_170
+  brand: Red Sea
+  model: ReefLED G2 170
+  category: light
+  type: led_puck
+  power_max: "170 W"
+  ppf: null
+  efficacy: null
+  par_data:
+    - {par: 550, depth: "0 (surface)", mount_height: "31 cm (12 in)", position: "centre of 80x80x80 cm tank", settings: "not stated", source: "https://redseafish.com/smart-hardware/reefled/tech-specs/"}
+    - {par: 130, depth: "80 cm (32 in)", mount_height: "31 cm (12 in)", position: "centre", settings: "not stated", source: "https://redseafish.com/smart-hardware/reefled/tech-specs/"}
+  footprint: {length: "18 cm (7 in)", width: "16 cm (6.3 in)", height: "6.4 cm (2.5 in)", note: "housing"}
+  optic: "not published"
+  channels: null
+  coverage: "max water depth 80 cm / 32 in"
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://redseafish.com/smart-hardware/reefled/tech-specs/
+  notes: "Deep-point PAR is at 80 cm, unlike the 50 cm point for the smaller units."
+
+# --------------------------------------------------------------------------
+# Orphek
+# --------------------------------------------------------------------------
+- id: orphek_atlantik_icon
+  brand: Orphek
+  model: Atlantik iCon
+  category: light
+  type: led_panel
+  power_max: "218-235 W (manufacturer); DaniReef measured 229 W vs 230 W declared"
+  ppf: null
+  efficacy: null
+  par_data:
+    - {par: 1774, depth: "n/a (in air)", mount_height: "17 cm (6.69 in) light-base to sensor-base", position: "centre", settings: "full power (229 W measured)", source: "DaniReef Lab review, republished by Orphek https://shop.orphek.com/blogs/news/orphek-atlantik-icon-breaking-all-par-records-review-of-danireef-lab"}
+    - {par: 966, depth: "n/a (in air)", mount_height: "37 cm (14.56 in)", position: "centre", settings: "full power", source: "DaniReef Lab via Orphek"}
+    - {par: 620, depth: "n/a (in air)", mount_height: "57 cm (22.44 in)", position: "centre", settings: "full power", source: "DaniReef Lab via Orphek"}
+    - {par: 401, depth: "bottom of 120x60x60 cm tank (water level 55 cm)", mount_height: "not stated in caption", position: "bottom centre", settings: "100% all channels", source: "Orphek blog https://shop.orphek.com/blogs/news/complete-atlantik-icon-coverage-par-map-for-48-inch-120cm-aquarium"}
+    - {par: null, par_range: [238, 248], depth: "bottom of tank (water 55 cm deep)", mount_height: "fixture 90 cm above tank bottom (~35 cm above water)", position: "various unspecified points", settings: "100% all channels", source: "Orphek blog (same URL); units printed as 'umol/s' - read as umol/m2/s"}
+  footprint: {length: "24.21 in (615 mm)", width: "9.37 in (238 mm)", height: "2.11 in (53.6 mm)", note: "housing"}
+  optic: "Wide convex 120 deg lens standard; optional 90/60/45/15/5 deg; 26 glass lenses on UV/violet LEDs"
+  channels:
+    - {name: "Ch1 sunrise/sunset (590 nm, 740 nm, 18,000 K)", count: 13}
+    - {name: "Ch2 noon (490 nm, 18,000 K)", count: 13}
+    - {name: "Ch3 cyan/blue (470, 490 nm)", count: 13}
+    - {name: "Ch4 blue (450 nm)", count: 13}
+    - {name: "Ch5 violet (430, 450 nm)", count: 13}
+    - {name: "Ch6 UV/violet (400, 415 nm)", count: 13}
+  coverage: "Orphek blog: one unit for 43x25 in (110x65 cm) SPS/LPS; hang at least 90 cm (36 in) above tank bottom. Shop page gives no area rating."
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://shop.orphek.com/products/atlantik-icon-reef-aquarium-led-lighting
+    - https://orphek.com/product-review-orphek-atlantik-icon-reef-aquarium-led-lighting-by-dana-riddle/
+    - https://shop.orphek.com/blogs/news/orphek-atlantik-icon-breaking-all-par-records-review-of-danireef-lab
+    - https://shop.orphek.com/blogs/news/complete-atlantik-icon-coverage-par-map-for-48-inch-120cm-aquarium
+  notes: "78 dual-chip 5 W LEDs (156 chips). Dana Riddle's per-wavelength LED counts: 400 nm 6, 415 nm 7, 420 nm 7, 430 nm 6, 450 nm 13, 470 nm 9, 490 nm 6, 590 nm 4, 730 nm 2, 18,000 K white 18. DaniReef: MQ-510 quantum meter, 70x70 cm base, 17 points; air readings already corrected for the 1.32 immersion factor. Orphek-hosted data are manufacturer-curated."
+
+- id: orphek_atlantik_icon_compact
+  brand: Orphek
+  model: Atlantik iCon Compact
+  category: light
+  type: led_panel
+  power_max: "123-130 W"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "13.58 in (345 mm)", width: "9.37 in (238 mm)", height: "2.11 in (53.6 mm)", note: "housing"}
+  optic: "26 glass lenses on UV/violet LEDs; beam angles not stated"
+  channels: ["6 control channels; per-channel counts not published"]
+  coverage: "1 unit 24x24 in (60x60 cm) SPS/LPS; 2 units 48x24 in; cube 18x18 in"
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://orphek.com/atlantik-icon/
+  notes: "Page states 44 x 5 W dual-chip LEDs but elsewhere 'total of 42 LEDS' - conflicting count."
+
+- id: orphek_or3_120_reef_day_plus
+  brand: Orphek
+  model: OR3 120 Reef Day Plus
+  category: light
+  type: led_bar
+  power_max: "60 W"
+  ppf: null
+  efficacy: null
+  par_data:
+    - {par: 240, depth: "n/a (in air, meter calibrated for underwater)", mount_height: "37 cm (14.56 in)", position: "peak", settings: "not stated", source: "Orphek OR3 catalogue https://orphek.com/led/wp-content/uploads/2023/02/OR3-Reef-Aquarium-LED-catalogue.pdf (bar length/spectrum of the test not stated)"}
+  footprint: {length: "123.5 cm (48.7 in)", width: "5.0 cm (1.97 in)", height: "3.6 cm (1.4 in)", note: "housing"}
+  optic: "catalogue lists lens options 15/30/60/90 deg; default lens not stated"
+  channels:
+    - {name: "400-410 nm", count: 2}
+    - {name: "420-425 nm", count: 2}
+    - {name: "430-435 nm", count: 4}
+    - {name: "450-460 nm", count: 7}
+    - {name: "460-470 nm", count: 4}
+    - {name: "470-475 nm", count: 2}
+    - {name: "585-595 nm", count: 2}
+    - {name: "730-740 nm", count: 2}
+    - {name: "5000 K white", count: 5}
+    - {name: "20000 K white", count: 6}
+  coverage: "Orphek: 4x OR3 120 for 48x30 in (120x75 cm) SPS/LPS. Single-bar coverage not published."
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://orphek.com/led/wp-content/uploads/2023/02/OR3-Reef-Aquarium-LED-catalogue.pdf
+    - https://www.bulkreefsupply.com/day-plus-or3-led-light-bar-orphek.html
+    - https://orphek.com/?p=38205
+  notes: "36 x 5 W dual-core LEDs 'running at 50% of the power' in a single row. LED counts read from the small 'Ratio Map' graphic in the catalogue; total (36) matches BRS. Single dimmable channel (Osix/iCon Dim compatible on 60/120)."
+
+- id: orphek_or3_120_blue_plus
+  brand: Orphek
+  model: OR3 120 Blue Plus
+  category: light
+  type: led_bar
+  power_max: "60 W"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "123.5 cm (48.7 in)", width: "5.0 cm (1.97 in)", height: "3.6 cm (1.4 in)", note: "housing"}
+  optic: "lens options 15/30/60/90 deg; default not stated"
+  channels:
+    - {name: "400-410 nm", count: 4}
+    - {name: "420-425 nm", count: 4}
+    - {name: "430-435 nm", count: 8}
+    - {name: "450-460 nm", count: 11}
+    - {name: "460-470 nm", count: 5}
+    - {name: "470-475 nm", count: 4}
+  coverage: "not published for a single bar"
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://orphek.com/led/wp-content/uploads/2023/02/OR3-Reef-Aquarium-LED-catalogue.pdf
+  notes: "36 LEDs, 400-500 nm blue/violet blend. Counts read from catalogue ratio-map graphic (small print - verify)."
+
+- id: orphek_or3_60_reef_day_plus
+  brand: Orphek
+  model: OR3 60 Reef Day Plus
+  category: light
+  type: led_bar
+  power_max: "30 W"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "63.5 cm (25 in)", width: "5.0 cm (1.97 in)", height: "3.6 cm (1.4 in)", note: "housing"}
+  optic: "lens options 15/30/60/90 deg; default not stated"
+  channels:
+    - {name: "400-410 nm", count: 1}
+    - {name: "420-425 nm", count: 1}
+    - {name: "430-435 nm", count: 2}
+    - {name: "450-460 nm", count: 4}
+    - {name: "460-470 nm", count: 2}
+    - {name: "470-475 nm", count: 1}
+    - {name: "585-595 nm", count: 2}
+    - {name: "730-740 nm", count: 1}
+    - {name: "5000 K white", count: 1}
+    - {name: "20000 K white", count: 3}
+  coverage: "not published"
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://orphek.com/led/wp-content/uploads/2023/02/OR3-Reef-Aquarium-LED-catalogue.pdf
+    - https://www.bulkreefsupply.com/day-plus-or3-led-light-bar-orphek.html
+  notes: "18 LEDs. Other sizes: OR3 90 = 40 W, 93.5 cm, 24 LEDs; OR3 150 = 75 W, 153.5 cm, 42 LEDs. Counts read from catalogue graphic; total matches BRS."
+
+# --------------------------------------------------------------------------
+# Neptune / Philips
+# --------------------------------------------------------------------------
+- id: neptune_sky
+  brand: Neptune Systems
+  model: SKY LED
+  category: light
+  type: led_panel
+  power_max: "200 W nominal (Neptune); 219 W 'variable usage (max)' per BRS spec table / PSU rating"
+  ppf: null
+  efficacy: null
+  par_data:
+    - {par: 390, depth: "average over 6, 12 and 18 in (108 pts)", mount_height: "9 in", position: "average, 36 pts per depth over 24x24 in cube", settings: "all channels 100%", source: "BRStv Investigates (independent) https://www.bulkreefsupply.com/content/post/brstv-investigates-neptune-systems-sky-led-light"}
+    - {par: 380, depth: "average over 6, 12, 18 in", mount_height: "9 in", position: "average", settings: "BRS custom (amber and green -25%)", source: "BRStv Investigates"}
+  footprint: {length: "12.8 in", width: "9.25 in", height: "1.75 in", note: "housing (L x W from BRS/retailers, height from Neptune)"}
+  optic: "patented diffuser plus four 'Shimz' lenses; beam angle not published"
+  channels: ["4 controllable colour channels (colour mapping not published)", "moonlight (4 LEDs in 2 colours)"]
+  coverage: "Neptune: 24x30 in for SPS, up to 30x36 in for lower-light corals (max spread 30x36x30 in). BRStv: 9 in above water ideal; 47% centre-to-edge drop at 6 in depth; ~15% spill at 9 in."
+  status: "current (no discontinuation notice found; stock status mixed at BRS)"
+  checked: 2026-11-12
+  sources:
+    - https://neptunesystems.com/?p=506
+    - https://www.bulkreefsupply.com/sky-led-aquarium-light-neptune-systems.html
+    - https://www.bulkreefsupply.com/content/post/brstv-investigates-neptune-systems-sky-led-light
+  notes: "104 LEDs total; per-colour counts not published. Panel with diffuser - treat as extended Lambertian-ish source."
+
+- id: philips_coralcare_gen2
+  brand: Philips (Signify)
+  model: CoralCare Gen2
+  category: light
+  type: led_panel
+  power_max: "170 W (brochure); measured 167.9 W by Reef Builders"
+  ppf: null
+  efficacy: null
+  par_data:
+    - {par: 201.5, depth: "n/a (Reef Builders bench test; in air presumed, not stated)", mount_height: "24 in fixture-to-sensor", position: "peak", settings: "not stated (167.9 W draw)", source: "Reef Builders 2025 independent test https://reefbuilders.com/2025/07/19/led-lighting-tests-phillips-coralcare-gen2-ghl-lx7506-il-coral-pop"}
+    - {par: 134, depth: "n/a", mount_height: "30 in fixture-to-sensor", position: "peak", settings: "as above", source: "Reef Builders 2025"}
+    - {par: 109.9, depth: "n/a", mount_height: "24 in fixture-to-sensor", position: "average, 3x3 ft grid (169 pts)", settings: "as above", source: "Reef Builders 2025"}
+    - {par: 91.6, depth: "n/a", mount_height: "30 in fixture-to-sensor", position: "average, 3x3 ft grid", settings: "as above", source: "Reef Builders 2025"}
+    - {par: 148.02, depth: "n/a", mount_height: "24 in fixture-to-sensor", position: "average, central 2x2 ft (81 pts)", settings: "as above", source: "Reef Builders 2025"}
+    - {par: 113.33, depth: "n/a", mount_height: "30 in fixture-to-sensor", position: "average, central 2x2 ft", settings: "as above", source: "Reef Builders 2025"}
+    - {par: 201.4, depth: "n/a", mount_height: "23.25 in fixture-to-sensor", position: "centre single point", settings: "as above", source: "Reef Builders 2025"}
+  footprint: {length: "460 mm (18.11 in)", width: "410 mm (16.14 in)", height: "50-57 mm (1.97-2.24 in)", note: "housing per brochure drawings; diffuse glass emitting window smaller than housing, size not published"}
+  optic: "optical light guide + diffuse glass plate with four clear areas; LEDs in triangular clusters; no beam angle"
+  channels: ["2 user channels (daylight-to-blue colour points); 68 LEDs, per-colour counts not published"]
+  coverage: "Brochure (tanks up to 1 m deep): SPS 80x60 cm, LPS 90x70 cm, mixed reef 100x80 cm; minimum 15 cm (5.91 in) fixture-to-water."
+  status: "unclear - Signify 2020 brochure is the latest found; Reef Builders still tested it in 2025; no official discontinuation notice found"
+  checked: 2026-11-12
+  sources:
+    - https://www.assets.signify.com/is/content/Signify/Assets/philips-lighting/united-kingdom/20200324-coralcare-gen2-brochure.pdf
+    - https://reefbuilders.com/2025/07/19/led-lighting-tests-phillips-coralcare-gen2-ghl-lx7506-il-coral-pop
+  notes: "Passive cooling, 7 kg, IP65. Reef Builders band PFD at 23.25 in centre: UV 0.29, blue 130.6, green 50.0, red 20.6, far-red 1.7. Derived (compiler): 3x3 ft grid total 18573.5 x (0.0762 m)^2 = ~107.8 umol/s intercepted at 24 in (lower bound on PPF)."
+
+# --------------------------------------------------------------------------
+# T5 / LED-strip references
+# --------------------------------------------------------------------------
+- id: reefbrite_xho_48_blue
+  brand: Reef Brite
+  model: XHO LED strip 48 in Blue (actinic)
+  category: light
+  type: led_bar
+  power_max: null
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "48 in nominal (mounting legs included in total length)", width: "1.85 in", height: "1.1 in", note: "housing"}
+  optic: "not published"
+  channels: ["blue + royal blue (actinic) LEDs, single channel; wavelengths not disclosed"]
+  coverage: "not published"
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://www.bulkreefsupply.com/blue-xho-led-strip-light-reef-brite.html
+  notes: "12 LEDs per foot, each 3 W rated, driven at ~50%. Total wattage NOT published. Derived (compiler, unverified): ~48 LEDs x 3 W x 50% = ~72 W if the full length is populated. Also sold in 24/36/60/72 in and 50/50 (white+actinic) versions."
+
+- id: ati_sunpower_6x54
+  brand: ATI (Aquaristik)
+  model: SunPower T5 HO 48 in 6x54 W
+  category: light
+  type: t5
+  power_max: null
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "47.0 in (1188 mm)", width: "13.4 in (340 mm)", height: "2.1 in (60 mm)", note: "housing; six 48 in T5 HO lamps under individual parabolic reflectors"}
+  optic: "individual parabolic reflectors, silver-coated 98% reflective aluminium; acrylic shield"
+  channels: ["6 x 54 W T5 HO lamps (lamp choice user-defined, e.g. ATI Blue Plus / Coral Plus / Purple Plus / AquaBlue Special); a dimmable version exists - channel layout not checked"]
+  coverage: "BRS: 80-160 gal. Mounting height not published."
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://www.bulkreefsupply.com/48-ati-sunpower-high-output-t5-light-fixture.html
+    - https://www.reefsupplies.ca/products/ati-sunpower-t5-6x54w-48
+    - https://www.bulkreefsupply.com/content/post/md-ati-sunpower-t5-lights-par-values-color-combinations-and-led-comparison
+  notes: "Fixture wall wattage not published; nominal lamp load 6 x 54 = 324 W (compiler arithmetic); a Canadian retailer quotes ~3.0 A draw. No numeric PAR found (BRStv only showed PAR in video). Example BRS 10K lamp set: 3x Blue Plus, 2x AquaBlue Special, 1x Purple Plus. For simulation: model each lamp as a ~1.15 m line source with reflector - lamp PPF must come from the lamp maker, not this fixture page."
+
+# ---------------------------------------------------------------- Nicrew (added 2026-11-12 on request)
+- id: nicrew_hyperreef_100_gen2
+  brand: Nicrew
+  model: HyperReef 100 Gen 2
+  category: light
+  type: led_panel
+  power_max: "100 W (max)"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: {length: "9.8 in (25 cm)", width: "6.3 in (16 cm)", height: "1.4 in (3.5 cm)", note: "housing (retailer listings)"}
+  optic: "wide-angle lens, 120 deg (retailer: 'expanded 120-degree output, up from the 90 degrees in Gen 1')"
+  channels: [{name: cool white, count: 15}, {name: royal blue, count: 30}, {name: blue, count: 30}, {name: violet, count: 9}, {name: UV, count: 9}, {name: green, count: 3}, {name: red, count: 3}, {name: warm white, count: 9}]
+  coverage: "max 24 x 24 in (60 x 60 cm); mount 8-10 in above the water (manual)"
+  status: current
+  checked: 2026-11-12
+  sources:
+    - https://aquariumdepot.ca/products/nicrew-hyperreef-100-gen-2
+    - https://worldwidecorals.com/products/nicrew-hyperreef-100-gen-2
+    - https://www.reefsupplies.ca/products/nicrew-hyper-reef-100-gen-2
+    - https://manuals.plus/asin/B0DBHD2V1W
+    - https://manuals.plus/asin/B0DBHFBHQ2.pdf
+  notes: "5 programmable channels; 100-240 VAC. No PAR or PPF published by Nicrew. LED counts are the HyperReef 200 Gen 2 manual's (CW 15, RB 30, B 30, V 9, UV 9, G 3, R 3, WW 9); the 100 is assumed to have the same mix. The manual's 'item dimensions' 16.14 x 11.02 x 7.09 in are the box. First available 2024-11-08."
+
+- id: nicrew_hyperreef_100_gen1
+  brand: Nicrew
+  model: HyperReef 100 (Gen 1)
+  category: light
+  type: led_panel
+  power_max: "100 W"
+  ppf: null
+  efficacy: null
+  par_data: []
+  footprint: null
+  optic: "90 deg (from a retailer's Gen 2 comparison: 'up from the 90 degrees in Gen 1')"
+  channels: null
+  coverage: null
+  status: discontinued (replaced by Gen 2)
+  checked: 2026-11-12
+  sources:
+    - https://worldwidecorals.com/products/nicrew-hyperreef-100-gen-2
+    - https://aquariumdepot.ca/products/nicrew-hyperreef-100-gen-2
+  notes: "Original HyperReef (2020). 100 W units confirmed by owner reviews; housing size and LED mix not found."

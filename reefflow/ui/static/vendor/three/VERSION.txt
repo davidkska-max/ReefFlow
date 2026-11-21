@@ -1,0 +1,18 @@
+three.js r160 (npm package "three", version 0.160.0), MIT License (see LICENSE in this folder).
+Downloaded once on 2026-10-31 from https://cdn.jsdelivr.net/npm/three@0.160.0/ and vendored so the
+ReefFlow UI runs fully offline (no CDN at runtime). Files, unmodified:
+
+  three.module.js                         <- build/three.module.js
+  addons/controls/OrbitControls.js        <- examples/jsm/controls/OrbitControls.js
+  addons/controls/TransformControls.js    <- examples/jsm/controls/TransformControls.js
+  addons/loaders/STLLoader.js             <- examples/jsm/loaders/STLLoader.js
+  addons/loaders/PLYLoader.js             <- examples/jsm/loaders/PLYLoader.js
+  LICENSE                                 <- LICENSE
+
+SHA-256
+  76dea8151bc9352aef3528b4262e249b2604f62543828328db978d060d61a495  three.module.js
+  5a44a9e86a2a0fb11933eed69bc2cd33c76a496854c1aed6ed776efa87d7b064  addons/controls/OrbitControls.js
+  487861c18e017a6c69cc302827c6f506993f05dafce220da0bad095d6fe5808d  addons/controls/TransformControls.js
+  896d006a48b8f125385a485ccae154dadee801a953f0b45ceffe7ddd8a29ca93  addons/loaders/STLLoader.js
+  5b1f81016923481f66e3cd70cbbdfbe6742e60ae51839bccd8e4a8f7d616db9d  addons/loaders/PLYLoader.js
+  852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d  LICENSE

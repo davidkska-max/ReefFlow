@@ -1,0 +1,158 @@
+{
+  "case": "5 convergence",
+  "seeds": 4,
+  "rows": [
+    {
+      "N": 524288,
+      "sand_empirical_rel": 0.2644980018578402,
+      "sand_internal_rel": 0.2722964503125772,
+      "sand_empirical_rel_median": 0.22945498451265295,
+      "sand_internal_rel_median": 0.25819917129968994,
+      "sand_cells": 16296,
+      "plan_150mm_empirical_rel": 0.2418097356006401,
+      "plan_150mm_internal_rel": 0.2497354244543034,
+      "plan_150mm_empirical_rel_median": 0.20874817218279057,
+      "plan_150mm_internal_rel_median": 0.2357470834658496,
+      "plan_150mm_cells": 19878,
+      "stack_150mm_empirical_rel": 0.2423956601675967,
+      "stack_150mm_internal_rel": 0.2520903440557505,
+      "stack_150mm_empirical_rel_median": 0.2086299962303447,
+      "stack_150mm_internal_rel_median": 0.23786722407687313,
+      "stack_150mm_cells": 19899
+    },
+    {
+      "N": 1048576,
+      "sand_empirical_rel": 0.18566919168173482,
+      "sand_internal_rel": 0.18859539275304968,
+      "sand_empirical_rel_median": 0.16050958814895866,
+      "sand_internal_rel_median": 0.17960999632035435,
+      "sand_cells": 16340,
+      "plan_150mm_empirical_rel": 0.17141032789648644,
+      "plan_150mm_internal_rel": 0.17432426485059388,
+      "plan_150mm_empirical_rel_median": 0.14780921451268786,
+      "plan_150mm_internal_rel_median": 0.16903094075005148,
+      "plan_150mm_cells": 20078,
+      "stack_150mm_empirical_rel": 0.17156593706735793,
+      "stack_150mm_internal_rel": 0.1757806037161951,
+      "stack_150mm_empirical_rel_median": 0.1481121338425385,
+      "stack_150mm_internal_rel_median": 0.17018408480954578,
+      "stack_150mm_cells": 20077
+    },
+    {
+      "N": 2097152,
+      "sand_empirical_rel": 0.1311582948053451,
+      "sand_internal_rel": 0.13214292008475292,
+      "sand_empirical_rel_median": 0.11453270494957715,
+      "sand_internal_rel_median": 0.1270001346956316,
+      "sand_cells": 16340,
+      "plan_150mm_empirical_rel": 0.1218214826199275,
+      "plan_150mm_internal_rel": 0.12244468645910879,
+      "plan_150mm_empirical_rel_median": 0.10478788988221467,
+      "plan_150mm_internal_rel_median": 0.11953466454423606,
+      "plan_150mm_cells": 20133,
+      "stack_150mm_empirical_rel": 0.12130430217432904,
+      "stack_150mm_internal_rel": 0.12349392619157366,
+      "stack_150mm_empirical_rel_median": 0.10456570242913013,
+      "stack_150mm_internal_rel_median": 0.12048586130782296,
+      "stack_150mm_cells": 20141
+    },
+    {
+      "N": 4194304,
+      "sand_empirical_rel": 0.09257717878440905,
+      "sand_internal_rel": 0.09300413600372957,
+      "sand_empirical_rel_median": 0.08089174736420193,
+      "sand_internal_rel_median": 0.08839188289865971,
+      "sand_cells": 16354,
+      "plan_150mm_empirical_rel": 0.08573440538583198,
+      "plan_150mm_internal_rel": 0.08631192932564898,
+      "plan_150mm_empirical_rel_median": 0.07332104292056185,
+      "plan_150mm_internal_rel_median": 0.08482946544000271,
+      "plan_150mm_cells": 20162,
+      "stack_150mm_empirical_rel": 0.08562181757149658,
+      "stack_150mm_internal_rel": 0.08700343955756595,
+      "stack_150mm_empirical_rel_median": 0.0735984618864361,
+      "stack_150mm_internal_rel_median": 0.08550184778399189,
+      "stack_150mm_cells": 20145
+    },
+    {
+      "N": 8388608,
+      "sand_empirical_rel": 0.06531372030743217,
+      "sand_internal_rel": 0.06559449199309492,
+      "sand_empirical_rel_median": 0.05673132001287877,
+      "sand_internal_rel_median": 0.061900796939747205,
+      "sand_cells": 16345,
+      "plan_150mm_empirical_rel": 0.06062670443055413,
+      "plan_150mm_internal_rel": 0.06094973260764885,
+      "plan_150mm_empirical_rel_median": 0.05211304481634775,
+      "plan_150mm_internal_rel_median": 0.06009171583939806,
+      "plan_150mm_cells": 20197,
+      "stack_150mm_empirical_rel": 0.06071970871676586,
+      "stack_150mm_internal_rel": 0.06146285137618015,
+      "stack_150mm_empirical_rel_median": 0.05244789280830353,
+      "stack_150mm_internal_rel_median": 0.06063551521886533,
+      "stack_150mm_cells": 20197
+    },
+    {
+      "N": 16777216,
+      "sand_empirical_rel": 0.046250681220708835,
+      "sand_internal_rel": 0.0463334247056271,
+      "sand_empirical_rel_median": 0.04036570478883039,
+      "sand_internal_rel_median": 0.04352136768973054,
+      "sand_cells": 16344,
+      "plan_150mm_empirical_rel": 0.04306088232196543,
+      "plan_150mm_internal_rel": 0.043068127457232194,
+      "plan_150mm_empirical_rel_median": 0.03711801067066281,
+      "plan_150mm_internal_rel_median": 0.04252888294699051,
+      "plan_150mm_cells": 20206,
+      "stack_150mm_empirical_rel": 0.04315276685228382,
+      "stack_150mm_internal_rel": 0.04341685915439908,
+      "stack_150mm_empirical_rel_median": 0.037044039652179506,
+      "stack_150mm_internal_rel_median": 0.04288576625564958,
+      "stack_150mm_cells": 20191
+    }
+  ],
+  "fits": {
+    "sand": {
+      "slope": -0.5029417550731672,
+      "internal_over_empirical": [
+        1.0294839598029493,
+        1.015760294127476,
+        1.0075071521848398,
+        1.0046119057085852,
+        1.0042988163029323,
+        1.0017890219718801
+      ],
+      "pass": true
+    },
+    "plan_150mm": {
+      "slope": -0.49863489435827396,
+      "internal_over_empirical": [
+        1.0327765498522068,
+        1.0169997746919144,
+        1.0051157137951245,
+        1.0067361981134406,
+        1.0053281500310598,
+        1.0001682532933858
+      ],
+      "pass": true
+    },
+    "stack_150mm": {
+      "slope": -0.4984958275427538,
+      "internal_over_empirical": [
+        1.0399952865552573,
+        1.024565870830073,
+        1.0180506707346444,
+        1.0161363309639588,
+        1.0122389035639279,
+        1.0061199390300806
+      ],
+      "pass": true
+    }
+  },
+  "rays_for_2pct_5mm_sand_cell": 90215206.8786453,
+  "rays_for_1pct_5mm_sand_cell": 360860827.5145812,
+  "rays_for_2pct_10mm_cell_est": 22553801.719661325,
+  "pass": true,
+  "backend": "cuda",
+  "timestamp": "2026-10-31 10:12:18"
+}

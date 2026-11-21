@@ -1,0 +1,83 @@
+{
+  "case": "8 energy closure",
+  "rows": [
+    {
+      "walls": {
+        "front": "clear",
+        "back": "clear",
+        "left": "clear",
+        "right": "clear"
+      },
+      "balance": {
+        "missed_tank": 0.189772,
+        "surface_reflected": 0.022121,
+        "absorbed_water": 0.041609399179082046,
+        "absorbed_sand": 0.2375224641454071,
+        "absorbed_rock": 0.1822860478309393,
+        "lost_through_glass": 0.1185105998968035,
+        "absorbed_black_wall": 0.0,
+        "absorbed_coralline": 0.0,
+        "escaped_surface": 0.15951725232812763,
+        "terminated_event_cap": 0.0,
+        "reached_floor_air": 0.0,
+        "lost_other": 0.04866123662278056,
+        "emitted_upward": 0.0,
+        "closure_residual": -3.1401548028497928e-12
+      },
+      "pass": true
+    },
+    {
+      "walls": {
+        "front": "black",
+        "back": "black",
+        "left": "black",
+        "right": "black"
+      },
+      "balance": {
+        "missed_tank": 0.189772,
+        "surface_reflected": 0.022121,
+        "absorbed_water": 0.025632705940004833,
+        "absorbed_sand": 0.11851172668913007,
+        "absorbed_rock": 0.1106225165400356,
+        "lost_through_glass": 0.0,
+        "absorbed_black_wall": 0.48648147355672716,
+        "absorbed_coralline": 0.0,
+        "escaped_surface": 0.04685857727129757,
+        "terminated_event_cap": 0.0,
+        "reached_floor_air": 0.0,
+        "lost_other": 0.0,
+        "emitted_upward": 0.0,
+        "closure_residual": 2.804756427110533e-12
+      },
+      "pass": true
+    },
+    {
+      "walls": {
+        "front": "clear",
+        "back": "coralline",
+        "left": "coralline",
+        "right": "black"
+      },
+      "balance": {
+        "missed_tank": 0.189772,
+        "surface_reflected": 0.022121,
+        "absorbed_water": 0.0340413064980908,
+        "absorbed_sand": 0.1642441255738288,
+        "absorbed_rock": 0.14804358998891712,
+        "lost_through_glass": 0.04307196274030209,
+        "absorbed_black_wall": 0.08594424392801524,
+        "absorbed_coralline": 0.20659235398949682,
+        "escaped_surface": 0.09251250734394789,
+        "terminated_event_cap": 0.0,
+        "reached_floor_air": 0.0,
+        "lost_other": 0.013656909940108658,
+        "emitted_upward": 0.0,
+        "closure_residual": -2.7073898678509067e-12
+      },
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "backend": "cuda",
+  "timestamp": "2026-10-31 10:09:56"
+}

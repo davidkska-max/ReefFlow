@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reefflow"
+version = "0.1.0"
+description = "Lattice Boltzmann CFD and photometric analysis for reef aquariums"
+requires-python = ">=3.11,<3.13"   # Taichi 1.7.x ships no wheels for 3.13+
+dependencies = [
+    "taichi==1.7.4",
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "matplotlib>=3.8",
+    "pyyaml>=6",
+    "trimesh>=4",
+    "scikit-image>=0.22",
+    "pyamg>=5",
+    "opencv-python-headless>=4.8",
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "python-multipart>=0.0.9",
+    "segno>=1.6",
+]
+
+[project.scripts]
+reefflow = "reefflow.cli:main"
+reefflow-ui = "reefflow.ui.launcher:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx>=0.27"]
+sam = ["torch>=2", "segment-anything>=1.0"]   # optional photo segmentation model (Apache-2.0)
+
+[tool.setuptools.packages.find]
+include = ["reefflow*"]
+
+[tool.setuptools.package-data]
+reefflow = ["data/*.yaml", "light/data/*.yaml", "photo/data/*", "ui/static/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "slow: full-resolution verification cases (minutes on GPU). Run with: pytest -m slow",
+]
+addopts = "-m 'not slow'"
+filterwarnings = ["ignore::SyntaxWarning", "ignore::DeprecationWarning"]

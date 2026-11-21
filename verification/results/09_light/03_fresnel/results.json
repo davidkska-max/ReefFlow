@@ -1,0 +1,137 @@
+{
+  "case": "3 refraction + Fresnel",
+  "rays_per_angle": 4000000,
+  "air_water": [
+    {
+      "theta_i_deg": 0,
+      "T_mc": 0.9788835,
+      "T_analytic": 0.9788881583753378,
+      "sigma": 7.187859863665498e-05,
+      "z": -0.06480893376003491,
+      "theta_t_mc_deg": 0.0,
+      "theta_t_snell_deg": 0.0,
+      "pass": true
+    },
+    {
+      "theta_i_deg": 15,
+      "T_mc": 0.9789135,
+      "T_analytic": 0.9788319598063929,
+      "sigma": 7.197213743520632e-05,
+      "z": 1.13294111461499,
+      "theta_t_mc_deg": 11.13658566689313,
+      "theta_t_snell_deg": 11.136586772277038,
+      "pass": true
+    },
+    {
+      "theta_i_deg": 30,
+      "T_mc": 0.97792375,
+      "T_analytic": 0.9778014766884787,
+      "sigma": 7.366435514261481e-05,
+      "z": 1.6598707921156324,
+      "theta_t_mc_deg": 21.909049914273965,
+      "theta_t_snell_deg": 21.90904978805388,
+      "pass": true
+    },
+    {
+      "theta_i_deg": 45,
+      "T_mc": 0.971197,
+      "T_analytic": 0.9712177210752133,
+      "sigma": 8.359703844138628e-05,
+      "z": -0.24786853218329472,
+      "theta_t_mc_deg": 31.84961941634537,
+      "theta_t_snell_deg": 31.84961968775388,
+      "pass": true
+    },
+    {
+      "theta_i_deg": 60,
+      "T_mc": 0.939028,
+      "T_analytic": 0.9389951452689755,
+      "sigma": 0.00011966961020897396,
+      "z": 0.27454531661849185,
+      "theta_t_mc_deg": 40.26228147676485,
+      "theta_t_snell_deg": 40.2622851860763,
+      "pass": true
+    },
+    {
+      "theta_i_deg": 75,
+      "T_mc": 0.7855285,
+      "T_analytic": 0.7854417871942543,
+      "sigma": 0.0002052577563232082,
+      "z": 0.4224581194833839,
+      "theta_t_mc_deg": 46.12388869647163,
+      "theta_t_snell_deg": 46.123889966395325,
+      "pass": true
+    },
+    {
+      "theta_i_deg": 85,
+      "T_mc": 0.414781,
+      "T_analytic": 0.4146711267755996,
+      "sigma": 0.00024633259193327126,
+      "z": 0.4460360829158517,
+      "theta_t_mc_deg": 48.02432792205901,
+      "theta_t_snell_deg": 48.024328459411215,
+      "pass": true
+    }
+  ],
+  "glass_slab": [
+    {
+      "theta_air_deg": 20,
+      "incidence_on_glass_deg": 75.21225767928391,
+      "R1_water_glass": 0.10923457316140592,
+      "R2_glass_air": 1.0,
+      "T_slab_mc": 0.0,
+      "T_slab_analytic": 0.0,
+      "sigma": 0.0,
+      "tir": true,
+      "pass": true
+    },
+    {
+      "theta_air_deg": 50,
+      "incidence_on_glass_deg": 55.13289158251518,
+      "R1_water_glass": 0.010603131220678389,
+      "R2_glass_air": 1.0,
+      "T_slab_mc": 0.0,
+      "T_slab_analytic": 0.0,
+      "sigma": 0.0,
+      "tir": true,
+      "pass": true
+    },
+    {
+      "theta_air_deg": 65,
+      "incidence_on_glass_deg": 47.44099701253105,
+      "R1_water_glass": 0.006013910247747267,
+      "R2_glass_air": 0.4147518548401582,
+      "T_slab_mc": 0.5834511454132577,
+      "T_slab_analytic": 0.5831831376295409,
+      "sigma": 0.0002582442037184573,
+      "tir": false,
+      "pass": true
+    },
+    {
+      "theta_air_deg": 75,
+      "incidence_on_glass_deg": 43.876110033604675,
+      "R1_water_glass": 0.004980144583104359,
+      "R2_glass_air": 0.15045198365404416,
+      "T_slab_mc": 0.8457318441980242,
+      "T_slab_analytic": 0.845950992320325,
+      "sigma": 0.000203704642665344,
+      "tir": false,
+      "pass": true
+    },
+    {
+      "theta_air_deg": 85,
+      "incidence_on_glass_deg": 41.975671540588785,
+      "R1_water_glass": 0.004586953059305254,
+      "R2_glass_air": 0.11063711371414897,
+      "T_slab_mc": 0.8856877637130802,
+      "T_slab_analytic": 0.8857329186344229,
+      "sigma": 0.0002469953443074703,
+      "tir": false,
+      "pass": true
+    }
+  ],
+  "critical_angle_water_air_deg": 48.26818296020623,
+  "pass": true,
+  "backend": "cuda",
+  "timestamp": "2026-10-31 10:09:15"
+}

@@ -1,0 +1,50 @@
+{
+  "case": "7 rock SDF (sphere)",
+  "stl": {
+    "sdf_source": "stl",
+    "sdf_h_m": 0.0025,
+    "rays": 20000000,
+    "E0": 10876.53509305931,
+    "intercepted_ratio": 1.0002182421159322,
+    "shadow_area_ratio": 1.0058592403407787,
+    "cosine_law_ratio": 1.0010802547607285,
+    "patch_excess_scatter_rms": 0.008115086248667783,
+    "patches_used": 604,
+    "median_patch_mc_rel": 0.020621886840736525,
+    "normal_rms_deg": 0.060931422908005295,
+    "normal_max_deg": 0.1923405938728502,
+    "surface_area_ratio": 0.9988630366765935,
+    "limits": {
+      "intercepted": 0.01,
+      "shadow": 0.03,
+      "cosine": 0.02,
+      "normal_deg": 2.0
+    },
+    "pass": true
+  },
+  "voxels": {
+    "sdf_source": "voxels",
+    "sdf_h_m": 0.005,
+    "rays": 20000000,
+    "E0": 10876.53509305931,
+    "intercepted_ratio": 0.9822198098644745,
+    "shadow_area_ratio": 0.9803944494460752,
+    "cosine_law_ratio": 1.0016391676424756,
+    "patch_excess_scatter_rms": 0.0988246683495956,
+    "patches_used": 600,
+    "median_patch_mc_rel": 0.020582497123110333,
+    "normal_rms_deg": 2.8142835030835287,
+    "normal_max_deg": 6.1075696543043785,
+    "surface_area_ratio": 0.9813079790219275,
+    "limits": {
+      "intercepted": 0.03,
+      "shadow": 0.06,
+      "cosine": 0.05,
+      "normal_deg": 8.0
+    },
+    "pass": true
+  },
+  "pass": true,
+  "backend": "cuda",
+  "timestamp": "2026-10-31 10:09:47"
+}
