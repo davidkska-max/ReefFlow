@@ -89,4 +89,4 @@ Verification 6, grid study on the demo tank (D3Q19):
 - SAM segmentation path: written, never run (no weights installed); model sha256 hashes not pinned.
 - Lighting: in-water scattering and per-channel schedules not modelled; calibration fits one scale for all fixtures.
 - UI: single user; the job list resets on restart (runs stay on disk).
-- Nothing is committed to git. Tell me when you want a commit.
+- First commit made 2026-11-21 (2880d01). Your own projects in reefflow_workspace/ are kept out of git.

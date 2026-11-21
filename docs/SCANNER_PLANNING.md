@@ -4,7 +4,7 @@
 
 **Labels used here.** "Today" means built and tested. "Proposed" means a plan, not built.
 
-Status as of 2026-11-07. Nothing is committed to git yet.
+Status as of 2026-11-07.
 
 ---
 
