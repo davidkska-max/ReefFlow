@@ -1246,3 +1246,68 @@ Your feedback on round 2:
   - folding hides 9 rows on the Tank tab and survives a re-render;
   - the Run badge shows "42 %" for a running job;
   - the 48 UI, phone, sculpt and scan tests pass.
+
+## Lid, particle animation, demo aquascape (D-848 to D-850), 2026-11-21
+
+**D-848 A lid over the tank (light tracer).** You asked to see how a lid affects PAR. The new `lighting.lid` section is open by default.
+- **Default unchanged:** with no lid (or `type: open`) the tracer draws no extra random numbers and gives bit-identical results to before (test).
+- **Geometry:** a horizontal sheet over the tank opening at `height` above the water surface (default: on the rim). Photons from the lights cross it on the way down.
+- **Glass and acrylic:**
+  - an incoherent slab: Fresnel reflection R(θ) at both faces, all internal reflections, and absorption along the refracted path;
+  - T = (1 − R)² τ / (1 − R² τ²), with τ = exp(−α t / cos θ_t);
+  - the lateral offset of the ray inside the sheet (a few mm) is ignored;
+  - α comes from typical visible transmittance of 6 mm sheet (A-848).
+- **Screens:**
+  - a square mesh of round strands (diameter d, hole size a, pitch p = a + d);
+  - per axis, the open fraction is (p − d·√(1 + tan²) − e·|tan|) / p, where tan is the slope of the ray along that axis;
+  - d·√(1 + tan²) is the shadow of a round strand; e is extra wall depth, used only for egg-crate grids;
+  - light that hits a strand goes on down with probability `scatter` (A-848), re-emitted Lambertian downward; otherwise it is lost.
+- **Extra loss:** `dirt` (salt creep, condensation) multiplies the transmission by (1 − dirt).
+- **Energy balance:** light lost at the lid is tallied as `absorbed_lid` and closes to 10⁻⁶.
+- **Presets:**
+
+| Preset | Straight down | 45° | PAR at 20 cm depth vs open top (puck 20 cm up, lid 25 mm above water) |
+|---|---|---|---|
+| Glass 6 mm standard float | 88.1 % | 85.9 % | 86.6 % |
+| Glass 6 mm low-iron | 90.9 % | – | 89.5 % |
+| Acrylic 6 mm clear cast | 91.6 % | – | 90.3 % |
+| Aluminium window screen 18 × 16 | 64 % open | – | 67.9 % (bright strands scatter some light on down) |
+| Black fibreglass window screen 18 × 16 | 59 % open | – | 55.3 % |
+| Black netting 1/8 in | 71 % open | – | 67.7 % |
+| Black netting 1/4 in | 79 % open | – | 76.6 % |
+| Clear / white netting 1/8 in | 71 % open | – | 75.3 % |
+| White egg-crate grid (1/2 in cells, 3/8 in deep) | 83 % open | – | 55.6 % (deep cells shade slanted light) |
+
+- **A model I dropped:** a first version treated strands as walls two strand-widths deep. It cut a black window screen to 33 % of open, below its 59 % open area, which is not credible for round strands. It was replaced by the cylinder shadow above.
+- **Tests:** tests/test_lid.py, 15 tests:
+  - presets match published transmittance (88 / 91 / 92 %);
+  - the tracer matches the analytic transmission within 0.2 % for glass, acrylic, two screens and egg crate, straight down and at 30°;
+  - an open lid traces bit-identically to no lid;
+  - the PAR effect ordering;
+  - validation (lid below the lights, positive hole size).
+- **UI:** Pumps & lights → **Lid over the tank**:
+  - preset, height, hole size and strand width for screens, sheet thickness for glass and acrylic, extra loss;
+  - the transmission straight down and at 45°, and the open area;
+  - the lid drawn in 3D: glass tinted, screens as a mesh.
+
+**D-849 Particle animation (Results).** Tracer particles carried by the run's time-averaged velocity field.
+- **Data:** `GET /api/runs/{pid}/{rid}/flowfield` sends `mean_u`, every `stride`-th node so at most 600,000 nodes go out (about 7 MB), NaN in rock.
+- **Integration (in the browser):** trilinear velocity; midpoint rule, sub-stepped so no step moves more than half a cell; corner weights renormalised over water nodes; a particle with less than a quarter of its weight in water counts as in rock and respawns.
+- **Display:** particles live 4–12 s (random) and fade in and out. Trails are coloured by speed (blue slow, cyan, pale yellow at the 95th-percentile speed and up).
+- **Options:** release everywhere or at the pump outlets; 1,000–12,000 particles; ¼× to 4× real time; trail length.
+- **Speed:** 2.0 ms per frame for 3,000 particles and 6.0 ms for 12,000 (headless Chrome, standard demo run, 121 × 44 × 48 nodes at 10 mm).
+- **What it shows:** particles follow the average flow only; the turbulent swirl on top of it is not added, and the panel says so.
+- **Test:** tests/test_particles.py (field, NaN in rock, stride and origin).
+
+**D-850 Demo aquascape in the UI template; broken-rock options.**
+- **The new scape:** "From the 75-gallon demo" builds its rock from 13 designer pieces, so every piece can be selected, moved and edited:
+  - left island: a broad mound with a ledge and a swim-through arch;
+  - right island: a taller stack with an overhang, peak about 10 cm under the water;
+  - open sand between them.
+- **Build:** about 10.2 L of rock (about 36 lb dry at 1.6 kg/L), built at 4 mm when the project is created (about 3 s), watertight, no designer warnings.
+- **CLI demo unchanged:** `reefflow demo` and the verification reference case keep the original two procedural islands, so the numbers in VERIFICATION.md stay valid.
+- **Rock element: two new options, both off by default** (existing rocks rebuild exactly as before, tested):
+  - `facets`: cuts the rock with random planes (smooth maximum), giving flat broken faces;
+  - `chunk`: adds large lumps (low-frequency noise of amplitude chunk × smallest lobe radius).
+- **The demo rocks** use facets 7, chunk 0.35 and roughness 0.18. Higher roughness alone gave spiky "hedgehog" rocks; higher chunk (0.5) left small floating bits.
+- **Tests:** tests/test_demo_scape.py (defaults unchanged, facets only remove rock, bounds hold, the demo builds clean and stays under water, the template uses the designer scape).

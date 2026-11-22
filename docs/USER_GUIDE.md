@@ -14,7 +14,7 @@ Your projects and results are saved in the folder `reefflow_workspace` next to w
 
 ## 2. Open or create a project
 
-The **Projects** button lists your tanks. **From 75-gal demo** creates the reference tank, a good place to start learning. **Blank tank** creates an empty one. **Import** opens an existing project file (YAML) together with its rock files (STL).
+The **Projects** button lists your tanks. **From the 75-gallon demo** creates an example tank, a good place to start learning: its rockscape (two islands with an arch, a ledge and an overhang) is built from designer pieces you can move and edit. (The command-line demo used for verification keeps its original two-island rock.) **Blank tank** creates an empty one. **Import** opens an existing project file (YAML) together with its rock files (STL).
 
 **Save** (or Ctrl+S) writes the project file. A yellow "● unsaved" mark means you have changes that are not saved yet. **Undo** and **Redo** (Ctrl+Z / Ctrl+Y) step through your edits. **YAML** downloads the project file.
 
@@ -255,7 +255,9 @@ Two things to know:
 
 **Lights**
 
-Add fixtures (pick a real model or a generic type), then set their position over the tank, height above the water, tilt and intensity. The yellow cone shows the beam. Finer settings (channels, photoperiod, water clarity, calibration) live in the project file for now.
+Add fixtures (pick a real model or a generic type), then set their position over the tank, height above the water, tilt and intensity.
+
+**Lid over the tank.** Under the lights, **Lid** sets what covers the top of the tank: open top, glass (standard or low-iron), acrylic, aluminium or black window screen, black or clear netting with 1/8 in or 1/4 in holes, or an egg-crate grid. Set how high it sits above the water (default: on the rim), the hole size and strand width for screens or the thickness for sheets, and an extra loss for salt creep or condensation. The panel shows how much light gets through straight down and at 45°. The lid is drawn over the tank in the 3-D view. The next run with lighting includes it; run once with and once without, then use **Compare**. Typical effect at 20 cm (8 in) depth under a puck: 6 mm glass −13 %, low-iron glass −10 %, acrylic −10 %, black 1/8 in netting −32 %, aluminium window screen −32 % (D-848). The yellow cone shows the beam. Finer settings (channels, photoperiod, water clarity, calibration) live in the project file for now.
 
 ## 7. Run (tab 5)
 
@@ -280,6 +282,8 @@ Pick a run. Then use these layers:
 The panel lists the key numbers, each with its statistical uncertainty. It also lists the largest dead zones with their locations, the sand and detritus figures, and coral scores for each profile.
 
 **Open report** gives the full printable report with all assumptions. **Re-analyze** repeats the analysis, for example after changing thresholds.
+
+**Particle animation.** In the Results panel, **Animate particles** releases thousands of tracer particles that drift with the run's time-averaged flow. Blue is slow, cyan medium, pale yellow fast. **Release particles: at the pump outlets** follows each jet; **everywhere** shows the overall circulation. Particles that hang about or circle mark slow or recirculating water. You can also set the number of particles, the playback speed (¼× to 4× real time) and the trail length. The particles follow the average flow only; real water also swirls on top of it (D-849).
 
 ## 9. Compare (tab 7)
 

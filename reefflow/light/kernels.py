@@ -19,6 +19,16 @@ Physics per event
     in water               Beer-Lambert: weight x exp(-Kd s) over each straight
                            path segment (Kd per spectral bin).
     water -> air (below)   Fresnel / total internal reflection; transmitted photons escape.
+    lid (optional, D-848)  horizontal sheet over the tank opening at z = z_lid, crossed on
+                           the way down. Glass / acrylic: incoherent slab, Fresnel at both
+                           faces with all internal reflections and absorption along the
+                           refracted path, T = (1-R)^2 tau / (1 - R^2 tau^2). Screen: square
+                           mesh of round strands (diameter d, pitch p); per axis the open
+                           fraction is (p - d sqrt(1 + tan^2) - extra |tan|) / p, the shadow
+                           of a cylinder plus any extra wall depth (egg-crate grids);
+                           photons hitting strands are either scattered on downward
+                           (Lambertian, probability = forward scatter) or lost. Lost photons
+                           are tallied as absorbed_lid (reflection off the lid included).
     side walls             clear/black: Fresnel water->glass, explicit propagation
                            in the slab (n_g), Fresnel/TIR at glass->air (clear) or
                            absorption at the painted outer face (black); coralline:
@@ -46,22 +56,22 @@ import taichi as ti
 # float parameters P[...]
 (P_L, P_W, P_ZS, P_ZSAND, P_RIM, P_G, P_NW, P_NG, P_ALB_SAND, P_ALB_ROCK, P_ALB_COR, P_ROUGH,
  P_ZFLOOR, P_SDF_H, P_SDF_OX, P_SDF_OY, P_SDF_OZ, P_GOX, P_GOY, P_GOZ, P_GDX, P_PX0, P_PY0, P_PDX,
- P_RX0, P_RY0, P_RDX) = range(27)
-NPF = 32
+ P_RX0, P_RY0, P_RDX, P_LIDZ, P_LIDN, P_LIDTAU, P_LIDX, P_MSTRAND, P_MPITCH, P_MDEEP, P_MSCAT) = range(35)
+NPF = 40
 # integer parameters IP[...]
 (I_NEMIT, I_NTAB, I_NBIN, I_HASROCK, I_SNX, I_SNY, I_SNZ, I_GNX, I_GNY, I_GNZ, I_NPLAN, I_PNX, I_PNY,
  I_NPROBE, I_WALL0, I_WALL1, I_WALL2, I_WALL3, I_MAXEV, I_STACK, I_RNX, I_RNY, I_HASWATER, I_BOUNCE,
- I_ROUGHMAP) = range(25)
+ I_ROUGHMAP, I_LID) = range(26)
 NPI = 32
 # counters (photon weight)
 (C_EMIT, C_MISS, C_SREFL, C_ENTER, C_WABS, C_SAND, C_ROCK, C_GLASS, C_BLACK, C_CORAL, C_ESC, C_TERM,
- C_DX, C_DY, C_DZ, C_FLOOR, C_OTHER, C_UP, C_SANDIN, C_ROCKIN, C_WALLIN, C_GLASSIN) = range(22)
+ C_DX, C_DY, C_DZ, C_FLOOR, C_OTHER, C_UP, C_SANDIN, C_ROCKIN, C_WALLIN, C_GLASSIN, C_LID) = range(23)
 NC = 24
 COUNTER_NAMES = ["emitted", "missed_tank", "surface_reflected", "entered_water", "absorbed_water",
                  "absorbed_sand", "absorbed_rock", "lost_through_glass", "absorbed_black_wall",
                  "absorbed_coralline", "escaped_surface", "terminated_event_cap", "entry_dir_x",
                  "entry_dir_y", "entry_dir_z", "reached_floor_air", "lost_other", "emitted_upward",
-                 "incident_sand", "incident_rock", "incident_walls", "entered_glass"]
+                 "incident_sand", "incident_rock", "incident_walls", "entered_glass", "absorbed_lid"]
 REPLICAS = 4096
 
 F1 = ti.types.ndarray(dtype=ti.f32, ndim=1)
@@ -397,44 +407,77 @@ def trace(n: ti.i32, seed: ti.u32, P: F1, IP: I1, emit: F2, ecdf: F1, prof: F2, 
                     C[rep, C_FLOOR] += w
                     alive = 0
                 else:
-                    inside = 1
-                    if p.z > P[P_RIM]:
-                        tr = (P[P_RIM] - p.z) / d.z
-                        xr = p.x + d.x * tr
-                        yr = p.y + d.y * tr
-                        if xr < 0.0 or xr > L or yr < 0.0 or yr > W:
+                    # ---- lid over the tank opening (D-848) ----
+                    lidhit = 0
+                    if IP[I_LID] > 0 and p.z > P[P_LIDZ]:
+                        tl = (P[P_LIDZ] - p.z) / d.z
+                        xl = p.x + d.x * tl
+                        yl = p.y + d.y * tl
+                        if xl >= 0.0 and xl <= L and yl >= 0.0 and yl <= W:
+                            lidhit = 1
+                            cz = -d.z
+                            T = 0.0
+                            if IP[I_LID] == 1:
+                                nl = P[P_LIDN]
+                                Rl = fresnel(cz, 1.0 / nl)
+                                ct = ti.sqrt(ti.max(1.0 - (1.0 - cz * cz) / (nl * nl), 1e-12))
+                                tau = ti.pow(P[P_LIDTAU], 1.0 / ct)
+                                T = (1.0 - Rl) * (1.0 - Rl) * tau / (1.0 - Rl * Rl * tau * tau) * P[P_LIDX]
+                            else:
+                                tx = ti.abs(d.x / d.z)
+                                ty = ti.abs(d.y / d.z)
+                                fx = ti.max(P[P_MPITCH] - P[P_MSTRAND] * ti.sqrt(1.0 + tx * tx) - P[P_MDEEP] * tx, 0.0) / P[P_MPITCH]
+                                fy = ti.max(P[P_MPITCH] - P[P_MSTRAND] * ti.sqrt(1.0 + ty * ty) - P[P_MDEEP] * ty, 0.0) / P[P_MPITCH]
+                                T = fx * fy * P[P_LIDX]
+                            s = lcg(s, inc)
+                            ul = u01(s)
+                            if ul < T:
+                                p = ti.Vector([xl, yl, P[P_LIDZ] - 1e-7])
+                            elif IP[I_LID] == 2 and ul < T + (1.0 - T) * P[P_MSCAT]:
+                                p = ti.Vector([xl, yl, P[P_LIDZ] - 1e-7])
+                                d, s = lambert_dir(ti.Vector([0.0, 0.0, -1.0]), s, inc)
+                            else:
+                                C[rep, C_LID] += w
+                                alive = 0
+                    if lidhit == 0:
+                        inside = 1
+                        if p.z > P[P_RIM]:
+                            tr = (P[P_RIM] - p.z) / d.z
+                            xr = p.x + d.x * tr
+                            yr = p.y + d.y * tr
+                            if xr < 0.0 or xr > L or yr < 0.0 or yr > W:
+                                inside = 0
+                        t = (zs - p.z) / d.z
+                        q = p + d * t
+                        if q.x < 0.0 or q.x > L or q.y < 0.0 or q.y > W:
                             inside = 0
-                    t = (zs - p.z) / d.z
-                    q = p + d * t
-                    if q.x < 0.0 or q.x > L or q.y < 0.0 or q.y > W:
-                        inside = 0
-                    if inside == 0:
-                        C[rep, C_MISS] += w
-                        alive = 0
-                    else:
-                        sig = P[P_ROUGH]
-                        if IP[I_ROUGHMAP] == 1:
-                            ri = ti.min(ti.max(ti.cast((q.x - P[P_RX0]) / P[P_RDX], ti.i32), 0), IP[I_RNX] - 1)
-                            rj = ti.min(ti.max(ti.cast((q.y - P[P_RY0]) / P[P_RDX], ti.i32), 0), IP[I_RNY] - 1)
-                            sig = rough[ri, rj]
-                        m, s = facet_normal(d, sig, s, inc)
-                        cos_i = -d.dot(m)
-                        R = fresnel(cos_i, 1.0 / nw)
-                        s = lcg(s, inc)
-                        if u01(s) < R:
-                            C[rep, C_SREFL] += w
+                        if inside == 0:
+                            C[rep, C_MISS] += w
                             alive = 0
                         else:
-                            d = refract(d, m, 1.0 / nw)
-                            if d.z > 0.0:
-                                d.z = -d.z
-                            p = q
-                            p.z = zs
-                            medium = 1
-                            C[rep, C_ENTER] += w
-                            C[rep, C_DX] += w * d.x
-                            C[rep, C_DY] += w * d.y
-                            C[rep, C_DZ] += w * d.z
+                            sig = P[P_ROUGH]
+                            if IP[I_ROUGHMAP] == 1:
+                                ri = ti.min(ti.max(ti.cast((q.x - P[P_RX0]) / P[P_RDX], ti.i32), 0), IP[I_RNX] - 1)
+                                rj = ti.min(ti.max(ti.cast((q.y - P[P_RY0]) / P[P_RDX], ti.i32), 0), IP[I_RNY] - 1)
+                                sig = rough[ri, rj]
+                            m, s = facet_normal(d, sig, s, inc)
+                            cos_i = -d.dot(m)
+                            R = fresnel(cos_i, 1.0 / nw)
+                            s = lcg(s, inc)
+                            if u01(s) < R:
+                                C[rep, C_SREFL] += w
+                                alive = 0
+                            else:
+                                d = refract(d, m, 1.0 / nw)
+                                if d.z > 0.0:
+                                    d.z = -d.z
+                                p = q
+                                p.z = zs
+                                medium = 1
+                                C[rep, C_ENTER] += w
+                                C[rep, C_DX] += w * d.x
+                                C[rep, C_DY] += w * d.y
+                                C[rep, C_DZ] += w * d.z
             elif medium == 1:
                 # ================= water =================
                 tb = BIG

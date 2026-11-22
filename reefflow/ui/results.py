@@ -8,6 +8,7 @@ flags, origin and dx).
 from __future__ import annotations
 
 import json
+import math
 import threading
 from collections import OrderedDict
 from pathlib import Path
@@ -147,6 +148,18 @@ def slice_vectors(run_dir: Path, axis: str, pos: float, stride: int | None = Non
                 vec.append((sl[i, j, other[0]], sl[i, j, other[1]]))
     return {"points": np.asarray(pts, np.float32).reshape(-1, 2), "vectors": np.asarray(vec, np.float32).reshape(-1, 2),
             "index": k, "pos": o[a] + k * dx, "axes": ("xyz"[other[0]], "xyz"[other[1]]), "stride": stride}
+
+
+def velocity_volume(run_dir: Path, max_nodes: int = 600_000) -> dict:
+    """Time-averaged velocity on the whole grid for the particle animation (D-849), every
+    ``stride``-th node so at most ``max_nodes`` go to the browser; NaN at rock / outside nodes."""
+    g = grid_info(run_dir)
+    n = g["shape"]
+    stride = max(1, math.ceil((n[0] * n[1] * n[2] / max_nodes) ** (1.0 / 3.0)))
+    U = CACHE.get(run_dir / "fields.npz", "mean_u")[::stride, ::stride, ::stride]
+    m = fluid_mask(run_dir)[::stride, ::stride, ::stride]
+    out = np.where(m[..., None], U, np.nan).astype(np.float32)
+    return {"U": out, "shape": list(out.shape[:3]), "origin": g["origin_m"], "dx": g["dx_m"] * stride, "stride": stride}
 
 
 def sand_shear(run_dir: Path) -> dict:

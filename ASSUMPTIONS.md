@@ -333,3 +333,22 @@ Each entry states the assumption, its justification, and its expected effect on 
   - A PAR-meter calibration replaces all of this.
 - **Return pumps** without a published curve use a straight line (D-845). The nozzle in the tank stays the generic 19 mm (3/4 in) unless you change it: the pump's own outlet does not set the jet.
 - **Overflow ratings** are the makers' claims (often optimistic for one 1 in drain, as the drain table shows). Red Sea Reefer "capacities" are its recommended return-pump flows.
+
+## Lid over the tank (D-848)
+
+**A-848 Lid material values.**
+- **Glass and acrylic:** typical visible transmittance of 6 mm sheet (standard float glass about 88 %, low-iron about 91 %, clear cast acrylic about 92 %), minus the two Fresnel reflections, gives bulk attenuation α:
+
+| Sheet | n | α |
+|---|---|---|
+| Standard float glass | 1.52 | 6.8 1/m |
+| Low-iron glass | 1.52 | 1.7 1/m |
+| Clear cast acrylic | 1.49 | 1.7 1/m |
+
+  - These are PAR-band averages; aged or scratched acrylic transmits less (use **extra loss**).
+- **Screen sizes:**
+  - window screen 18 × 16: 1.1 mm holes, 0.28–0.33 mm strands;
+  - netting: 1/8 in holes with 0.6 mm strands, 1/4 in holes with 0.8 mm strands;
+  - egg crate: 12 mm cells, 1.2 mm walls, 10 mm deep.
+- **Scatter** (the share of light that hits a strand and still goes on down) is an estimate, not a measurement: black 0.02, aluminium 0.2, white 0.25, white egg crate 0.3. It moves the bright-screen results by a few percent; the open area and the strand shadow dominate.
+- **Light reflected up by the lid** is counted as lost (some would bounce back down off the fixture; a small effect).

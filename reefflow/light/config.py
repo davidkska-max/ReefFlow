@@ -33,6 +33,18 @@ Schema (every field optional except ``fixtures``; defaults in brackets)::
         walls: {front: clear, back: black, left: clear, right: clear}   # clear|black|coralline [all clear]
         coralline_albedo: 0.3            #                                                  [0.3]
       albedo: {sand: 0.6, rock: 0.15}    # Lambertian reflectance                           [0.6, 0.15]
+      lid:                               # cover over the tank opening (D-848)              [open]
+        preset: glass_float_6mm          # see LID_PRESETS; any field below overrides it
+        type: open                       # open | glass | acrylic | screen
+        height: 1 in                     # lid above the water surface            [on the rim]
+        thickness: 6 mm                  # glass / acrylic sheet
+        n: 1.52                          # glass / acrylic refractive index
+        attenuation: 6.8 1/m             # bulk absorption of the sheet (PAR average)
+        opening: 1/8 in                  # screen: hole size (square holes)
+        strand: 0.6 mm                   # screen: strand (wire) width
+        mesh_thickness: 10 mm            # screen: depth of deep grids (egg crate)   [= strand]
+        scatter: 0.02                    # screen: share of light hitting strands that goes on down
+        dirt: 0.0                        # extra loss from salt creep / condensation (0-0.5)
       bounces: true                      # diffuse reflection off sand / rock / coralline    [true]
       rock_geometry: auto                # auto | stl | voxels | none                       [auto]
       sdf_resolution: 2.5 mm             # rock signed-distance grid spacing (STL)          [2.5 mm]
@@ -63,6 +75,150 @@ from . import lunits as LU
 from .fixtures import LAMBDA_CENTRES, Fixture, build_fixture, load_library
 
 WALL_CONDITIONS = {"clear": 0, "black": 1, "coralline": 2}
+
+# Lid presets (D-848, A-848). Sheets: typical visible transmittance of 6 mm sheet (standard
+# float glass ~88 %, low-iron ~91 %, clear cast acrylic ~92 %) minus the two Fresnel reflections
+# gives the bulk attenuation. Screens: opening / strand of common products, round strands
+# (a strand's shadow widens as 1/cos of the slant); egg-crate grids also have wall depth.
+# 'scatter' is the share of the light that hits a strand and still goes on down (bright
+# aluminium / white scatter some, black absorbs nearly all): an assumption, not a measurement.
+LID_PRESETS = {
+    "open": {"type": "open", "label": "Open top (no lid)"},
+    "glass_float_6mm": {"type": "glass", "label": "Glass, 6 mm (1/4 in) standard float", "thickness": "6 mm", "n": 1.52,
+                        "attenuation": "6.8 1/m"},
+    "glass_lowiron_6mm": {"type": "glass", "label": "Glass, 6 mm low-iron (Starphire / Optiwhite)", "thickness": "6 mm",
+                          "n": 1.52, "attenuation": "1.7 1/m"},
+    "acrylic_6mm": {"type": "acrylic", "label": "Acrylic (Plexiglas), 6 mm (1/4 in) clear cast", "thickness": "6 mm",
+                    "n": 1.49, "attenuation": "1.7 1/m"},
+    "acrylic_3mm": {"type": "acrylic", "label": "Acrylic (Plexiglas), 3 mm (1/8 in) clear cast", "thickness": "3 mm",
+                    "n": 1.49, "attenuation": "1.7 1/m"},
+    "screen_aluminum_window": {"type": "screen", "label": "Aluminium window screen (18 x 16 mesh)", "opening": "1.13 mm",
+                               "strand": "0.28 mm", "scatter": 0.2},
+    "screen_black_window": {"type": "screen", "label": "Black fibreglass window screen (18 x 16 mesh)", "opening": "1.1 mm",
+                            "strand": "0.33 mm", "scatter": 0.02},
+    "screen_black_1_8": {"type": "screen", "label": "Black netting, 1/8 in holes (screen-top lid)", "opening": "1/8 in",
+                         "strand": "0.6 mm", "scatter": 0.02},
+    "screen_black_1_4": {"type": "screen", "label": "Black netting, 1/4 in holes", "opening": "1/4 in", "strand": "0.8 mm",
+                         "scatter": 0.02},
+    "screen_clear_1_8": {"type": "screen", "label": "Clear / white netting, 1/8 in holes", "opening": "1/8 in",
+                         "strand": "0.6 mm", "scatter": 0.25},
+    "eggcrate_white": {"type": "screen", "label": "White egg-crate grid (1/2 in cells, 3/8 in deep)", "opening": "12 mm",
+                       "strand": "1.2 mm", "mesh_thickness": "10 mm", "scatter": 0.3},
+}
+LID_TYPES = ("open", "glass", "acrylic", "screen")
+
+
+@dataclass
+class Lid:
+    type: str = "open"
+    preset: str | None = None
+    height: float = 0.0              # above the water surface (m)
+    thickness: float = 0.0
+    n: float = 1.5
+    attenuation: float = 0.0         # 1/m
+    opening: float = 0.0
+    strand: float = 0.0
+    mesh_thickness: float = 0.0
+    scatter: float = 0.0
+    dirt: float = 0.0
+
+    @property
+    def is_open(self) -> bool:
+        return self.type == "open"
+
+    @property
+    def pitch(self) -> float:
+        return self.opening + self.strand
+
+    @property
+    def extra_depth(self) -> float:
+        """Wall depth beyond a round strand (egg-crate grids); 0 for woven screens."""
+        return max(self.mesh_thickness - self.strand, 0.0)
+
+    @property
+    def open_fraction(self) -> float:
+        """Screen: open area at normal incidence; sheet: 1."""
+        return (self.opening / self.pitch) ** 2 if self.type == "screen" else 1.0
+
+    def transmission(self, theta: float = 0.0, phi: float = 0.0) -> float:
+        """Analytic transmission at incidence angle theta from vertical (rad), azimuth phi from
+        the x axis: what the tracer applies (screens without the scattered part)."""
+        if self.is_open:
+            return 1.0
+        if self.type == "screen":
+            t = math.tan(theta)
+            tx, ty = abs(t * math.cos(phi)), abs(t * math.sin(phi))
+            fx = max(self.pitch - self.strand * math.sqrt(1 + tx * tx) - self.extra_depth * tx, 0.0) / self.pitch
+            fy = max(self.pitch - self.strand * math.sqrt(1 + ty * ty) - self.extra_depth * ty, 0.0) / self.pitch
+            return fx * fy * (1.0 - self.dirt)
+        c = math.cos(theta)
+        eta = 1.0 / self.n
+        st2 = eta * eta * (1 - c * c)
+        ct = math.sqrt(1 - st2)
+        rs = (eta * c - ct) / (eta * c + ct)
+        rp = (c - eta * ct) / (c + eta * ct)
+        R = 0.5 * (rs * rs + rp * rp)
+        ctt = math.sqrt(max(1 - (1 - c * c) / self.n ** 2, 1e-12))
+        tau = math.exp(-self.attenuation * self.thickness / ctt)
+        return (1 - R) ** 2 * tau / (1 - R * R * tau * tau) * (1.0 - self.dirt)
+
+    def describe(self) -> str:
+        if self.is_open:
+            return "open top"
+        base = LID_PRESETS.get(self.preset, {}).get("label") or self.type
+        if self.type == "screen":
+            return (f"{base}: {self.opening * 1e3:.2f} mm holes, {self.strand * 1e3:.2f} mm strands, "
+                    f"{100 * self.open_fraction:.0f} % open, {self.height * 1e3:.0f} mm above the water")
+        return (f"{base}: {self.thickness * 1e3:.1f} mm, {100 * self.transmission():.1f} % straight through, "
+                f"{self.height * 1e3:.0f} mm above the water")
+
+    def summary(self) -> dict:
+        return {"type": self.type, "preset": self.preset, "description": self.describe(), "height_m": self.height,
+                "transmission_normal": self.transmission(),
+                "transmission_45deg": self.transmission(math.radians(45)), "open_fraction": self.open_fraction}
+
+
+def parse_lid(d: dict | None, tank, fixtures) -> Lid:
+    """``lighting.lid`` -> Lid (preset values overridden by the entry's own fields)."""
+    if not d:
+        return Lid()
+    d = dict(d)
+    pre = d.get("preset")
+    if pre is not None and pre not in LID_PRESETS:
+        raise ValueError(f"lighting.lid.preset {pre!r}: choose from {sorted(LID_PRESETS)}")
+    v = {**(LID_PRESETS.get(pre) or {}), **{k: x for k, x in d.items() if x is not None}}
+    typ = v.get("type", "open")
+    if typ not in LID_TYPES:
+        raise ValueError(f"lighting.lid.type {typ!r}: use one of {LID_TYPES}")
+    if typ == "open":
+        return Lid(preset=pre)
+    gap = getattr(tank, "water_gap", 0.0254)
+    h = LU.parse(v["height"], "length") if v.get("height") is not None else gap
+    if h <= 0:
+        raise ValueError("lighting.lid.height must be above the water surface (> 0)")
+    low = min((f.centre[2] - tank.water_surface for f in fixtures), default=1e9)
+    if h >= low:
+        raise ValueError(f"lighting.lid: the lid ({h * 1e3:.0f} mm above the water) must be below the lowest light "
+                         f"({low * 1e3:.0f} mm above the water)")
+    dirt = float(v.get("dirt", 0.0))
+    if not 0 <= dirt <= 0.5:
+        raise ValueError("lighting.lid.dirt must be between 0 and 0.5")
+    lid = Lid(type=typ, preset=pre, height=h, dirt=dirt)
+    if typ in ("glass", "acrylic"):
+        lid.thickness = LU.parse(v.get("thickness", "6 mm"), "length")
+        lid.n = float(v.get("n", 1.52 if typ == "glass" else 1.49))
+        lid.attenuation = LU.parse(v.get("attenuation", "6.8 1/m" if typ == "glass" else "1.7 1/m"), "attenuation")
+        if not 1.0 < lid.n < 2.5 or lid.thickness <= 0 or lid.attenuation < 0:
+            raise ValueError("lighting.lid: sheet needs thickness > 0, attenuation >= 0 and 1 < n < 2.5")
+    else:
+        lid.opening = LU.parse(v["opening"], "length")
+        lid.strand = LU.parse(v["strand"], "length")
+        lid.mesh_thickness = LU.parse(v["mesh_thickness"], "length") if v.get("mesh_thickness") is not None \
+            else lid.strand
+        lid.scatter = float(v.get("scatter", 0.02))
+        if lid.opening <= 0 or lid.strand < 0 or lid.mesh_thickness < 0 or not 0 <= lid.scatter <= 1:
+            raise ValueError("lighting.lid: screen needs opening > 0, strand >= 0, mesh_thickness >= 0, 0 <= scatter <= 1")
+    return lid
 WALL_NAMES = ("front", "back", "left", "right")          # y = 0, y = W, x = 0, x = L
 
 DEFAULTS = {
@@ -184,6 +340,7 @@ class LightingConfig:
     max_events: int
     batch: int
     calibration: dict | None
+    lid: Lid = field(default_factory=Lid)
     raw: dict = field(default_factory=dict)
 
     @property
@@ -207,7 +364,8 @@ class LightingConfig:
                            "coralline": self.coralline_albedo}, "bounces": self.bounces,
                 "photoperiod_full_intensity_h": self.photoperiod.full_intensity_seconds / 3600.0,
                 "rays": self.rays, "target_noise": self.target_noise, "seed": self.seed,
-                "map_depths_m": list(self.map_depths), "rock_geometry": self.rock_geometry}
+                "map_depths_m": list(self.map_depths), "rock_geometry": self.rock_geometry,
+                "lid": self.lid.summary()}
 
 
 def parse_lighting(raw: dict, tank, library: dict | None = None) -> LightingConfig:
@@ -264,7 +422,8 @@ def parse_lighting(raw: dict, tank, library: dict | None = None) -> LightingConf
         map_resolution=LU.parse(d["map_resolution"], "length"),
         section_y=None if d.get("section_y") is None else LU.parse(d["section_y"], "length"),
         probe_size=LU.parse(d["probe_size"], "length"), max_events=int(d["max_events"]),
-        batch=int(d["batch"]), calibration=raw.get("calibration"), raw=raw)
+        batch=int(d["batch"]), calibration=raw.get("calibration"),
+        lid=parse_lid(raw.get("lid"), tank, fixtures), raw=raw)
     if cfg.kd < 0 or cfg.kd_extra < 0:
         raise ValueError("lighting.water: Kd must be >= 0")
     if not 1.0 < cfg.n_water < 2.0 or not 1.0 < cfg.n_glass < 2.5:

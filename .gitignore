@@ -9,3 +9,10 @@ runs/
 
 # your own projects, photos and runs (user data, not source)
 reefflow_workspace/
+
+# rendered media (large; publish separately)
+docs/media/*.mp4
+
+# personal working notes (spec, plan, drafts) - never published
+private/
+dist/

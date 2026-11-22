@@ -4,8 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reefflow"
-version = "0.1.0"
+version = "1.0.0"
 description = "Lattice Boltzmann CFD and photometric analysis for reef aquariums"
+license = { file = "LICENSE" }
+classifiers = ["License :: Other/Proprietary License", "Operating System :: Microsoft :: Windows"]
 requires-python = ">=3.11,<3.13"   # Taichi 1.7.x ships no wheels for 3.13+
 dependencies = [
     "taichi==1.7.4",

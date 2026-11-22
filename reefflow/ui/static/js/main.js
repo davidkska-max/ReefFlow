@@ -9,6 +9,7 @@ import { Photos } from './photos.js';
 
 const EDITOR_TABS = ['tank', 'rocks', 'equip', 'run'];
 const OPTIONAL_TABS = ['photos', 'compare'];
+const SUPPORT_URL = 'https://buymeacoffee.com/davidkska';   // plain link; opens in the browser, nothing is sent from the app
 const LOGO_SVG = '<svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lgw" x1="0" y1="0" x2="1" y2="1">'
   + '<stop offset="0" stop-color="#19b6d2"/><stop offset="1" stop-color="#0a5f80"/></linearGradient></defs>'
   + '<rect width="32" height="32" rx="8" fill="url(#lgw)"/>'
@@ -441,7 +442,9 @@ class App {
     const hero = el('div', { class: 'welcome' },
       el('div', { class: 'logo', html: LOGO_SVG + '<h1>Reef<span>Flow</span></h1>' }),
       el('p', {}, 'Model your reef tank, then see where the water moves, where it stalls and how much light reaches each part of the rock, before you move a thing.'),
-      el('div', { class: 'ws', title: 'Projects are stored in this folder on your computer' }, `Projects folder: ${ws}`));
+      el('div', { class: 'ws', title: 'Projects are stored in this folder on your computer' }, `Projects folder: ${ws}`),
+      el('div', { class: 'support' }, 'ReefFlow is free. If it helps your tank, you can ',
+        el('a', { href: SUPPORT_URL, target: '_blank', rel: 'noopener' }, 'buy me a coffee ☕'), '.'));
     modal(el('div', {}, hero,
       el('h3', {}, list.length ? 'Your projects' : 'Projects'), box,
       el('h3', {}, 'Start a new project'),

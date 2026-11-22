@@ -29,7 +29,7 @@
 #                 intensities (%) in the project file scale each channel.
 #
 # Values are typical of the product class (2024-2026 hobby fixtures) and are starting
-# assumptions (docs/drafts/phase4_assumptions.md A-404), not data-sheet values.
+# assumptions (ASSUMPTIONS.md A-404), not data-sheet values.
 
 spectra:
   # relative PHOTON spectra over 400-700 nm as sums of Gaussians: [peak nm, FWHM nm, height]

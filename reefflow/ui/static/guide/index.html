@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReefFlow guide</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a7ea4'/%3E%3Cpath d='M5 13c4-4 7 2 11-1.5S22 7 27 10' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Cpath d='M5 20c4-4 7 2 11-1.5s6-4.5 11-1.5' stroke='white' stroke-opacity='.7' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+  :root { --ink: #13222d; --ink-2: #2c4150; --muted: #5f7180; --line: #dfe6eb; --bg: #f6f9fb; --accent: #0a7ea4; --cyan: #19b6d2;
+    --navy: #0c2a3b; --warn: #fff4e0; --warn-line: #f3dba8; --note: #eef7fb; --note-line: #d3e9f1;
+    --font: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font: 16px/1.6 var(--font); color: var(--ink); background: #fff; -webkit-font-smoothing: antialiased; }
+  header.hero { color: #e7f4f8; padding: 44px 24px 38px;
+    background: radial-gradient(120% 140% at 0% 0%, rgba(54,150,190,.55), rgba(54,150,190,0) 60%), linear-gradient(135deg, #0c2a3b, #081f2e); }
+  .wrap { max-width: 980px; margin: 0 auto; }
+  .hero .logo { display: flex; align-items: center; gap: 14px; }
+  .hero svg { width: 52px; height: 52px; }
+  .hero h1 { margin: 0; font-size: 34px; letter-spacing: -.5px; color: #fff; }
+  .hero h1 span { color: #6fd6ea; }
+  .hero p { max-width: 680px; color: #bcd7e1; font-size: 17px; margin: 14px 0 0; }
+  nav.toc { position: sticky; top: 0; z-index: 5; background: rgba(255,255,255,.94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  nav.toc .wrap { display: flex; gap: 4px; overflow-x: auto; padding: 8px 24px; scrollbar-width: none; }
+  nav.toc a { white-space: nowrap; color: var(--ink-2); text-decoration: none; padding: 5px 10px; border-radius: 6px; font-size: 14px; font-weight: 500; }
+  nav.toc a:hover { background: var(--bg); color: var(--accent); }
+  main { padding: 10px 24px 80px; }
+  section { padding-top: 26px; }
+  h2 { font-size: 26px; letter-spacing: -.3px; margin: 30px 0 6px; display: flex; align-items: center; gap: 12px; }
+  h2 .n { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 16px; flex: 0 0 auto; }
+  h3 { font-size: 19px; margin: 26px 0 4px; }
+  p, li { color: var(--ink-2); }
+  .lead { font-size: 17px; color: var(--muted); margin-top: 0; }
+  figure { margin: 18px 0 22px; }
+  figure img { width: 100%; border-radius: 10px; border: 1px solid var(--line); box-shadow: 0 10px 30px rgba(8,28,40,.12); display: block; }
+  figcaption { color: var(--muted); font-size: 14px; margin-top: 8px; }
+  .steps { counter-reset: s; list-style: none; padding: 0; }
+  .steps li { counter-increment: s; position: relative; padding: 2px 0 10px 40px; }
+  .steps li::before { content: counter(s); position: absolute; left: 0; top: 1px; width: 26px; height: 26px; border-radius: 50%;
+    background: #e3f3f8; color: var(--accent); font-weight: 700; font-size: 13px; display: grid; place-items: center; }
+  .box { border-radius: 10px; padding: 12px 16px; margin: 16px 0; border: 1px solid; }
+  .box.note { background: var(--note); border-color: var(--note-line); }
+  .box.warn { background: var(--warn); border-color: var(--warn-line); }
+  .box b:first-child { color: var(--ink); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } .hero h1 { font-size: 28px; } }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; margin: 12px 0; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--bg); font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  kbd { font: 13px/1.4 "Cascadia Mono", Consolas, monospace; background: var(--bg); border: 1px solid #cdd8df; border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; }
+  .k { font-weight: 600; color: var(--ink); }
+  footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding: 20px 24px 40px; }
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="logo">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#19b6d2"/><stop offset="1" stop-color="#0a5f80"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#g)"/><path d="M5 13c4-4 7 2 11-1.5S22 7 27 10" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M5 19.5c4-4 7 2 11-1.5s6-4.5 11-1.5" stroke="#fff" stroke-opacity=".7" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M9 27c0-3 1.2-4.6 2.6-5.6M11.6 27c0-2 .6-3.2 1.6-4M22 27c0-2.6 1.4-4 3-4.6" stroke="#ffd7a8" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+    <h1>Reef<span>Flow</span> guide</h1>
+  </div>
+  <p>Model your reef tank on your PC, then see where the water moves, where it stalls, and how much light reaches each part of the rock, before you move a single powerhead.</p>
+</div></header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#start">Start</a><a href="#demo">5-minute demo</a><a href="#tank">1 Tank</a><a href="#rock">2–3 Rock</a>
+  <a href="#equip">4 Pumps &amp; lights</a><a href="#run">5 Run</a><a href="#results">6 Results</a><a href="#compare">7 Compare</a>
+  <a href="#trust">How far to trust it</a><a href="#faq">FAQ</a>
+</div></nav>
+
+<main><div class="wrap">
+
+<section id="start">
+  <h2>Getting started</h2>
+  <p class="lead">ReefFlow runs in your web browser, but everything happens on your own computer. Nothing is uploaded, and it works without the internet.</p>
+  <ul class="steps">
+    <li>Double-click <span class="k">ReefFlow.bat</span> in the ReefFlow folder. A console window opens and your browser shows ReefFlow. Keep the console open while you work; closing it stops ReefFlow.</li>
+    <li>The welcome window lists your projects. Start with <span class="k">From the 75-gallon demo</span>: a complete example tank with rock, pumps, an overflow and lights, ready to run.</li>
+    <li>The steps along the top go left to right. A green tick shows a step that is done for this project.</li>
+  </ul>
+  <figure><img src="img/welcome.jpg" alt="Welcome window"><figcaption>The welcome window: your projects, newest first, and the two ways to start a new one.</figcaption></figure>
+  <div class="box note"><b>A graphics card helps a lot.</b> ReefFlow uses an NVIDIA graphics card automatically. A quick run of a 75-gallon tank takes about 5 minutes on an RTX 3070. Without a suitable graphics card it still works, just much more slowly.</div>
+</section>
+
+<section id="demo">
+  <h2>The 5-minute demo</h2>
+  <ul class="steps">
+    <li>Create a project <span class="k">From the 75-gallon demo</span>.</li>
+    <li>Go to <span class="k">5 Run</span>, choose <span class="k">preview</span> and press <span class="k">Start run</span>. The progress shows next to the Run tab.</li>
+    <li>When it finishes, open <span class="k">6 Results</span>. Press <span class="k">Animate particles</span> and set <span class="k">Release particles</span> to <span class="k">at the pump outlets</span> to watch where your pumps push the water.</li>
+  </ul>
+  <figure><img src="img/particles_pumps.jpg" alt="Particles released at the pumps"><figcaption>Particles released at the pumps trace each jet: how far it carries, where it bends around the rock, and where the water slows down.</figcaption></figure>
+</section>
+
+<section id="tank">
+  <h2><span class="n">1</span>Tank</h2>
+  <p>Enter the <span class="k">outside</span> size of your tank, measured with a tape over the frame, plus the glass thickness, how far below the rim the water sits, and the sand depth. ReefFlow works out the inside size and the water volume. The <span class="k">US / SI</span> switch at the top changes every number between inches/gallons and millimetres/litres.</p>
+  <figure><img src="img/tank.jpg" alt="Tank tab"><figcaption>The Tank tab. The 3-D view shows the tank to scale with the sand bed and the water surface.</figcaption></figure>
+</section>
+
+<section id="rock">
+  <h2><span class="n">2</span>Rock: three ways in</h2>
+  <p class="lead">The rock decides where the water can go, so it is worth getting roughly right. Pick whichever fits your tank.</p>
+  <h3>A new tank: build it from pieces (tab 3, Rockscape)</h3>
+  <p>Add rocks, slabs, pillars, arches and bridges, then drag them into place in the 3-D view. <span class="k">Move</span>, <span class="k">Rotate</span> and <span class="k">Scale</span> work like in any 3-D program; numbers can be typed too. Press <span class="k">Build rockscape</span> to join the pieces into one rock for the simulation. The demo's rockscape is built this way, so you can take it apart to see how.</p>
+  <figure><img src="img/rockscape.jpg" alt="Rockscape designer"><figcaption>The demo rockscape: two islands of rock with an arch, a ledge and an overhang, and open sand in the middle.</figcaption></figure>
+  <h3>An existing tank: from photos (tab 2, Photos)</h3>
+  <p>Take a photo from the top (pumps off, so the surface is still) and from the front and one end. Click the tank corners on each photo, check the rock outline, and ReefFlow builds the 3-D rock from the photos, correcting for the glass and water bending the view. <span class="k">Use my phone</span> shows a QR code so you can take and send the photos straight from your phone over your home Wi-Fi.</p>
+  <h3>Dry rock: a phone 3-D scan</h3>
+  <p>If the rock is out of the water, scan it with a phone scanning app (Polycam, Scaniverse and similar) and use <span class="k">Import phone scan</span> on the Rockscape tab. ReefFlow cuts away the table, closes holes and scales it to your tape measurement.</p>
+  <h3>Shaping any of these: sculpt</h3>
+  <p><span class="k">Sculpt the rockscape</span> works like a terrain tool: <span class="k">Raise</span> pulls rock toward you, <span class="k">Lower</span> pushes it away, <span class="k">Smooth</span> rounds off, <span class="k">Flatten</span> makes shelves and <span class="k">Tunnel</span> drills caves. The mouse wheel sets the brush size.</p>
+</section>
+
+<section id="equip">
+  <h2><span class="n">4</span>Pumps, overflow, lights and lid</h2>
+  <p>Every <span class="k">Model</span> list has real products grouped by brand, plus generic types at the top. Pick yours and ReefFlow fills in its published specs. A card under the list shows each number, where it came from, and links to the sources.</p>
+  <div class="grid2">
+    <figure><img src="img/pump.jpg" alt="Choosing a pump"><figcaption>A real pump: rated flow, power and outlet, each with its source.</figcaption></figure>
+    <figure><img src="img/lid.jpg" alt="Lid over the tank"><figcaption>The lid: glass, acrylic, screens of different hole sizes, or open top.</figcaption></figure>
+  </div>
+  <ul>
+    <li><span class="k">Powerheads:</span> click one in the view and drag it; Rotate mode aims it. <span class="k">Snap to glass</span> puts it on the nearest glass.</li>
+    <li><span class="k">Return pump:</span> ReefFlow uses the maker's head-flow curve where one is published, so enter your head height (sump to tank) and a fittings allowance. It warns if the water leaves the nozzle so fast that the real flow would be lower.</li>
+    <li><span class="k">Overflow:</span> pick your overflow box to get its rated capacity. ReefFlow warns when the return pump sends more than it can take.</li>
+    <li><span class="k">Lights:</span> set the position, height above the water and tilt. The yellow cone shows the beam.</li>
+    <li><span class="k">Lid:</span> pick what covers the tank. Glass loses about 12 % of the light straight down; a black 1/8 in screen passes 71 % straight down and less at a slant. Run with and without the lid and compare.</li>
+  </ul>
+</section>
+
+<section id="run">
+  <h2><span class="n">5</span>Run</h2>
+  <p>Choose a resolution and press <span class="k">Start run</span>. Tick <span class="k">Compute PAR</span> to include the lighting. <span class="k">Estimate</span> tells you the size and expected time before you start.</p>
+  <table>
+    <tr><th>Preset</th><th>Detail</th><th>Time, 75 gal (RTX 3070)</th><th>Good for</th></tr>
+    <tr><td>preview</td><td>10 mm cells</td><td>about 5 min</td><td>a quick look at the overall flow</td></tr>
+    <tr><td>standard</td><td>5 mm cells</td><td>about 13 min</td><td>comparing layouts; the default</td></tr>
+    <tr><td>fine</td><td>3 mm cells</td><td>about 75 min</td><td>flow close to the rock and sand</td></tr>
+  </table>
+  <figure><img src="img/run.jpg" alt="Run tab"><figcaption>The Run tab. Runs wait in a queue and use the graphics card one at a time; the analysis and report follow automatically.</figcaption></figure>
+</section>
+
+<section id="results">
+  <h2><span class="n">6</span>Results</h2>
+  <p>Results open as layers you can switch on and off.</p>
+  <ul>
+    <li><span class="k">Slices</span> through the water coloured by speed, water age or PAR. Drag the sliders to move them.</li>
+    <li><span class="k">Rock coloured by coral score</span>: how well each spot suits SPS, LPS or soft corals, from the flow and the light together. Numbered markers show the best spots.</li>
+    <li><span class="k">Dead-zone overlay</span> and <span class="k">sand bed shear</span>: where the water stalls and where detritus will settle.</li>
+    <li><span class="k">Particle animation</span>: thousands of particles carried by the average flow. Released everywhere, they show the overall circulation; released at the pumps, they show each jet.</li>
+  </ul>
+  <figure><img src="img/results.jpg" alt="Results"><figcaption>Speed on a horizontal slice and the coral score on the rock, with the best spots for SPS numbered.</figcaption></figure>
+  <figure><img src="img/particles_all.jpg" alt="Particles everywhere"><figcaption>Particles released everywhere: fast water is pale yellow, slow water blue. Particles that linger or circle mark slow or recirculating water.</figcaption></figure>
+  <p><span class="k">Open report</span> gives a full HTML report with the key numbers, figures and the best coral spots, for saving or sharing.</p>
+</section>
+
+<section id="compare">
+  <h2><span class="n">7</span>Compare</h2>
+  <p>This is where ReefFlow earns its keep. Change one thing (move or re-aim a powerhead, raise the lights, add a lid), run again, and compare the two runs. ReefFlow shows the difference maps and flags only the changes that are bigger than the run-to-run noise.</p>
+</section>
+
+<section id="trust">
+  <h2>How far to trust it</h2>
+  <div class="box warn"><b>Use it to compare layouts.</b> "Layout B moves more water through the back corner than layout A" is a solid result. A single number such as "2.3 in/s at this spot" is an estimate.</div>
+  <ul>
+    <li>Right at the surface of the sand and rock, flow is under-predicted at the usual resolutions, so dead zones look a bit worse than they are. Finer runs help.</li>
+    <li>Powerhead flow ratings are free-flow figures; ReefFlow assumes pumps deliver 70 % of them in a tank. You can change that per pump.</li>
+    <li>Rock from photos comes out a little chunkier than the real thing, because photos cannot see into every gap.</li>
+    <li>Light output is estimated from published measurements or the wattage. If you have a PAR meter, calibrating to your readings beats any estimate.</li>
+  </ul>
+</section>
+
+<section id="faq">
+  <h2>FAQ</h2>
+  <h3>Where are my projects saved?</h3>
+  <p>In the <span class="k">reefflow_workspace</span> folder next to ReefFlow, one folder per project. The welcome window shows the exact path.</p>
+  <h3>My pump or light is not in the list.</h3>
+  <p>Pick the closest generic type and type the rated flow (and for lights the wattage) yourself. Every number can be overwritten.</p>
+  <h3>A run failed or stopped.</h3>
+  <p>Open the run's <span class="k">Log</span> on the Results tab. Most problems are flagged before a run starts: the badge at the top right turns orange or red, and clicking it lists what to fix.</p>
+  <h3>Keyboard shortcuts</h3>
+  <p><kbd>Ctrl</kbd>+<kbd>S</kbd> save · <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd> undo / redo · <kbd>W</kbd> <kbd>E</kbd> <kbd>R</kbd> move / rotate / scale · <kbd>Del</kbd> delete · <kbd>Ctrl</kbd>+<kbd>D</kbd> duplicate · sculpt brushes <kbd>1</kbd>–<kbd>5</kbd></p>
+</section>
+
+</div></main>
+<footer><div class="wrap">ReefFlow runs entirely on your computer. Product names belong to their makers; ReefFlow is not affiliated with any of them. The full reference manual is <span class="k">docs/USER_GUIDE.md</span> in the ReefFlow folder.<br>ReefFlow is free to use. If it helps your tank, you can <a href="https://buymeacoffee.com/davidkska" target="_blank" rel="noopener">buy me a coffee ☕</a>.</div></footer>
+</body>
+</html>

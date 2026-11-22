@@ -145,8 +145,58 @@ def _fix_bool_keys(d):
     return d
 
 
+LID_LEN_KEYS = ("height", "thickness", "opening", "strand", "mesh_thickness")
+
+
+def lid_to_editor(d: dict | None) -> dict | None:
+    """``lighting.lid`` -> editor dict (lengths in m; None = not set, preset value applies)."""
+    if not d:
+        return None
+    out = {"preset": d.get("preset"), "type": d.get("type"), "dirt": _num(d.get("dirt"), 0.0)}
+    for k in LID_LEN_KEYS:
+        out[k] = _len(d.get(k), None) if d.get(k) is not None else None
+    out["extra"] = {k: v for k, v in d.items() if k not in ("preset", "type", "dirt", *LID_LEN_KEYS)}
+    return out
+
+
+def lid_from_editor(lid: dict | None, fmt_len) -> dict | None:
+    if not lid or (lid.get("preset") in (None, "open") and lid.get("type") in (None, "open")):
+        return None
+    d = dict(copy.deepcopy(lid.get("extra") or {}))
+    for k in ("preset", "type"):
+        if lid.get(k):
+            d[k] = lid[k]
+    for k in LID_LEN_KEYS:
+        if lid.get(k) is not None:
+            d[k] = fmt_len(lid[k])
+    if lid.get("dirt"):
+        d["dirt"] = round(float(lid["dirt"]), 4)
+    return d
+
+
+def lid_presets() -> dict:
+    """Lid presets for the UI with their transmission (straight down / 45 deg) and open area."""
+    try:
+        from types import SimpleNamespace
+        from reefflow.light.config import LID_PRESETS, parse_lid
+    except Exception:
+        return {}
+    tank = SimpleNamespace(water_surface=0.0, water_gap=0.0254)
+    fx = [SimpleNamespace(centre=np.array([0.0, 0.0, 10.0]))]
+    out = {}
+    for k, v in LID_PRESETS.items():
+        lid = parse_lid({"preset": k}, tank, fx)
+        out[k] = {"label": v["label"], "type": lid.type, "n": lid.n, "attenuation": lid.attenuation,
+                  "thickness": lid.thickness, "opening": lid.opening, "strand": lid.strand,
+                  "mesh_thickness": lid.mesh_thickness, "scatter": lid.scatter,
+                  "transmission_normal": lid.transmission(), "transmission_45": lid.transmission(math.radians(45)),
+                  "open_fraction": lid.open_fraction}
+    return out
+
+
 def editor_from_raw(section: dict | None) -> dict:
     section = _fix_bool_keys(copy.deepcopy(section or {}))
+    lid = lid_to_editor(section.pop("lid", None))
     fixtures = []
     for i, f in enumerate(section.pop("fixtures", None) or []):
         pos = f.get("position") or [0, 0]
@@ -158,7 +208,7 @@ def editor_from_raw(section: dict | None) -> dict:
             "intensity": _num(f.get("intensity"), 100.0),
             "extra": {k: v for k, v in f.items() if k not in MOUNT_KEYS},
         })
-    return {"fixtures": fixtures, "extra": section}
+    return {"fixtures": fixtures, "lid": lid, "extra": section}
 
 
 def raw_from_editor(ed: dict | None, fmt_len) -> dict | None:
@@ -179,7 +229,10 @@ def raw_from_editor(ed: dict | None, fmt_len) -> dict | None:
             d["intensity"] = round(float(f["intensity"]), 2)
         fx.append(d)
     out = {"fixtures": fx}
-    out.update({k: v for k, v in sec.items() if k != "fixtures"})
+    out.update({k: v for k, v in sec.items() if k not in ("fixtures", "lid")})
+    lid = lid_from_editor(ed.get("lid"), fmt_len)
+    if lid:
+        out["lid"] = lid
     return out
 
 

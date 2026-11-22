@@ -14,7 +14,7 @@ Workflow (each step is a pure function a UI backend can call):
 6. Check                   :func:`side_by_side` (reconstruction vs photo)
 7. Export / report         :func:`export_stl`, :func:`volume_report`
 
-:func:`reconstruct` chains 2-7. See docs/drafts/phase6_*.md for decisions,
+:func:`reconstruct` chains 2-7. See DECISIONS.md and ASSUMPTIONS.md (Phase 6) for decisions,
 assumptions and the license audit; validation: ``python -m reefflow.photo.validation``.
 """
 from .calibration import CalibrationError, CalibrationResult, calibrate_view, check_tank_size, focal_px_from_35mm

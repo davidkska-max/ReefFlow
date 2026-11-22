@@ -42,6 +42,56 @@ export function modelSelect(entries, value, onChange, opts = {}) {
   if (onChange) s.addEventListener('change', () => onChange(s.value));
   return s;
 }
+// ---------------------------------------------------------------- lid (D-848)
+// Editor lid: {preset, type, height, thickness, opening, strand, mesh_thickness, dirt, extra};
+// null fields fall back to the preset. Same formulas as reefflow/light/config.py Lid.transmission.
+export function lidParams(lid, lib) {
+  const pre = (lib.lid_presets || {})[lid?.preset] || {};
+  const own = Object.fromEntries(Object.entries(lid || {}).filter(([k, v]) => v !== null && v !== undefined && k !== 'extra'));
+  return { ...pre, ...own, type: lid?.type || pre.type || 'open' };
+}
+export function lidTransmission(q, theta = 0, phi = 0) {
+  if (!q || q.type === 'open') return 1;
+  const keep = 1 - (q.dirt || 0);
+  if (q.type === 'screen') {
+    const pitch = q.opening + q.strand, extra = Math.max((q.mesh_thickness ?? q.strand) - q.strand, 0), t = Math.tan(theta);
+    const f = (tt) => Math.max(pitch - q.strand * Math.sqrt(1 + tt * tt) - extra * tt, 0) / pitch;
+    return f(Math.abs(t * Math.cos(phi))) * f(Math.abs(t * Math.sin(phi))) * keep;
+  }
+  const c = Math.cos(theta), eta = 1 / q.n, ct = Math.sqrt(1 - eta * eta * (1 - c * c));
+  const rs = (eta * c - ct) / (eta * c + ct), rp = (c - eta * ct) / (c + eta * ct), R = 0.5 * (rs * rs + rp * rp);
+  const ctt = Math.sqrt(Math.max(1 - (1 - c * c) / (q.n * q.n), 1e-12)), tau = Math.exp(-q.attenuation * q.thickness / ctt);
+  return (1 - R) ** 2 * tau / (1 - R * R * tau * tau) * keep;
+}
+function lidObject(lid, lib, tank, waterGap) {
+  const q = lidParams(lid, lib);
+  if (q.type === 'open') return null;
+  const z = tank.ws + (lid.height ?? waterGap);
+  const g = new THREE.Group();
+  const geo = new THREE.PlaneGeometry(tank.L, tank.W);
+  let mat;
+  if (q.type === 'screen') {
+    const c = document.createElement('canvas'); c.width = c.height = 64;
+    const ctx = c.getContext('2d');
+    const light = (q.scatter || 0) > 0.1;
+    ctx.fillStyle = light ? 'rgba(200,215,225,0.28)' : 'rgba(12,16,20,0.42)'; ctx.fillRect(0, 0, 64, 64);
+    ctx.strokeStyle = light ? 'rgba(235,242,246,0.95)' : 'rgba(6,8,10,1)'; ctx.lineWidth = 8;
+    for (const v of [3, 35]) { ctx.beginPath(); ctx.moveTo(v, 0); ctx.lineTo(v, 64); ctx.stroke(); ctx.beginPath(); ctx.moveTo(0, v); ctx.lineTo(64, v); ctx.stroke(); }
+    const tex = new THREE.CanvasTexture(c);
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    tex.repeat.set(tank.L / 0.02, tank.W / 0.02);
+    mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0.9, side: THREE.DoubleSide, depthWrite: false });
+  } else {
+    mat = new THREE.MeshBasicMaterial({ color: 0xe2f8ff, transparent: true, opacity: 0.3, side: THREE.DoubleSide, depthWrite: false });
+  }
+  g.add(new THREE.Mesh(geo, mat));
+  g.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineBasicMaterial({ color: 0xbfe9f5, transparent: true, opacity: 0.8 })));
+  g.add(textSprite(q.type === 'screen' ? 'screen lid' : `${q.type} lid`, -tank.L / 2 + 0.08, -tank.W / 2, 0.025, 0.02, '#cdeaf3'));
+  g.position.set(tank.L / 2, tank.W / 2, z);
+  g.userData = { kind: 'lid', name: 'lid' };
+  return g;
+}
+
 function host(u) { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return u; } }
 // Spec card of a real product: the numbers, where each came from, and the source links.
 export function productCard(a, rows) {
@@ -210,6 +260,8 @@ export class Equipment {
     for (const p of this.pumps) this.group.add(...pumpObjects(p, this.app.lib));
     for (const f of this.fixtures) this.group.add(fixtureObject(f, this.app.lib, t));
     if (this.app.ed.overflow) this.group.add(overflowHandle(this.app.ed.overflow, t, this.sel?.kind === 'overflow'));
+    const lid = this.app.ed.lighting?.lid;
+    if (lid) { const o = lidObject(lid, this.app.lib, t, this.app.ed.tank.water_gap); if (o) this.group.add(o); }
     this._reattach();
     this.app.view.render();
   }
@@ -474,6 +526,47 @@ export class Equipment {
       const f = this.fixtures.find(x => x.name === this.sel.name);
       if (f) this._fixtureForm(P, f);
     }
+    this._lidForm(P);
+  }
+
+  _lidForm(P) {
+    const app = this.app, U = app.units, lib = app.lib, presets = lib.lid_presets || {};
+    if (!Object.keys(presets).length) return;
+    const lt = app.ed.lighting || (app.ed.lighting = { fixtures: [], lid: null, extra: {} });
+    const lid = lt.lid;
+    const ch = (rerender = true) => { app.changed('lid'); this.sync(); if (rerender) this.renderPanel(); };
+    P.append(el('h3', {}, 'Lid over the tank'));
+    P.append(el('div', { class: 'hint' }, 'What covers the top of the tank changes how much light gets into the water. The next run with lighting uses it; compare a run with and without a lid on the Compare tab.'));
+    const cur = lid?.preset || 'open';
+    P.append(selectRow('Lid', Object.entries(presets).map(([k, v]) => [k, v.label]), cur, (v) => {
+      lt.lid = v === 'open' ? null : { preset: v, type: null, height: lid?.height ?? null, dirt: lid?.dirt || 0, thickness: null,
+        opening: null, strand: null, mesh_thickness: null, extra: {} };
+      ch();
+    }));
+    if (!lid || cur === 'open') return;
+    const q = lidParams(lid, lib);
+    const gap = app.ed.tank.water_gap;
+    P.append(numRow('Height above the water', U, 'length', () => lid.height ?? gap, (v) => { lid.height = v; ch(false); },
+      { min: 0, title: 'Where the lid sits, measured up from the water surface. Default: on the rim of the tank.' }));
+    if (q.type === 'screen') {
+      P.append(numRow('Hole size', U, 'length', () => lid.opening ?? q.opening, (v) => { lid.opening = v; ch(); }, { min: 0, title: 'Width of the square holes' }));
+      P.append(numRow('Strand width', U, 'length', () => lid.strand ?? q.strand, (v) => { lid.strand = v; ch(); }, { min: 0, title: 'Thickness of the wires or strands between the holes' }));
+    } else {
+      P.append(numRow('Sheet thickness', U, 'length', () => lid.thickness ?? q.thickness, (v) => { lid.thickness = v; ch(); }, { min: 0 }));
+    }
+    P.append(numRow('Extra loss (salt creep, condensation)', U, null, () => +(100 * (lid.dirt || 0)).toFixed(1), (v) => { lid.dirt = Math.min(Math.max(v / 100, 0), 0.5); ch(); },
+      { unit: '%', step: 1, min: 0, max: 50, title: 'Salt spray and condensation on a lid block extra light. 0 = clean.' }));
+    const T0 = lidTransmission(q, 0), T45 = lidTransmission(q, Math.PI / 4);
+    const rows = [['Light straight down that gets through', `${num(100 * T0, 3)} %`], ['Light at 45° that gets through', `${num(100 * T45, 3)} %`]];
+    if (q.type === 'screen') {
+      const pitch = q.opening + q.strand;
+      rows.push(['Open area', `${num(100 * (q.opening / pitch) ** 2, 3)} %`]);
+      rows.push(['Light hitting the strands that still goes on down', `${num(100 * (q.scatter || 0), 2)} %`, 'an estimate (A-848): bright aluminium and white scatter some light, black absorbs almost all']);
+    }
+    P.append(kvTable(rows));
+    P.append(el('div', { class: 'note' }, q.type === 'screen'
+      ? 'Light arriving at a slant sees the strands side-on, so a screen blocks more of it than its open area suggests. The PAR change at your corals depends on the angles your lights send light in at: run the lighting to see it.'
+      : 'Each surface of the sheet reflects about 4 % of the light, and the sheet absorbs a little more. Light arriving at a slant loses more. Run the lighting to see the PAR change at your corals.'));
   }
 
   _overflowForm(P) {

@@ -39,6 +39,7 @@ Endpoints (JSON unless noted; binary = little-endian float32/uint32 with a JSON
     GET  /api/runs/{pid}/{rid}/slice             ?field=&axis=x|y|z&pos=<m>  -> binary float32 2-D
     GET  /api/runs/{pid}/{rid}/vectors           ?axis=&pos=&stride=         -> binary
     GET  /api/runs/{pid}/{rid}/sand_shear        -> binary float32 2-D (Pa)
+    GET  /api/runs/{pid}/{rid}/flowfield         -> binary float32 (nx, ny, nz, 3) mean velocity, NaN in rock (particles)
     GET  /api/runs/{pid}/{rid}/scores            ?profile=                   -> binary points + scores
     GET  /api/runs/{pid}/{rid}/rock_mesh         -> binary mesh of the snapshot rockscape (world)
     GET  /api/runs/{pid}/{rid}/file/{name}       report.html, PNG figures, PLY score meshes, logs
@@ -156,6 +157,7 @@ def library() -> dict:
     return {
         "overflows": overflows, "drain_capacity": oc["drain_capacity"],
         "pumps": pumps, "coral_profiles": load_profiles(), "fixtures": LA.fixture_library(),
+        "lid_presets": LA.lid_presets(),
         "lighting_available": LA.available(),
         "presets": PR.PRESETS, "sim_defaults": {k: v for k, v in PR.SIM_DEFAULTS.items() if v is not None},
         "element_types": RG.TYPES, "element_defaults": RG.DEFAULTS,
@@ -589,6 +591,13 @@ def create_app(workspace=None, start_worker: bool = True) -> FastAPI:
         meta = {"n": int(len(s["points"])), "axes": s["axes"], "index": s["index"], "pos": s["pos"],
                 "stride": s["stride"]}
         return _binary([s["points"], s["vectors"]], meta)
+
+    @app.get("/api/runs/{pid}/{rid}/flowfield")
+    async def get_flowfield(pid: str, rid: str):
+        d = ws.run_dir(pid, rid)
+        _need_fields(d)
+        v = await run_in_threadpool(RS.velocity_volume, d)
+        return _binary([v["U"]], {"shape": v["shape"], "origin": v["origin"], "dx": v["dx"], "stride": v["stride"]})
 
     @app.get("/api/runs/{pid}/{rid}/sand_shear")
     async def get_sand(pid: str, rid: str):

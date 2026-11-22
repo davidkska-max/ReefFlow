@@ -112,6 +112,12 @@ class Workspace:
             p = write_demo(d)                       # demo_75gal.yaml + rock.stl
             data = yaml.safe_load(p.read_text(encoding="utf-8"))
             p.unlink()
+            # UI demo: an editable aquascape built from designer elements (D-850)
+            from ..demo import demo_scape
+            tank = PR.parse({**data, "rockscape": [], "lighting": None}, d / PROJECT_FILE).tank
+            sc = demo_scape(d, tank)
+            data["designer"], data["rockscape"] = sc["designer"], sc["rockscape"]
+            (d / "rock.stl").unlink(missing_ok=True)
             try:                                    # Phase 4 demo lighting (two LED pucks, 8 in)
                 from .lighting_adapter import demo_lighting
                 lt = demo_lighting()

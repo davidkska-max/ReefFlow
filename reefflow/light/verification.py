@@ -17,7 +17,7 @@ PRE-DECLARED ACCEPTANCE CRITERIA (written before the first run, DECISIONS D-110)
    angle of a rectangle). Pass if, for every plane, 0.9 <= chi^2/dof <= 1.1 over pixels
    with lambda >= 50, max |z| < 5.5 over all planes, and the exponent n fitted to the probe
    values E(h) ~ h^n is -2.000 +- 0.015.
-   AMENDMENT (after the first run, recorded in docs/drafts/phase4_decisions.md D-412): probes
+   AMENDMENT (after the first run, recorded in DECISIONS.md D-412): probes
    scaled with h intercept the same photon cone at every h, so their exponent is -2 by
    construction. Added: fixed 20 mm half-width probes, pass if their fitted exponent is within
    0.015 of the exponent of the exact probe averages. (A first version also required the exact

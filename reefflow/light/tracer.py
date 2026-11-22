@@ -83,6 +83,7 @@ class Scene:
     rough_map: np.ndarray | None = None          # (nx, ny) RMS slope
     rough_grid: tuple = (0.0, 0.0, 1.0)          # x0, y0, dx
     max_events: int = 200
+    lid: object = None                           # config.Lid (None / open = no lid)
 
     @property
     def total_ppf(self) -> float:
@@ -129,7 +130,8 @@ def build_scene(cfg: LightingConfig, tank=None, *, grid: Grid | None = None, sdf
                  spectra=np.vstack(spec), kd=cfg.kd_bins(), sdf=sdf, grid=grid,
                  stack=(grid is not None) if stack is None else stack, plan_z=pz, plan_grid=pg,
                  probes=np.zeros((0, 4)) if probes is None else np.asarray(probes, float).reshape(-1, 4),
-                 rough_map=rough_map, rough_grid=rough_grid or (0.0, 0.0, 1.0), max_events=cfg.max_events)
+                 rough_map=rough_map, rough_grid=rough_grid or (0.0, 0.0, 1.0), max_events=cfg.max_events,
+                 lid=getattr(cfg, "lid", None))
 
 
 # ----------------------------------------------------------------------
@@ -168,7 +170,7 @@ class Tallies:
         e = c["emitted"]
         sinks = ["missed_tank", "surface_reflected", "absorbed_water", "absorbed_sand", "absorbed_rock",
                  "lost_through_glass", "absorbed_black_wall", "absorbed_coralline", "escaped_surface",
-                 "terminated_event_cap", "reached_floor_air", "lost_other", "emitted_upward"]
+                 "terminated_event_cap", "reached_floor_air", "lost_other", "emitted_upward", "absorbed_lid"]
         fr = {k: c[k] / e for k in sinks}
         fr["closure_residual"] = 1.0 - sum(fr.values())
         return fr
@@ -200,6 +202,16 @@ def trace(scene: Scene, rays: int, seed: int = 1, batch: int = 1 << 22, target_n
     IP[K.I_NEMIT], IP[K.I_NTAB], IP[K.I_NBIN] = ne, s.profiles.shape[1], len(s.kd)
     IP[K.I_WALL0:K.I_WALL0 + 4] = s.walls
     IP[K.I_MAXEV], IP[K.I_HASWATER], IP[K.I_BOUNCE] = s.max_events, int(s.has_water), int(s.bounces)
+    lid = s.lid
+    if lid is not None and not lid.is_open:                       # D-848
+        P[K.P_LIDZ], P[K.P_LIDX] = s.zs + lid.height, 1.0 - lid.dirt
+        if lid.type == "screen":
+            IP[K.I_LID] = 2
+            P[K.P_MSTRAND], P[K.P_MPITCH], P[K.P_MSCAT] = lid.strand, lid.pitch, lid.scatter
+            P[K.P_MDEEP] = lid.extra_depth
+        else:
+            IP[K.I_LID] = 1
+            P[K.P_LIDN], P[K.P_LIDTAU] = lid.n, math.exp(-lid.attenuation * lid.thickness)
     # rock
     if s.sdf is not None and s.has_water:
         sdf_arr = np.ascontiguousarray(s.sdf.phi, np.float32)

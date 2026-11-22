@@ -5,6 +5,7 @@ import { PLYLoader } from 'three/addons/loaders/PLYLoader.js';
 import { api, el, clear, kvTable, num, status, busy, selectRow, modal } from './util.js';
 import { meshFromBuffers, rockMaterial, disposeTree, textSprite } from './viewport.js';
 import { pumpObject } from './equipment.js';
+import { Particles } from './particles.js';
 
 const FIELD_CMAP = { speed: 'viridis', umag: 'viridis', sigma: 'viridis', ti: 'plasma', age: 'magma', par: 'YlOrRd' };
 const AXES = { z: 'Plan (horizontal)', y: 'Front elevation', x: 'Side elevation' };
@@ -23,6 +24,7 @@ export class Results {
     this.cmaps = null;
     this.layers = { field: 'speed', rock: 'score', profile: 'SPS', spots: true, pumps: true, vectors: false, dead: false, sand: false,
       z: { on: true, f: 0.5 }, y: { on: false, f: 0.5 }, x: { on: false, f: 0.5 }, auto: true, lo: 0, hi: 0.3 };
+    this.particles = new Particles(app, this.group.parent);
     this.slices = {};           // axis -> {mesh, dead, vec, meta, data}
     this.objs = {};
     this.seq = 0;
@@ -41,6 +43,7 @@ export class Results {
     await this.init();
     this.cur = { pid, rid };
     this.clearScene();
+    this.particles.forget();
     this.sum = null; this.snap = null;
     try {
       [this.sum, this.snap] = await busy('loading results', () => Promise.all([api.get(`/api/runs/${pid}/${rid}`), api.get(`/api/runs/${pid}/${rid}/project`)]));
@@ -416,7 +419,36 @@ export class Results {
       P.append(selectRow('Coral profile', s.profiles, L.profile, (v) => { L.profile = v; this.loadRock().then(() => { this.updateSpots(); this.updateLegend(); this.render(); }); }));
       P.append(chk('Best-spot markers', 'spots', () => this.updateSpots()));
     }
+    this._particlePanel(P);
     if (!s.layers.par) P.append(el('div', { class: 'hint' }, 'PAR layer: not in this run. Runs started with "Compute PAR" (Phase 4 lighting) add it, and the coral score then includes light.'));
+  }
+
+  // ---------------------------------------------------------------- particle animation (D-849)
+  _pumpSeeds() {
+    const out = [];
+    for (const p of this.snap?.pumps || []) for (const n of (p.nozzles?.length ? p.nozzles : [p])) {
+      const a = n.aim || [1, 0, 0], m = Math.hypot(...a) || 1;
+      out.push({ p: n.position, aim: a.map(v => v / m) });
+    }
+    return out;
+  }
+
+  _particlePanel(P) {
+    const pa = this.particles, o = pa.opts;
+    const go = async () => {
+      try { await busy('loading the flow field', () => pa.start(this.cur.pid, this.cur.rid, this._pumpSeeds())); }
+      catch (e) { status(e.message, 'err'); pa.on = false; }
+      this.render();
+    };
+    P.append(el('h3', {}, 'Particle animation'));
+    P.append(el('div', { class: 'btns' },
+      el('button', { class: pa.on ? '' : 'primary', onclick: () => { if (pa.on) { pa.stop(); this.render(); } else go(); } }, pa.on ? 'Stop particles' : 'Animate particles')));
+    P.append(selectRow('Release particles', [['everywhere', 'everywhere in the water'], ['pumps', 'at the pump outlets']], o.release, (v) => { o.release = v; pa.restart(this.cur.pid, this.cur.rid, this._pumpSeeds()); }));
+    P.append(selectRow('Number of particles', [[1000, '1,000'], [3000, '3,000'], [6000, '6,000'], [12000, '12,000']], o.count, (v) => { o.count = +v; pa.restart(this.cur.pid, this.cur.rid, this._pumpSeeds()); }));
+    P.append(selectRow('Playback speed', [[0.25, '1/4 real time'], [0.5, '1/2 real time'], [1, 'real time'], [2, '2x'], [4, '4x']], o.speed, (v) => { o.speed = +v; }));
+    P.append(selectRow('Trail length', [[8, 'short'], [16, 'medium'], [32, 'long']], o.trail, (v) => { o.trail = +v; pa.restart(this.cur.pid, this.cur.rid, this._pumpSeeds()); }));
+    const vmax = pa.field ? this.app.units.fmt(pa.field.vmax, 'small_velocity', 2) : null;
+    P.append(el('div', { class: 'hint' }, `Particles drift with the time-averaged flow: blue is slow, cyan medium, pale yellow fast${vmax ? ` (${vmax} and up)` : ''}. Particles that hang about or circle show slow or recirculating water. Real water also swirls on top of this average.`));
   }
 
   _metricsPanel(P, an) {

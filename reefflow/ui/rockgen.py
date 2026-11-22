@@ -34,7 +34,7 @@ from .. import units as U
 TYPES = ("rock", "slab", "pillar", "arch", "bridge", "mesh")
 
 DEFAULTS = {
-    "rock": {"size": [0.20, 0.15, 0.14], "seed": 1, "lobes": 3, "roughness": 0.25, "bury": 0.15},
+    "rock": {"size": [0.20, 0.15, 0.14], "seed": 1, "lobes": 3, "roughness": 0.25, "bury": 0.15, "facets": 0, "chunk": 0.0},
     "slab": {"size": [0.25, 0.15, 0.025], "seed": 1, "roughness": 0.15},
     "pillar": {"radius_bottom": 0.04, "radius_top": 0.03, "height": 0.20, "seed": 1, "roughness": 0.2},
     "arch": {"span": 0.25, "height": 0.18, "thickness": 0.05, "seed": 1, "roughness": 0.2},
@@ -141,6 +141,24 @@ def local_field(el: dict, P: np.ndarray, base_dir: Path | None = None, h: float 
         feature = float(np.clip(0.6 * rmin, 0.015, 0.08))
         d = G.rock_sdf(P, blobs, int(p["seed"]), roughness=float(p["roughness"]), feature=feature,
                        blend=0.3 * rmin)
+        # D-850: optional broken-rock look. 'chunk' adds large lumps; 'facets' cuts the rock with
+        # random planes (flat broken faces, slightly rounded edges). Both 0 = the original shape.
+        chunk = float(p.get("chunk", 0.0))
+        if chunk > 0:
+            d = d + chunk * rmin * G._value_noise(P, int(p["seed"]) + 101, octaves=2, base_freq=1.0 / (1.6 * rmin))
+        nf = int(p.get("facets", 0))
+        if nf > 0:
+            rng = np.random.default_rng(int(p["seed"]) + 977)
+            sx, sy, sz = (float(v) for v in p["size"])
+            half = np.array([sx, sy, sz]) / 2
+            c0 = np.array([0.0, 0.0, sz / 2 - float(p.get("bury", 0.15)) * sz])
+            k = 0.15 * rmin
+            for _ in range(nf):
+                n = rng.standard_normal(3)
+                n[2] = 0.35 * n[2] + 0.45 * abs(n[2])          # mostly sideways / upward faces
+                n /= np.linalg.norm(n)
+                off = float(n @ c0) + rng.uniform(0.6, 0.88) * float(np.sqrt(np.sum((n * half) ** 2)))
+                d = -G._smin(-d, -(P @ n - off), k)               # smooth max: cut away beyond the plane
         return d
     if t == "slab":
         sx, sy, th = (float(v) for v in p["size"])
@@ -187,7 +205,7 @@ def local_bounds(el: dict, base_dir: Path | None = None) -> tuple[np.ndarray, np
     p = params_of(el)
     if t == "rock":
         s = np.asarray(p["size"], float)
-        m = 0.6 * float(p["roughness"]) * s.min() / 2 + 0.01
+        m = (0.6 * float(p["roughness"]) + float(p.get("chunk", 0.0))) * s.min() / 2 + 0.01
         bury = float(p.get("bury", 0.15)) * s[2]
         return np.array([-s[0] / 2 - m, -s[1] / 2 - m, -bury - m]), np.array([s[0] / 2 + m, s[1] / 2 + m, s[2] - bury + m])
     if t == "slab":

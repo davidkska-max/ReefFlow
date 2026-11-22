@@ -1,0 +1,107 @@
+[
+ {
+  "eval": "(async () => { window.confirm = () => true; await __title('Reef<span>Flow</span>', 'Water flow and light for your reef tank, simulated on your own PC'); return 1; })()"
+ },
+ {
+  "wait": 3.5
+ },
+ {
+  "eval": "(async () => { await __untitle(); await __cap('Start from the 75-gallon demo, or your own tank'); return 1; })()"
+ },
+ {
+  "wait": 2.5
+ },
+ {
+  "eval": "(async () => { await __click(document.querySelector('#modal .projlist .item span')); await new Promise(r => setTimeout(r, 1800)); window.reefflow.setTab('tank'); return 1; })()"
+ },
+ {
+  "note": "tank"
+ },
+ {
+  "eval": "(async () => { await __cap('Enter your tank size, glass and sand depth', '1 Tank'); await __move('#panel input[type=number]'); await __orbit(6, 35); return 1; })()"
+ },
+ {
+  "wait": 0.8
+ },
+ {
+  "eval": "(async () => { await __click('#tabs button[data-tab=rocks]'); await new Promise(r => setTimeout(r, 1500)); await __cap('Build the rockscape from pieces, or from photos of your tank', '3 Rockscape'); return 1; })()"
+ },
+ {
+  "wait": 2
+ },
+ {
+  "eval": "(async () => { await __click(__find('#panel .list .item', 'Swim-through arch')); await __cap('Click and drag any piece; Build joins them into one rock', '3 Rockscape'); await __orbit(5, -30); return 1; })()"
+ },
+ {
+  "wait": 1.5
+ },
+ {
+  "note": "equipment"
+ },
+ {
+  "eval": "(async () => { await __click('#tabs button[data-tab=equip]'); await new Promise(r => setTimeout(r, 1200)); await __cap('Pick your real pumps, overflow and lights', '4 Pumps & lights'); await __click(__find('#panel .list .item', 'PH-left')); await new Promise(r => setTimeout(r, 900)); return 1; })()"
+ },
+ {
+  "eval": "(async () => { const s = document.querySelector('#panel .row select.model'); await __pick(s, 'ecotech_mp40mqd'); await new Promise(r => setTimeout(r, 1200)); const c = document.querySelector('#panel div.spec'); if (c) { c.scrollIntoView({ block: 'center' }); await __move(c); } await __cap('Each model comes with its published specs and where they came from', '4 Pumps & lights'); return 1; })()"
+ },
+ {
+  "wait": 3
+ },
+ {
+  "eval": "(async () => { await __cap(''); const row = [...document.querySelectorAll('#panel .row')].find(r => r.querySelector('label')?.textContent === 'Lid'); row.scrollIntoView({ block: 'center' }); await new Promise(r => setTimeout(r, 400)); await __pick(row.querySelector('select'), 'glass_float_6mm'); await new Promise(r => setTimeout(r, 800)); const h = [...document.querySelectorAll('#panel h3')].find(x => x.textContent.startsWith('Lid')); h.scrollIntoView({ block: 'start' }); await __cap('Add a lid (glass, acrylic or screen) and see what it does to the light', '4 Pumps & lights'); return 1; })()"
+ },
+ {
+  "wait": 3
+ },
+ {
+  "note": "run"
+ },
+ {
+  "eval": "(async () => { await __click('#tabs button[data-tab=run]'); await new Promise(r => setTimeout(r, 1000)); await __cap('Start a run: about 5 minutes for a quick preview on a gaming GPU', '5 Run'); await __click(__find('#panel button', 'Estimate')); return 1; })()"
+ },
+ {
+  "wait": 3
+ },
+ {
+  "note": "results"
+ },
+ {
+  "eval": "(async () => { await __click('#tabs button[data-tab=results]'); const R = window.reefflow.results; await R.refreshRuns(); if (!R.cur) await R.open(window.reefflow.pid, R.runs[0].id || R.runs[0].rid); await new Promise(r => setTimeout(r, 3500)); await __cap('Results: speed, dead zones and coral scores on the rock', '6 Results'); await __orbit(6, 30); return 1; })()"
+ },
+ {
+  "wait": 1
+ },
+ {
+  "eval": "(async () => { const R = window.reefflow.results; R.layers.z.on = false; await R.updateSlices(); R.render(); await new Promise(r => setTimeout(r, 400)); await __click(__find('#panel button', 'Animate particles')); await __cap('Watch the flow: particles carried by the water', '6 Results'); return 1; })()"
+ },
+ {
+  "wait": 2
+ },
+ {
+  "eval": "(async () => { await __orbit(8, -40); return 1; })()"
+ },
+ {
+  "eval": "(async () => { const row = [...document.querySelectorAll('#panel .row')].find(r => r.querySelector('label')?.textContent === 'Release particles'); await __pick(row.querySelector('select'), 'pumps'); await __cap('Release them at the pumps to follow each jet', '6 Results'); return 1; })()"
+ },
+ {
+  "wait": 3
+ },
+ {
+  "eval": "(async () => { await __orbit(8, 45); return 1; })()"
+ },
+ {
+  "note": "compare"
+ },
+ {
+  "eval": "(async () => { await __click('#tabs button[data-tab=compare]'); await __cap('Change one thing, run again, and compare the two', '7 Compare'); return 1; })()"
+ },
+ {
+  "wait": 3
+ },
+ {
+  "eval": "(async () => { await __cap(''); await __title('Reef<span>Flow</span>', 'Runs on your PC \u00b7 no internet needed \u00b7 Help opens the full guide'); return 1; })()"
+ },
+ {
+  "wait": 4
+ }
+]

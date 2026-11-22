@@ -127,6 +127,60 @@ criteria:                            # all thresholds are starting assumptions (
 """
 
 
+# ----------------------------------------------------------------------
+# UI demo aquascape (D-850): the "From the 75-gallon demo" template of the browser UI builds
+# this from rockscape-designer elements, so users can see, move and edit every piece. The CLI
+# demo / verification reference case above keeps the two procedural islands (rock.stl), so the
+# documented verification numbers stay valid.
+# ----------------------------------------------------------------------
+S = SAND
+DEMO_SCAPE_ELEMENTS = [
+    # ---- left island: a broad mound of broken rock with a ledge and a swim-through arch
+    {"id": "l1", "type": "rock", "name": "Left base", "position": [0.30, 0.225, S], "rotation": [0, 0, 0],
+     "scale": [1, 1, 1], "params": {"size": [0.32, 0.22, 0.1], "seed": 5, "lobes": 5, "roughness": 0.18, "bury": 0.15, "facets": 7, "chunk": 0.35}},
+    {"id": "l2", "type": "rock", "name": "Left base back", "position": [0.24, 0.27, S], "rotation": [0, 0, -30],
+     "scale": [1, 1, 1], "params": {"size": [0.18, 0.14, 0.11], "seed": 61, "lobes": 4, "roughness": 0.18, "bury": 0.15, "facets": 7, "chunk": 0.35}},
+    {"id": "l3", "type": "rock", "name": "Left middle", "position": [0.28, 0.245, S + 0.06], "rotation": [0, 0, 20],
+     "scale": [1, 1, 1], "params": {"size": [0.22, 0.17, 0.13], "seed": 9, "lobes": 4, "roughness": 0.18, "bury": 0.15, "facets": 7, "chunk": 0.35}},
+    {"id": "l4", "type": "rock", "name": "Left top", "position": [0.31, 0.255, S + 0.14], "rotation": [0, 0, -15],
+     "scale": [1, 1, 1], "params": {"size": [0.15, 0.12, 0.1], "seed": 31, "lobes": 4, "roughness": 0.18, "bury": 0.15, "facets": 7, "chunk": 0.35}},
+    {"id": "l5", "type": "rock", "name": "Left ledge", "position": [0.175, 0.19, S + 0.12], "rotation": [0, 8, 25],
+     "scale": [1, 1, 1], "params": {"size": [0.19, 0.13, 0.06], "seed": 44, "lobes": 4, "roughness": 0.18, "bury": 0.1, "facets": 7, "chunk": 0.35}},
+    {"id": "l6", "type": "rock", "name": "Arch foot", "position": [0.53, 0.16, S], "rotation": [0, 0, 0],
+     "scale": [1, 1, 1], "params": {"size": [0.11, 0.1, 0.07], "seed": 52, "lobes": 3, "roughness": 0.18, "bury": 0.15, "facets": 7, "chunk": 0.35}},
+    {"id": "a1", "type": "arch", "name": "Swim-through arch", "position": [0.455, 0.195, S], "rotation": [0, 0, 32],
+     "scale": [1, 1, 1], "params": {"span": 0.15, "height": 0.15, "thickness": 0.075, "seed": 3, "roughness": 0.4}},
+    # ---- right island: a taller stack with an overhang
+    {"id": "r1", "type": "rock", "name": "Right base", "position": [0.85, 0.24, S], "rotation": [0, 0, 0],
+     "scale": [1, 1, 1], "params": {"size": [0.28, 0.2, 0.11], "seed": 13, "lobes": 5, "roughness": 0.18, "bury": 0.15, "facets": 7, "chunk": 0.35}},
+    {"id": "r2", "type": "rock", "name": "Right base side", "position": [0.95, 0.19, S], "rotation": [0, 0, 40],
+     "scale": [1, 1, 1], "params": {"size": [0.14, 0.12, 0.09], "seed": 17, "lobes": 4, "roughness": 0.18, "bury": 0.15, "facets": 7, "chunk": 0.35}},
+    {"id": "r3", "type": "rock", "name": "Right middle", "position": [0.86, 0.25, S + 0.07], "rotation": [0, 0, 15],
+     "scale": [1, 1, 1], "params": {"size": [0.19, 0.15, 0.15], "seed": 23, "lobes": 4, "roughness": 0.18, "bury": 0.15, "facets": 7, "chunk": 0.35}},
+    {"id": "r4", "type": "rock", "name": "Right upper", "position": [0.85, 0.26, S + 0.17], "rotation": [0, 0, -20],
+     "scale": [1, 1, 1], "params": {"size": [0.14, 0.12, 0.14], "seed": 29, "lobes": 4, "roughness": 0.18, "bury": 0.15, "facets": 7, "chunk": 0.35}},
+    {"id": "r5", "type": "rock", "name": "Right peak", "position": [0.87, 0.255, S + 0.27], "rotation": [0, 0, 0],
+     "scale": [1, 1, 1], "params": {"size": [0.1, 0.09, 0.09], "seed": 37, "lobes": 3, "roughness": 0.18, "bury": 0.15, "facets": 7, "chunk": 0.35}},
+    {"id": "r6", "type": "rock", "name": "Right overhang", "position": [0.75, 0.215, S + 0.20], "rotation": [0, -6, -20],
+     "scale": [1, 1, 1], "params": {"size": [0.19, 0.11, 0.06], "seed": 41, "lobes": 4, "roughness": 0.18, "bury": 0.1, "facets": 7, "chunk": 0.35}},
+]
+
+
+def demo_scape(directory, tank) -> dict:
+    """Build the UI demo aquascape into ``directory``/rockscape.stl; returns the project-file
+    'designer' and 'rockscape' sections (same form the designer's Build button writes)."""
+    import copy
+    from .ui import editor_model as EM
+    from .ui import rockgen as RG
+    els = copy.deepcopy(DEMO_SCAPE_ELEMENTS)
+    res = RG.union(els, tank, Path(directory), 0.004)
+    RG.save_union_stl(Path(directory) / "rockscape.stl", res)
+    designer = {"elements": els, "resolution": 0.004, "rock_density": 1600.0, "rockscape_file": "rockscape.stl",
+                "built_hash": EM.elements_hash(els)}
+    rockscape = [{"file": "rockscape.stl", "unit": "mm", "translate": ["0 mm", "0 mm", "0 mm"]}]
+    return {"designer": designer, "rockscape": rockscape, "volume_m3": float(res["volume_m3"])}
+
+
 def make_rock_mesh(h: float = 0.004):
     verts, faces, off = [], [], 0
     for isl in ISLANDS:

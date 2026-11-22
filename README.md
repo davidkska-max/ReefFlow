@@ -2,13 +2,26 @@
 
 Water circulation (lattice Boltzmann CFD) and lighting (Monte Carlo PAR ray tracing) for reef aquariums. ReefFlow maps dead spots, water age, detritus settling and coral placement scores. It runs entirely on your own machine; after installation no internet connection is needed.
 
-- **Spec:** `reef-cfd-prompt.md`
-- **Approved plan:** `PLAN.md`
-- **Design choices and physical assumptions (with numbers):** `DECISIONS.md`, `ASSUMPTIONS.md`
-- **Third-party licenses:** `LICENSES.md` (all permit commercial use)
-- **Verification evidence:** `verification/VERIFICATION.md`
+**ReefFlow is free to use.** If it helps your tank, you can [buy me a coffee ☕](https://buymeacoffee.com/davidkska).
 
-## Install (Windows)
+- **Walkthrough video:** attached to each [release](../../releases)
+- **Illustrated guide:** the **Help** button in the app, or `reefflow/ui/static/guide/index.html`
+- **Reference manual:** `docs/USER_GUIDE.md`
+- **Design choices and physical assumptions (with numbers):** `DECISIONS.md`, `ASSUMPTIONS.md`
+- **Verification evidence:** `verification/VERIFICATION.md` (in the GitHub repository; not in the download zip)
+- **Licence:** `LICENSE` (free for personal use; all rights reserved). Third-party libraries: `LICENSES.md`.
+
+## Download and install (Windows)
+
+1. Download `ReefFlow-<version>.zip` from the latest [release](../../releases) and unzip it somewhere permanent, e.g. `Documents\ReefFlow`.
+2. Right-click `install.ps1` and choose **Run with PowerShell**. It needs the internet once, to download Python and the libraries (about 1.3 GB).
+3. Double-click `ReefFlow.bat`. ReefFlow opens in your browser; choose **From the 75-gallon demo** to try it.
+
+**What you need:** Windows 10 or 11, about 2 GB of disk space plus room for runs (a few hundred MB each), and ideally an NVIDIA graphics card. Other graphics cards and CPU-only PCs work, but runs take much longer.
+
+Everything runs on your own PC. Nothing is uploaded, and no internet connection is needed after installation.
+
+## Install details
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File install.ps1              # add -SystemCerts on TLS-inspecting networks

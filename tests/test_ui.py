@@ -121,7 +121,8 @@ def test_project_crud_and_roundtrip(client):
     assert p["validation"]["ok"], p["validation"]
     ed = p["editor"]
     assert ed["tank"]["length"] == pytest.approx(48 * 0.0254)
-    assert len(ed["pumps"]) == 3 and ed["designer"]["elements"][0]["type"] == "mesh"
+    assert len(ed["pumps"]) == 3 and len(ed["designer"]["elements"]) == 13          # D-850: designer-built demo scape
+    assert ed["designer"]["elements"][0]["type"] == "rock" and ed["rockscape"][0]["file"] == "rockscape.stl"
     assert not p["designer_stale"]
     # save unchanged editor model -> same physics
     p2 = client.put(f"/api/projects/{pid}", json={"editor": ed}).json()
