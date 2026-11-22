@@ -32,6 +32,6 @@ ReefFlow simulates water flow and light in a reef tank on your own Windows PC. B
 
 ### Install
 
-Download `ReefFlow-1.0.0.zip` below, unzip it, right-click `install.ps1` and choose **Run with PowerShell**, then double-click `ReefFlow.bat`. The installer needs the internet once; after that ReefFlow runs offline.
+Download `ReefFlow-1.0.0.zip` below, unzip it, double-click `Install.bat`, then double-click `ReefFlow.bat`. The installer needs the internet once; after that ReefFlow runs offline.
 
 ReefFlow is free for personal use (see `LICENSE`). If it helps your tank, you can [buy me a coffee ☕](https://buymeacoffee.com/davidkska).

@@ -14,7 +14,7 @@ Water circulation (lattice Boltzmann CFD) and lighting (Monte Carlo PAR ray trac
 ## Download and install (Windows)
 
 1. Download `ReefFlow-<version>.zip` from the latest [release](../../releases) and unzip it somewhere permanent, e.g. `Documents\ReefFlow`.
-2. Right-click `install.ps1` and choose **Run with PowerShell**. It needs the internet once, to download Python and the libraries (about 1.3 GB).
+2. Double-click `Install.bat`. It needs the internet once, to download Python and the libraries (about 1.3 GB).
 3. Double-click `ReefFlow.bat`. ReefFlow opens in your browser; choose **From the 75-gallon demo** to try it.
 
 **What you need:** Windows 10 or 11, about 2 GB of disk space plus room for runs (a few hundred MB each), and ideally an NVIDIA graphics card. Other graphics cards and CPU-only PCs work, but runs take much longer.
